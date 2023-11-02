@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace LiddellRoch.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class Empresa : BaseModel
     {
         [Required]
         public string Nome { get; set; }
@@ -18,11 +15,6 @@ namespace LiddellRoch.Models
         public string? Cidade { get; set; }
         public string? Estado { get; set; }
         public string? CodigoPostal { get; set; }
-        public int? EmpresaId { get; set; }
-        [ForeignKey("EmpresaId")]
-        [ValidateNever]
-        public Empresa? Empresa { get; set; }
-        [NotMapped]
-        public string Role { get; set; }
+        public string? Telefone { get; set; }
     }
 }
