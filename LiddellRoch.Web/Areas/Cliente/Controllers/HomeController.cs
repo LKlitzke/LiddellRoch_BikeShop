@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace LiddellRoch.Web.Controllers
+namespace LiddellRoch.Web.Areas.Cliente.Controllers
 {
     public class HomeController : Controller
     {

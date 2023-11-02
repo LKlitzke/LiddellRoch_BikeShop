@@ -25,4 +25,15 @@
     <PackageReference Include="Stripe.net" Version="43.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LiddellRoch.Application\LiddellRoch.Application.csproj" />
+    <ProjectReference Include="..\LiddellRoch.DataAccess\LiddellRoch.DataAccess.csproj" />
+    <ProjectReference Include="..\LiddellRoch.Utility\LiddellRoch.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\" />
+    <Folder Include="Areas\Cliente\" />
+  </ItemGroup>
+
 </Project>
