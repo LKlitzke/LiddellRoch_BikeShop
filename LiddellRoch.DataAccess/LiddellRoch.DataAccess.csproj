@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DbInitializer\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
@@ -21,6 +20,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LiddellRoch.Utility\LiddellRoch.Utility.csproj" />
+    <ProjectReference Include="..\LiddelRoch.Models\LiddellRoch.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -55,65 +55,67 @@ namespace LiddellRoch.DataAccess.DbInitializer
                     Email = "Administrador@gmail.com",
                     Nome = "Administrador",
                     PhoneNumber = "1234567890",
-                    Endereco = "Martin Luther",
+                    Endereco = "Rua Martin Luther",
                     Estado = "ES",
                     EmailConfirmed = true,
-                    CodigoPostal = "12345",
-                    Cidade = "Sundays Martins"
+                    CodigoPostal = "29260-000",
+                    Cidade = "Sundays Martins",
                 }, "Admin123*").GetAwaiter().GetResult();
 
                 ApplicationUser user1 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Administrador@gmail.com");
                 _userManager.AddToRoleAsync(user1, SD.Role_Administrador).GetAwaiter().GetResult();
 
-                // Cria um ApplicationUser Company
+
+                // Cria um ApplicationUser Empresa
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Company@gmail.com",
-                    Email = "Company@gmail.com",
-                    Nome = "Company",
+                    UserName = "Empresa@gmail.com",
+                    Email = "Empresa@gmail.com",
+                    Nome = "Empresa",
                     PhoneNumber = "0987654321",
-                    Endereco = "Chunga Bunga",
-                    Estado = "MG",
+                    Endereco = "Av. Fernando Ferrari",
+                    EmpresaId = 1,
+                    Estado = "ES",
                     EmailConfirmed = true,
-                    CodigoPostal = "54321",
+                    CodigoPostal = "29255-000",
                     Cidade = "Victory"
-                }, "Company123*").GetAwaiter().GetResult();
+                }, "Empresa123*").GetAwaiter().GetResult();
 
-                ApplicationUser user2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Company@gmail.com");
+                ApplicationUser user2 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Empresa@gmail.com");
                 _userManager.AddToRoleAsync(user2, SD.Role_Empresa).GetAwaiter().GetResult();
 
-                // Cria um ApplicationUser Employee
+                // Cria um ApplicationUser Empregado
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Employee@gmail.com",
-                    Email = "Employee@gmail.com",
-                    Nome = "Employee",
+                    UserName = "Empregado@gmail.com",
+                    Email = "Empregado@gmail.com",
+                    Nome = "Empregado",
                     PhoneNumber = "0192837465",
-                    Endereco = "HomeOffice",
-                    Estado = "AC",
+                    Endereco = "Av. Praia da Costa",
+                    Estado = "ES",
                     EmailConfirmed = true,
-                    CodigoPostal = "67890",
+                    CodigoPostal = "67890-000",
                     Cidade = "Old Village"
-                }, "Employee123*").GetAwaiter().GetResult();
+                }, "Empregado123*").GetAwaiter().GetResult();
 
-                ApplicationUser user3 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Employee@gmail.com");
+                ApplicationUser user3 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Empregado@gmail.com");
                 _userManager.AddToRoleAsync(user3, SD.Role_Empregado).GetAwaiter().GetResult();
 
-                // Cria um ApplicationUser Employee
+                // Cria um ApplicationUser Cliente
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Customer@gmail.com",
-                    Email = "Customer@gmail.com",
-                    Nome = "Customer",
+                    UserName = "ClienteTester@gmail.com",
+                    Email = "ClienteTester@gmail.com",
+                    Nome = "ClienteTester",
                     PhoneNumber = "5647382910",
                     Endereco = "Miami",
                     Estado = "FL",
                     EmailConfirmed = true,
                     CodigoPostal = "09876",
                     Cidade = "Saw"
-                }, "Customer123*").GetAwaiter().GetResult();
+                }, "Cliente123*").GetAwaiter().GetResult();
 
-                ApplicationUser user4 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "Customer@gmail.com");
+                ApplicationUser user4 = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "ClienteTester@gmail.com");
                 _userManager.AddToRoleAsync(user4, SD.Role_Cliente).GetAwaiter().GetResult();
             }
 

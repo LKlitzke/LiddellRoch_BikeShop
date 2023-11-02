@@ -9,14 +9,14 @@ namespace LiddellRoch.DataAccess.Repository.Interfaces
     public interface IUnitOfWork
     {
         // Listar Interfaces de repositorios das entidades 
-        //ICategoryRepository Category { get; }
-        //ICompanyRepository Company { get; }
-        //IProductRepository Product { get; }
-        //IShoppingCartRepository ShoppingCart { get; }
-        //IApplicationUserRepository ApplicationUser { get; }
-        //IOrderDetailRepository OrderDetail { get; }
-        //IOrderHeaderRepository OrderHeader { get; }
-        //IProductImageRepository ProductImage { get; }
+        ICategoriaRepository Categoria { get; }
+        IEmpresaRepository Empresa { get; }
+        IBicicletaRepository Bicicleta { get; }
+        ICarrinhoComprasRepository CarrinhoCompras { get; }
+        IApplicationUserRepository ApplicationUser { get; }
+        IPedidoDetalheRepository PedidoDetalhes { get; }
+        IPedidoHeaderRepository PedidoHeader { get; }
+        IImagemProdutoRepository ImagemProduto { get; }
         void Save();
     }
 }

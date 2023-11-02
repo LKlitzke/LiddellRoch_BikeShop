@@ -11,26 +11,26 @@ namespace LiddellRoch.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
-        //public ICategoryRepository Category { get; private set; }
-        //public IApplicationUserRepository ApplicationUser { get; private set; }
-        //public IShoppingCartRepository ShoppingCart { get; private set; }
-        //public ICompanyRepository Company { get; private set; }
-        //public IProductRepository Product { get; private set; }
-        //public IOrderHeaderRepository OrderHeader { get; private set; }
-        //public IOrderDetailRepository OrderDetail { get; private set; }
-        //public IProductImageRepository ProductImage { get; private set; }
+        public ICategoriaRepository Categoria { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+        public ICarrinhoComprasRepository CarrinhoCompras { get; private set; }
+        public IEmpresaRepository Empresa { get; private set; }
+        public IBicicletaRepository Bicicleta { get; private set; }
+        public IPedidoHeaderRepository PedidoHeader { get; private set; }
+        public IPedidoDetalheRepository PedidoDetalhes { get; private set; }
+        public IImagemProdutoRepository ImagemProduto { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            //Category = new CategoryRepository(_db);
-            //ApplicationUser = new ApplicationUserRepository(_db);
-            //ShoppingCart = new ShoppingCartRepository(_db);
-            //Company = new CompanyRepository(_db);
-            //Product = new ProductRepository(_db);
-            //OrderHeader = new OrderHeaderRepository(_db);
-            //OrderDetail = new OrderDetailRepository(_db);
-            //ProductImage = new ProductImageRepository(_db);
+            Categoria = new CategoriaRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
+            CarrinhoCompras = new CarrinhoComprasRepository(_db);
+            Empresa = new EmpresaRepository(_db);
+            Bicicleta = new BicicletaRepository(_db);
+            PedidoHeader = new PedidoHeaderRepository(_db);
+            PedidoDetalhes = new PedidoDetalheRepository(_db);
+            ImagemProduto = new ImagemProdutoRepository(_db);
         }
         public void Save()
         {
