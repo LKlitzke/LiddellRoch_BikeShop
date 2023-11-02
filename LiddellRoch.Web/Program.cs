@@ -10,6 +10,8 @@ using LiddellRoch.DataAccess.Repository;
 using LiddellRoch.DataAccess.DbInitializer;
 using LiddellRoch.Application.Services.Interfaces;
 using LiddellRoch.Application.Services;
+using System.Security.Cryptography.X509Certificates;
+using Azure.Identity;
 
 // Globalization
 var cultureInfo = new CultureInfo("pt-BR");
@@ -23,6 +25,28 @@ CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
 var builder = WebApplication.CreateBuilder(args);
+
+/*if (builder.Environment.IsProduction())
+{
+    using var x509Store = new X509Store(StoreLocation.CurrentUser);
+
+    x509Store.Open(OpenFlags.ReadOnly);
+
+    var x509Certificate = x509Store.Certificates
+        .Find(
+            X509FindType.FindByThumbprint,
+            builder.Configuration["AzureADCertThumbprint"],
+            validOnly: false)
+        .OfType<X509Certificate2>()
+        .Single();
+
+    builder.Configuration.AddAzureKeyVault(
+        new Uri($"https://{builder.Configuration["KeyVaultName"]}.vault.azure.net/"),
+        new ClientCertificateCredential(
+            builder.Configuration["AzureADDirectoryId"],
+            builder.Configuration["AzureADApplicationId"],
+            x509Certificate));
+}*/
 
 // --------------------------- BUIDER ---------------------------
 //builder.Services.AddAutoMapper(typeof(MappingProfile));
