@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace LiddellRoch.Web.Areas.Cliente.Controllers
 {
+    [Area("Cliente")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -19,6 +20,11 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUs()
         {
             return View();
         }

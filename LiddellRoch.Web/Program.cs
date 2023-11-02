@@ -8,6 +8,8 @@ using Stripe;
 using LiddellRoch.DataAccess.Repository.Interfaces;
 using LiddellRoch.DataAccess.Repository;
 using LiddellRoch.DataAccess.DbInitializer;
+using LiddellRoch.Application.Services.Interfaces;
+using LiddellRoch.Application.Services;
 
 // Globalization
 var cultureInfo = new CultureInfo("pt-BR");
@@ -72,7 +74,7 @@ builder.Services.AddSession(options => {
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-//builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 
 // RazorPages
 builder.Services.AddRazorPages();
@@ -101,7 +103,7 @@ app.MapRazorPages();
 app.UseRequestLocalization("pt-BR");
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Cliente}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 
