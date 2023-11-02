@@ -16,6 +16,7 @@ namespace LiddellRoch.Utility
         Azure,
         Beige,
         Bisque,
+        Black,
         BlanchedAlmond,
         Blue,
         BlueViolet,

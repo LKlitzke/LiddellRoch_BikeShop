@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LiddellRoch.Models
 {
-    public class PedidoDetalhes : BaseModel
+    public class PedidoDetalhe : BaseModel
     {
         public int PedidoHeaderId { get; set; }
         [ForeignKey("PedidoHeaderId")]

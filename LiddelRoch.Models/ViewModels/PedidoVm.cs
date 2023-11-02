@@ -9,6 +9,6 @@ namespace LiddellRoch.Models.ViewModels
     public class PedidoVm
     {
         public PedidoHeader PedidoHeader { get; set; }
-        public IEnumerable<PedidoDetalhes> PedidoDetalhe { get; set; }
+        public IEnumerable<PedidoDetalhe> PedidoDetalhe { get; set; }
     }
 }

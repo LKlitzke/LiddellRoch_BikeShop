@@ -20,12 +20,6 @@ namespace LiddellRoch.Models
         public string Descricao { get; set; }
 
         [Required]
-        public string Tipo { get; set; }
-
-        [Required]
-        public string Modelo { get; set; }
-
-        [Required]
         [Display(Name = "Preço")]
         [DataType(DataType.Currency)]
         [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Apenas duas casas decimais")]
@@ -36,10 +30,13 @@ namespace LiddellRoch.Models
         public double Peso { get; set; }
 
         [Required]
-        public List<Cores> Cores { get; set; }
-        
+        public string Cores { get; set; }
+
         [Required]
-        public List<Tamanhos> Tamanhos { get; set; }
+        public int Estoque { get; set; }
+
+        [Required]
+        public string Tamanhos { get; set; }
 
         // Adicionar componentes individuais?
 
@@ -54,6 +51,6 @@ namespace LiddellRoch.Models
         public Marca Marca { get; set; }
 
         [ValidateNever]
-        public List<ImagemProduto> ImagemProduto { get; set; }
+        public List<ImagemProduto> ImagensProduto { get; set; }
     }
 }
