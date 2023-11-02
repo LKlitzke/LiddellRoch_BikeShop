@@ -60,5 +60,5 @@ jobs:
         with:
           app-name: 'liddellroch'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6DED7F4DB3F54D1BA48B70C03214F2FA }}
+          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
           package: .
