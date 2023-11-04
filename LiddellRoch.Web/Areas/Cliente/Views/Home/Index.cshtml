@@ -1,8 +1,115 @@
-﻿@{
+﻿@model IEnumerable<Bicicleta>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<!-- ======= Hero Section ======= -->
+@* <section id="hero" style="height:700px">
+    <div id="heroCarousel" data-bs-interval="50000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active" style="background-image: url(assets/img/slide/slide_1.jpeg)">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">LiddellRoch</h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+                <div class="carousel-container">
+                    <div class="container">
+                        <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+                        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+    </div>
+</section><!-- End Hero --> *@
+
+<div class="row pb-3">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2 h-100">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
+                        @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
+                        {
+                            <img src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="card-img-top rounded" />
+                        }
+                        else
+                        {
+                            <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
+                        }
+
+                        <div class="card-body pb-0">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Nome</p>
+                                <p class="card-title text-warning text-center">por <b>@product.Marca.Nome</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center mb-0">
+                                    Preço:
+                                    <span class="text-decoration-line-through">
+                                        @product.Preco.ToString("c")
+                                    </span>
+                                </p>
+                            </div>@* 
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center">
+                                    Preço no PIX:
+                                    <span>
+                                        @product.Price100.ToString("c")
+                                    </span>
+                                </p>
+                            </div> *@
+                        </div>
+                        <div>
+                            @* productId DEVE ter o mesmo nome na assinatura do método Details *@
+                            <a asp-action="Detalhes"
+                               asp-route-bikeId="@product.Id"
+                               class="btn btn-primary bg-gradient border-0 form-control">
+                                Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</div> *@
