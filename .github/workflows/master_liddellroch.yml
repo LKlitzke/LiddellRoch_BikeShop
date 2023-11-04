@@ -25,6 +25,9 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
+      - name: Run UnitTests Project
+        run: dotnet test --configuration Release
+
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
@@ -53,5 +56,5 @@ jobs:
         with:
           app-name: 'liddellroch'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B675080F7822454C85927648C820664B }}
+          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
           package: .
