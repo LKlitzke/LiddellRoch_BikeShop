@@ -38,58 +38,74 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
+                <img src="~/mountain.png" />@* 
+                <link rel="icon" type="image/png" sizes="32x32" href="/mountain_w.png"> *@
                 <a class="logo me-auto navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LIDDELLROCH</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Cliente" asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill"></i> Homepage</a>
-                        </li>
-                        @*<li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>*@
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index"><i class="bi bi-truck"></i> Gerenciar pedidos</a>
-                        </li>
-                        @if (User.IsInRole(SD.Role_Administrador))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-inboxes-fill"></i> Gerenciamento de conteúdo
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index"><i class="bi bi-handbag-fill"></i> Categorias</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index"><i class="bi bi-box-seam-fill"></i> Produtos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Company" asp-action="Index"><i class="bi bi-building-fill"></i> Empresas</a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-fill-add"></i> Criar usuário</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Index"><i class="bi bi-person-fill-add"></i> Usuários</a>
-                                    </li>
-                                </ul>
+                    @* <div class="nav-item"> *@
+                        <ul class="navbar-nav">
+                            @* me-auto*@
+                            @* <li class="nav-item">
+                                <a class="nav-link" asp-area="Cliente" asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill"></i> Homepage</a>
+                            </li> *@
+                            @*<li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Pedido" asp-action="Index"><i class="bi bi-truck"></i> Gerenciar pedidos</a>
                             </li>
-                        }
+                            @if (User.IsInRole(SD.Role_Administrador))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-inboxes-fill"></i> Gerenciamento de conteúdo
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categoria" asp-action="Index"><i class="bi bi-handbag-fill"></i> Categorias</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Bicicleta" asp-action="Index"><i class="bi bi-box-seam-fill"></i> Bicicletas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Empresa" asp-action="Index"><i class="bi bi-building-fill"></i> Empresas</a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-fill-add"></i> Criar usuário</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Index"><i class="bi bi-person-fill-add"></i> Usuários</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
 
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Cliente" asp-controller="Cart" asp-action="Index">
-                                @await Component.InvokeAsync("ShoppingCart")
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Cliente" asp-controller="Home" asp-action="AboutUs"><i class="bi bi-trophy-fill"></i> Sobre a demo</a>
-                        </li>
-                    </ul>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Cliente" asp-controller="Cart" asp-action="Index">
+                                    @await Component.InvokeAsync("ShoppingCart")
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Cliente" asp-controller="Home" asp-action="SobreNos"><i class="bi bi-trophy-fill"></i> Sobre a demo</a>
+                            </li>
+                            
+                        </ul>
+                        <div class="navbar-nav w-40">
+                            <form class="d-flex" method="post" asp-controller="Home" asp-action="Pesquisa">
+                                <div class="input-group">
+                                    <input name="query" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    
+                    
+                    
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -217,7 +233,7 @@
         </main>
     </div> 
 
-    <footer class="border-top footer text-muted bg-primary"
+    @* <footer class="border-top footer text-muted bg-primary"
         style="
             background-color: #F3F3F3;
             padding-top: 10px;
@@ -229,7 +245,81 @@
         <div class="container text-center" style="color:#FFF">
             DEMO PARA TCC <i class="bi bi-heart-fill"></i>
         </div>
-    </footer>
+    </footer> *@
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info">
+                            <h3>Sailor</h3>
+                            <p>
+                                A108 Adam Street <br>
+                                NY 535022, USA<br><br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Sailor</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -247,6 +337,13 @@
 
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
+    <script>
+        function passInputValueToRoute() {
+            var inputValue = document.getElementById("searchInput").value;
+            var routeQueryInput = document.querySelector('button[asp-action="Pesquisa"]');
+            routeQueryInput.setAttribute('asp-route-query', inputValue);
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
