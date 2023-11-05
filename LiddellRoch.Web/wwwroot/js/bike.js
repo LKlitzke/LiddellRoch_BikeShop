@@ -7,19 +7,19 @@ function loadDataTable() {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
         },
-        "ajax": { url: '/admin/product/getall' },
+        "ajax": { url: '/admin/bicicleta/getall' },
         "columns": [
-            { data: 'title', "width": "25%" },
-            { data: 'isbn', "width": "15%" },
-            { data: 'listPrice', "width": "10%", render: $.fn.dataTable.render.number('.', ',', 2, 'R$ ') },
-            { data: 'author', "width": "15%" },
-            { data: 'category.name', "width": "10%" },
+            { data: 'nome', "width": "25%" },
+            { data: 'estoque', "width": "15%" },
+            { data: 'preco', "width": "10%", render: $.fn.dataTable.render.number('.', ',', 2, 'R$ ') },
+            { data: 'marca.nome', "width": "15%" },
+            { data: 'categoria.nome', "width": "10%" },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group">
-                     <a href="/admin/product/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
-                     <a onClick=Delete('/admin/product/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
+                     <a href="/admin/bicicleta/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
+                     <a onClick=Delete('/admin/bicicleta/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
                     </div>`
                 },
                 "width": "25%"
@@ -30,13 +30,13 @@ function loadDataTable() {
 
 function Delete(url) {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Você tem certeza?',
+        text: "Esta ação é irreversível!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Sim, exclua!'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({

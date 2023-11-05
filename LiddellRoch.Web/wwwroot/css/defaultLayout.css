@@ -69,7 +69,7 @@ h6 {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-#header {
+/*#header {
   background: white;
   transition: all 0.5s;
   z-index: 997;
@@ -100,7 +100,7 @@ h6 {
 
 #header .logo img {
   max-height: 40px;
-}
+}*/
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -108,7 +108,7 @@ h6 {
 /**
 * Desktop Navigation 
 */
-.navbar {
+/*.navbar {
   padding: 0;
 }
 
@@ -231,7 +231,7 @@ h6 {
   .navbar .dropdown .dropdown:hover>ul {
     left: -100%;
   }
-}
+}*/
 
 /**
 * Mobile Navigation 
@@ -249,7 +249,7 @@ h6 {
   color: #fff;
 }
 
-@media (max-width: 991px) {
+/*@media (max-width: 991px) {
   .mobile-nav-toggle {
     display: block;
   }
@@ -257,7 +257,7 @@ h6 {
   .navbar ul {
     display: none;
   }
-}
+}*/
 
 .navbar-mobile {
   position: fixed;

@@ -67,13 +67,24 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult AboutUs()
+        public IActionResult Pesquisa(string query)
+        {
+            if(query is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var bikeList = _unitOfWork.Bicicleta.GetAll(b => b.Nome.ToLower().Contains(query.ToLower()));
+
+            ViewData["query"] = query;
+            return View(bikeList);
+        }
+        public IActionResult SobreNos()
         {
             return View();
         }
 
 
-        public IActionResult Privacy()
+        public IActionResult Privacidade()
         {
             return View();
         }

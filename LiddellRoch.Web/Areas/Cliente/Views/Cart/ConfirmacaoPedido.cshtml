@@ -1,0 +1,16 @@
+﻿@model int
+
+<div class="container row pt-4">
+    <div class="col-12 text-center">
+        <h1 class="text-primary text-center">Pedido concluído com sucesso!</h1>
+        Seu número de pedido é: @Model <br /><br />
+        <img src="~/assets/img/slide/slide_3" width="65%" />
+    </div>
+    <div class="col-12 text-center" style="color:maroon">
+        <br />
+        Seu pedido foi confirmado e em breve será processado para envio. Para mais detalhes, acesse: 
+        <a asp-area="Admin" asp-controller="Pedido" asp-action="Index"> Gerenciar pedidos</a>
+        <br />
+    </div>
+
+</div> 
