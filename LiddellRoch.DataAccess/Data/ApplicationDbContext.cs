@@ -26,6 +26,7 @@ namespace LiddellRoch.DataAccess.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Bicicleta> Bicicletas { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
         public DbSet<CarrinhoCompras> CarrinhoCompras { get; set; }
         public DbSet<ImagemProduto> ImagemProdutos { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

@@ -1,5 +1,9 @@
 ﻿@model CarrinhoCompras
 
+@{
+    var coresList = Model.Bicicleta.Cores.Split(",").ToList();
+}
+
 <form method="post">
     <input hidden asp-for="BicicletaId" />
     <div class="card shadow border-0 mt-4 mb-4">
@@ -70,9 +74,20 @@
                         <div class="row ps-2">
                             <h6 class="text-dark text-opacity-50  pb-2">
                                 Preço:
-                                <span class="text-decoration-line-through">
+                                <span>
                                     @Model.Bicicleta.Preco.ToString("c")
                                 </span>
+                            </h6>
+                        </div>
+                        <div class="row ps-2">
+                            <h6 class="text-dark text-opacity-50  pb-2">
+                                Cores:
+                                @foreach(var i in coresList)
+                                {
+                                    var css = "height: 25px;width: 25px;background-color:" + i + ";border-radius: 50%; display: inline-block;" ;
+                                    <span class="dot" style="@css"></span>
+                                }
+                                
                             </h6>
                         </div>
                         @* <div class="row text-center ps-2">

@@ -11,6 +11,8 @@
     <div class="card-body py-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="Bicicleta.Id" hidden />
+            <input asp-for="Bicicleta.Tamanhos" hidden />
+            <input asp-for="Bicicleta.Cores" hidden />
             <div class="row">
                 <div class="col-10">
                     <div class="border p-3">
@@ -29,25 +31,43 @@
                             <span asp-validation-for="Bicicleta.Estoque" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Bicicleta.Marca.Nome" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Marca.Nome" type="text" class="ms-2"></label>
-                            <span asp-validation-for="Bicicleta.Marca.Nome" class="text-danger"></span>
+                            <select asp-for="@Model.Bicicleta.MarcaId" asp-items="@Model.MarcaList" class="form-select border-0 shadow">
+                                <option disabled selected>Select Marca</option>
+                            </select>
+                            <label asp-for="Bicicleta.MarcaId" type="text" class="ms-2">Marca</label>
+                            <span asp-validation-for="Bicicleta.MarcaId" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="Bicicleta.Preco" class="form-control border-0 shadow" />
                             <label asp-for="Bicicleta.Preco" type="text" class="ms-2"></label>
                             <span asp-validation-for="Bicicleta.Preco" class="text-danger"></span>
                         </div>
+
+                        <div class="py-2 col-12">
+                            <label asp-for="@Model.CoresListSplit" type="text" class="ms-2">Cores</label>
+                            <select asp-for="@Model.CoresListSplit" asp-items="@Model.CoresListEnum" class="form-select border-0 shadow" multiple id="cores-select">
+                                @* <option disabled selected>Select Tamanhos</option> *@
+                            </select>
+                            <span asp-validation-for="@Model.CoresListSplit" class="text-danger"></span>
+                        </div>
+
+                        <div class="py-2 col-12">
+                            <label asp-for="@Model.TamanhosListSplit" type="text" class="ms-2">Tamanhos</label>
+                            <select asp-for="@Model.TamanhosListSplit" asp-items="@Model.TamanhosListEnum" class="form-select border-0 shadow"multiple id="tamanhos-select">
+                                @* <option disabled selected>Select Tamanhos</option> *@
+                            </select>
+                            <span asp-validation-for="@Model.TamanhosListSplit" class="text-danger"></span>
+                        </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Bicicleta.Peso" type="number" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Peso" type="text" class="ms-2"></label>
+                            <input asp-for="Bicicleta.Peso" class="form-control border-0 shadow" />
+                            <label asp-for="Bicicleta.Peso" class="ms-2"></label>
                             <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <select asp-for="@Model.Bicicleta.CategoriaId" asp-items="@Model.CategoriaList" class="form-select border-0 shadow">
                                 <option disabled selected>Select Categoria</option>
                             </select>
-                            <label asp-for="Bicicleta.CategoriaId" type="text" class="ms-2"></label>
+                            <label asp-for="Bicicleta.CategoriaId" type="text" class="ms-2">Categoria</label>
                             <span asp-validation-for="Bicicleta.CategoriaId" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
@@ -97,18 +117,21 @@
 
 @section Scripts {
     <script>
+        $(document).ready(function () {
+            $("#tamanhos-select").select2({
+                placeholder: 'Selecione uma ou mais opções',
+                allowClear: true
+            });
+            $("#cores-select").select2({
+                placeholder: 'Selecione uma ou mais opções',
+                allowClear: true
+            });
+        });
         tinymce.init({
             selector: 'textarea',
-            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons lists table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | tinycomments | checklist numlist bullist indent outdent',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
-        });
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        })
     </script>
     @{
         <partial name="_ValidationScriptsPartial" />
