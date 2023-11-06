@@ -11,6 +11,7 @@ namespace LiddellRoch.DataAccess.Repository.Interfaces
         // Listar Interfaces de repositorios das entidades 
         ICategoriaRepository Categoria { get; }
         IEmpresaRepository Empresa { get; }
+        IMarcaRepository Marca { get; }
         IBicicletaRepository Bicicleta { get; }
         ICarrinhoComprasRepository CarrinhoCompras { get; }
         IApplicationUserRepository ApplicationUser { get; }

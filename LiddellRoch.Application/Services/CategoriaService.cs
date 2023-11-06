@@ -44,14 +44,14 @@ namespace LiddellRoch.Application.Services
             }
         }
 
-        public IEnumerable<Categoria> GetAllCategories()
-        {
-            return _unitOfWork.Categoria.GetAll().ToList();
-        }
-
         public Categoria GetCategoryById(int id)
         {
             return _unitOfWork.Categoria.GetFirstOrDefault(u => u.Id == id);
+        }
+
+        public IEnumerable<Categoria> GetAll()
+        {
+            return _unitOfWork.Categoria.GetAll().ToList();
         }
     }
 }

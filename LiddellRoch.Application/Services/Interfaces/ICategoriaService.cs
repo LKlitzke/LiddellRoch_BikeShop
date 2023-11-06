@@ -9,8 +9,8 @@ namespace LiddellRoch.Application.Services.Interfaces
 {
     public interface ICategoriaService
     {
-        IEnumerable<Categoria> GetAllCategories();
         Categoria GetCategoryById(int id);
+        IEnumerable<Categoria> GetAll();
         void CreateCategory(Categoria categoria);
         void UpdateCategory(Categoria categoria);
         bool DeleteCategory(int id);
