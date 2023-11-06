@@ -22,19 +22,41 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Bicicleta> bikes = _unitOfWork.Bicicleta.GetAll(includeProperties: "Categoria").ToList();
+            List<Bicicleta> bikes = _unitOfWork.Bicicleta.GetAll(includeProperties: "Categoria,Marca").ToList();
             return View(bikes);
         }
 
         public IActionResult Upsert(int? id)
         {
+            var coresEnumList = Enum.GetValues(typeof(Cores)).Cast<Cores>();
+            var tamEnumList = Enum.GetValues(typeof(Tamanhos)).Cast<Tamanhos>();
+
             BicicletaVm bicicletaVm = new()
             {
                 CategoriaList = _unitOfWork.Categoria.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Nome,
                     Value = u.Id.ToString()
+                }).OrderBy(e => e.Text),
+
+                MarcaList = _unitOfWork.Marca.GetAll().Select(marca => new SelectListItem
+                {
+                    Text = marca.Nome,
+                    Value = marca.Id.ToString()
+                }).OrderBy(e => e.Text),
+
+                CoresListEnum = coresEnumList.Select(i => new SelectListItem
+                {
+                    Text = i.ToString(),
+                    Value = i.ToString()
                 }),
+
+                TamanhosListEnum = tamEnumList.Select(i => new SelectListItem
+                {
+                    Text = i.ToString(),
+                    Value = i.ToString()
+                }),
+
                 Bicicleta = new Bicicleta()
             };
 
@@ -44,6 +66,10 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             else
             {
                 bicicletaVm.Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == id, includeProperties: "ImagensProduto");
+
+                bicicletaVm.TamanhosListSplit = bicicletaVm.Bicicleta.Tamanhos.Split(',').ToList();
+                bicicletaVm.CoresListSplit = bicicletaVm.Bicicleta.Cores.Split(',').ToList();
+
                 return View(bicicletaVm);
             }
         }
@@ -53,6 +79,8 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                obj.Bicicleta.Tamanhos = string.Join(",", obj.TamanhosListSplit);
+                obj.Bicicleta.Cores = string.Join(",", obj.CoresListSplit);
                 if (obj.Bicicleta.Id == 0)
                 {
                     _unitOfWork.Bicicleta.Add(obj.Bicicleta);
@@ -70,7 +98,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                     foreach (IFormFile file in files)
                     {
                         string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        string productPath = @"images\products\product-" + obj.Bicicleta.Id;
+                        string productPath = @"images\bicicletas\bicicleta-" + obj.Bicicleta.Id;
                         string finalPath = Path.Combine(wwwRootPath, productPath);
 
                         if (!Directory.Exists(finalPath))
@@ -107,7 +135,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                 {
                     Text = u.Nome,
                     Value = u.Id.ToString()
-                });
+                }).OrderBy(e => e.Text);
                 return View(obj);
             }
         }
@@ -154,7 +182,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Erro ao excluir" });
             }
 
-            string productPath = @"images\products\product-" + id;
+            string productPath = @"images\bicicletas\bicicleta-" + id;
             string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
 
             if (Directory.Exists(finalPath))

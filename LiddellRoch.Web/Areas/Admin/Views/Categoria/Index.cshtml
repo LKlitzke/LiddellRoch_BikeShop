@@ -1,0 +1,51 @@
+﻿@model List<Categoria>
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Lista de Categorias</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body py-4">
+        <div class="row pb-3">
+            <div class="col-12 text-end">
+                <a asp-controller="Categoria" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Criar nova categoria
+                </a>
+            </div>
+
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="text-center">Ordem</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model /*.OrderBy(o => o.DisplayOrder)*/)
+                {
+                    <tr>
+                        <td>@obj.Nome</td>
+                        <td class="text-center">@obj.OrdemExibicao</td>
+                        <td class="text-center">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Categoria" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </a>
+                                <a asp-controller="Categoria" asp-action="Excluir" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i> Excluir
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

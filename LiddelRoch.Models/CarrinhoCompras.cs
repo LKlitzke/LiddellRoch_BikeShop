@@ -16,7 +16,7 @@ namespace LiddellRoch.Models
         [ValidateNever]
         public Bicicleta Bicicleta { get; set; }
 
-        [Range(1, 1000, ErrorMessage = "O valor deve estar entre 1 a 100")]
+        [Range(1, 100, ErrorMessage = "O valor deve estar entre 1 a 100")]
         public int Quantidade { get; set; }
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
