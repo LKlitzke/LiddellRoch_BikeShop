@@ -9,12 +9,12 @@ function loadDataTable() {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
         },
-        "ajax": { url: '/admin/user/getall' },
+        "ajax": { url: '/Admin/Usuario/getall' },
         "columns": [
-            { "data": "name", "width": "15%" },
+            { "data": "nome", "width": "15%" },
             { "data": "email", "width": "15%" },
             { "data": "phoneNumber", "width": "15%" },
-            { "data": "company.name", "width": "15%" },
+            { "data": "empresa.nome", "width": "15%" },
             { "data": "role", "width": "10%" },
             {
                 data: { id: "id", lockoutEnd: "lockoutEnd" },
@@ -27,13 +27,13 @@ function loadDataTable() {
                              <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" title="Bloquear" style="cursor:pointer;">
                                     <i class="bi bi-lock-fill"></i>
                                 </a> 
-                                <a href="/admin/user/RoleManagement?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
+                                <a href="/Admin/Usuario/GerenciarRoles?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
                                      <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="/admin/user/ClaimManagement?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
+                                <a href="/Admin/Usuario/GerenciarClaims?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar claims" style="cursor:pointer;">
                                      <i class="bi-check-square"></i>
                                 </a>
-                                <a onclick=Delete('/admin/user/Delete?userId=${data.id}') class="btn btn-danger text-white" title="Excluir" style="cursor:pointer;">
+                                <a onclick=Delete('/Admin/Usuario/Delete?userId=${data.id}') class="btn btn-danger text-white" title="Excluir" style="cursor:pointer;">
                                      <i class="bi bi-trash"></i>
                                 </a>
                         </div>`

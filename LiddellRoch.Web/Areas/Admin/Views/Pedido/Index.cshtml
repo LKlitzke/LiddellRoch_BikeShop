@@ -1,0 +1,80 @@
+﻿@{
+    var status = Context.Request.Query["status"];
+    var pendente = "text-primary";
+    var processando = "text-primary";
+    var completado = "text-primary";
+    var aprovado = "text-primary";
+    var todos = "text-primary";
+
+    switch (status)
+    {
+        case "pendente":
+            pendente = "active text-white bg-primary";
+            break;
+        case "processando":
+            processando = "active text-white bg-primary";
+            break;
+        case "completado":
+            completado = "active text-white bg-primary";
+            break;
+        case "aprovado":
+            aprovado = "active text-white bg-primary";
+            break;
+        default:
+            todos = "active text-white bg-primary";
+            break;
+
+    }
+
+}
+
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Lista de encomendas</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between pb-5 pt-2">
+            <span></span>
+            <ul class="list-group list-group-horizontal-sm">
+                <a style="text-decoration:none;" asp-controller="Pedido" asp-action="Index" asp-route-status="processando">
+                <li class="list-group-item @processando">Em processamento</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Pedido" asp-action="Index" asp-route-status="pendente">
+                <li class="list-group-item @pendente">Pagamento pendente</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Pedido" asp-action="Index" asp-route-status="completado">
+                <li class="list-group-item @completado">Concluído</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Pedido" asp-action="Index" asp-route-status="aprovado">
+                <li class="list-group-item @aprovado">Aprovado</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Pedido" asp-action="Index" asp-route-status="todos">
+                <li class="list-group-item @todos">Todos</li>
+                </a>
+            </ul>
+        </div>
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Número de telefone</th>
+                    <th>E-mail</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/pedido.js"></script>
+}

@@ -1,0 +1,17 @@
+﻿@model int
+
+<div class="container row pt-4">
+    <div class="col-12 text-center">
+        <h1 class="text-primary text-center">Pagamento bem sucedido!</h1>
+        Número do pedido : @Model <br /><br />
+        <img src="~/images/bicicletas/bicicleta-8/5c050acb-4a9f-48ec-8e5d-ec6d64f9098a.jpg" width="65%" />
+    </div>
+    <div class="col-12 text-center" style="color:maroon">
+        <br />
+        Payment has been applied successfully!<br /><br />
+        <a asp-area="Admin" asp-controller="Pedido" asp-action="Detalhes" asp-route-pedidoId="@Model" class="btn btn-primary">
+            Voltar à listagem
+        </a>
+    </div>
+
+</div> 

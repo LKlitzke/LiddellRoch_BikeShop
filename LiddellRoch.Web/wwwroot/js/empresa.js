@@ -9,19 +9,19 @@ function loadDataTable() {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
         },
-        "ajax": { url: '/admin/company/getall' },
+        "ajax": { url: '/admin/empresa/getall' },
         "columns": [
-            { "data": "name", "width": "15%" },
-            { "data": "streetAddress", "width": "15%" },
-            { "data": "city", "width": "15%" },
-            { "data": "state", "width": "15%" },
-            { "data": "phoneNumber", "width": "15%" },
+            { "data": "nome", "width": "15%" },
+            { "data": "endereco", "width": "15%" },
+            { "data": "cidade", "width": "15%" },
+            { "data": "estado", "width": "15%" },
+            { "data": "telefone", "width": "15%" },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group">
-                     <a href="/admin/company/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>               
-                     <a onClick=Delete('/admin/company/delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                     <a href="/admin/empresa/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
+                     <a onClick=Delete('/admin/empresa/excluir/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
                     </div>`
                 },
                 "width": "25%"

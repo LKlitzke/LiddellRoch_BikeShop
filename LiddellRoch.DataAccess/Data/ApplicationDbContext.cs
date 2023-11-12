@@ -146,6 +146,17 @@ namespace LiddellRoch.DataAccess.Data
                     Estado = "ES",
                     Telefone = "1029384756",
                     CriadoEm = DateTime.Now
+                },
+                new Empresa
+                {
+                    Id = 4,
+                    Nome = "Dani Floricultura",
+                    Endereco = "Av. Violet Hill",
+                    Cidade = "São Paulo",
+                    CodigoPostal = "01153-000",
+                    Estado = "SP",
+                    Telefone = "9925266237",
+                    CriadoEm = DateTime.Now
                 }
             );
 

@@ -1,0 +1,59 @@
+﻿@model UserClaimsVm
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Gerenciar claims do usuário</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="UserId" hidden />
+            @for (int i = 0; i < Model.Claims.Count; i++)
+            {
+                <div class="m-2 form-check">
+                    <input asp-for="Claims[i].ClaimType" hidden />
+                    <input asp-for="Claims[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="Claims[i].IsSelected" ´>
+                        @Model.Claims[i].ClaimType
+                    </label>
+                </div>
+
+            }
+            <div class="row pt-2">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Atualizar Claims</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-action="Index" class="btn btn-outline-primary border form-control">
+                        Voltar
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            $('#ApplicationUser_Role').change(function () {
+                var selection = $('#ApplicationUser_Role Option:Selected').text();
+                if (selection == 'Empresa') {
+                    $('#ApplicationUser_EmpresaId').show();
+                }
+                else {
+                    $('#ApplicationUser_EmpresaId').hide();
+                }
+            })
+        })
+    </script>
+}
