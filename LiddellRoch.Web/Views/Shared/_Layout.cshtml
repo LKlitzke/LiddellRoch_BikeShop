@@ -66,10 +66,13 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categoria" asp-action="Index"><i class="bi bi-handbag-fill"></i> Categorias</a>
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categoria" asp-action="Index"><i class="bi bi-bookmarks"></i> Categorias</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Bicicleta" asp-action="Index"><i class="bi bi-box-seam-fill"></i> Bicicletas</a>
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Bicicleta" asp-action="Index"><i class="bi bi-bicycle"></i> Bicicletas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Marca" asp-action="Index"><i class="bi bi-postage-fill"></i> Marcas</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Empresa" asp-action="Index"><i class="bi bi-building-fill"></i> Empresas</a>
@@ -79,7 +82,7 @@
                                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-fill-add"></i> Criar usuário</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Index"><i class="bi bi-person-fill-add"></i> Usuários</a>
+                                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Usuario" asp-action="Index"><i class="bi bi-person-fill-add"></i> Usuários</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -90,19 +93,18 @@
                                     @await Component.InvokeAsync("ShoppingCart")
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Cliente" asp-controller="Home" asp-action="SobreNos"><i class="bi bi-trophy-fill"></i> Sobre a demo</a>
-                            </li>
                             
                         </ul>
-                        <div class="navbar-nav w-40">
-                            <form class="d-flex" method="post" asp-controller="Home" asp-action="Pesquisa">
-                                <div class="input-group">
-                                    <input name="query" class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
-                                </div>
-                            </form>
-                        </div>
+                        <ul class="navbar-nav w-50">
+                            <li class="nav-item w-100">
+                                <form class="d-flex" method="post" asp-controller="Home" asp-action="Pesquisa">
+                                    <div class="input-group">
+                                    <input name="query" class="form-control" type="search" placeholder="Buscar modelo" aria-label="Buscar modelo">
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
                     
                     
                     
@@ -250,6 +252,10 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
+
+            <div class="text-center">
+                <a asp-area="Cliente" asp-controller="Home" asp-action="SobreNos"><i class="bi bi-trophy-fill"></i> Sobre a demo</a>
+            </div>
             @* <div class="container">
                 <div class="row">
 
@@ -304,8 +310,8 @@
                     </div>
 
                 </div>
-            </div>
-        </div> *@
+            </div>*@
+        </div>
 
         <div class="container">
             <div class="copyright">

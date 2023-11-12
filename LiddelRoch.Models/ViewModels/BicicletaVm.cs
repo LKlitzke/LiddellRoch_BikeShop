@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,10 @@ namespace LiddellRoch.Models.ViewModels
         public IEnumerable<SelectListItem> TamanhosListEnum { get; set; }
 
         [ValidateNever]
+        [Required(ErrorMessage = "Selecione um ou mais tamanhos")]
         public List<string> TamanhosListSplit { get; set; }
         [ValidateNever]
+        [Required(ErrorMessage = "Selecione uma ou mais cores")]
         public List<string> CoresListSplit { get; set; }
     }
 }

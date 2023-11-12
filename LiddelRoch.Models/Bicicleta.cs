@@ -13,38 +13,42 @@ namespace LiddellRoch.Models
 {
     public class Bicicleta : BaseModel
     {
-        [Required]
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public string Nome { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public string Descricao { get; set; }
 
         [Required]
         [Display(Name = "Preço")]
         [DataType(DataType.Currency)]
+        [Range(1, 1000000, ErrorMessage = "Selecione um preço entre 1 a 1000000")]
         [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Apenas duas casas decimais")]
         public decimal Preco { get; set; }
 
         [Required]
+        [Range(1.00, 50.00, ErrorMessage = "Selecione um peso entre 1.00 a 50.00")]
         [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Apenas duas casas decimais")]
         public double Peso { get; set; }
 
-        [Required]
+        [ValidateNever]
         public string Cores { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
+        [Range(1,100, ErrorMessage = "Selecione um estoque entre 1 a 100")]
         public int Estoque { get; set; }
 
-        [Required]
+        [ValidateNever]
         public string Tamanhos { get; set; }
 
         // Adicionar componentes individuais?
-
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public int CategoriaId { get; set; }
         [ForeignKey("CategoriaId")]
         [ValidateNever]
         public Categoria Categoria { get; set; }
 
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public int MarcaId { get; set; }
         [ForeignKey("MarcaId")]
         [ValidateNever]

@@ -22,24 +22,29 @@
                             <span asp-validation-for="Bicicleta.Nome" class="text-danger"></span>
                         </div>
                         <div class="py-2 col-12">
-                            <label asp-for="Bicicleta.Descricao" type="text" class="ms-2 text-muted"></label>
+                            <label asp-for="Bicicleta.Descricao" type="text" class="ms-2 text-muted">Descrição</label>
                             <textarea asp-for="Bicicleta.Descricao" class="form-control border-0 shadow"></textarea>
                         </div>
-                        <div class="form-floating py-2 col-12">
+                        <div class="form-floating py-2 col-6">
                             <input asp-for="Bicicleta.Estoque" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Estoque" type="text" class="ms-2"></label>
+                            <label asp-for="Bicicleta.Estoque" type="text" class="ms-2">Estoque (Unidades)</label>
                             <span asp-validation-for="Bicicleta.Estoque" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-6">
+                            <input asp-for="Bicicleta.Peso" class="form-control border-0 shadow" />
+                            <label asp-for="Bicicleta.Peso" class="ms-2">Peso (kg)</label>
+                            <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <select asp-for="@Model.Bicicleta.MarcaId" asp-items="@Model.MarcaList" class="form-select border-0 shadow">
-                                <option disabled selected>Select Marca</option>
+                                <option disabled selected>Selecione a marca...</option>
                             </select>
                             <label asp-for="Bicicleta.MarcaId" type="text" class="ms-2">Marca</label>
                             <span asp-validation-for="Bicicleta.MarcaId" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="Bicicleta.Preco" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Preco" type="text" class="ms-2"></label>
+                            <label asp-for="Bicicleta.Preco" type="text" class="ms-2">Preço (R$)</label>
                             <span asp-validation-for="Bicicleta.Preco" class="text-danger"></span>
                         </div>
 
@@ -59,36 +64,31 @@
                             <span asp-validation-for="@Model.TamanhosListSplit" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Bicicleta.Peso" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Peso" class="ms-2"></label>
-                            <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
                             <select asp-for="@Model.Bicicleta.CategoriaId" asp-items="@Model.CategoriaList" class="form-select border-0 shadow">
-                                <option disabled selected>Select Categoria</option>
+                                <option disabled selected>Selecione a Categoria</option>
                             </select>
                             <label asp-for="Bicicleta.CategoriaId" type="text" class="ms-2">Categoria</label>
                             <span asp-validation-for="Bicicleta.CategoriaId" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input type="file" name="files" class="form-control border-0 shadow" multiple />
-                            <label asp-for="Bicicleta.ImagensProduto" class="ms-2"></label>
+                            <label asp-for="Bicicleta.ImagensProduto" class="ms-2">Imagens do Produto</label>
                         </div>
                         <div class="row pt-2">
                             <div class="col-6 col-md-3">
                                 @if (Model.Bicicleta.Id != 0)
                                 {
-                                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                                    <button type="submit" class="btn btn-primary form-control">Atualizar</button>
                                 }
                                 else
                                 {
-                                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                                    <button type="submit" class="btn btn-primary form-control">Criar</button>
                                 }
 
                             </div>
                             <div class="col-6 col-md-3">
                                 <a asp-controller="Bicicleta" asp-action="Index" class="btn btn-outline-primary border form-control">
-                                    Back to List
+                                    Voltar à listagem
                                 </a>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                 <img src="@image.ImagemUrl" width="100%"
                                      style="border-radius:5px; border:1px solid #bbb9b9" />
                                 <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
-                                    <i class="bi bi-trash-fill"></i> Delete
+                                    <i class="bi bi-trash-fill"></i> Excluir
                                 </a>
                             </div>
                         }

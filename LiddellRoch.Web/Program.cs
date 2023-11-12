@@ -99,6 +99,7 @@ builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IMarcaService, MarcaService>();
 
 // RazorPages
 builder.Services.AddRazorPages();

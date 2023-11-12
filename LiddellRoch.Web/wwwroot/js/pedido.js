@@ -2,23 +2,23 @@
 
 $(document).ready(function () {
     var url = window.location.search;
-    if (url.includes("inprocess")) {
-        loadDataTable("inprocess");
+    if (url.includes("processando")) {
+        loadDataTable("processando");
     }
     else {
-        if (url.includes("completed")) {
-            loadDataTable("completed");
+        if (url.includes("completado")) {
+            loadDataTable("completado");
         }
         else {
-            if (url.includes("pending")) {
-                loadDataTable("pending");
+            if (url.includes("pendente")) {
+                loadDataTable("pendente");
             }
             else {
-                if (url.includes("approved")) {
-                    loadDataTable("approved");
+                if (url.includes("aprovado")) {
+                    loadDataTable("aprovado");
                 }
                 else {
-                    loadDataTable("all");
+                    loadDataTable("todos");
                 }
             }
         }
@@ -31,19 +31,19 @@ function loadDataTable(status) {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
         },
-        "ajax": { url: '/admin/order/getall?status=' + status },
+        "ajax": { url: '/admin/pedido/getall?status=' + status },
         "columns": [
             { data: 'id', "width": "5%" },
-            { data: 'name', "width": "25%" },
-            { data: 'phoneNumber', "width": "20%" },
+            { data: 'nome', "width": "25%" },
+            { data: 'telefone', "width": "20%" },
             { data: 'applicationUser.email', "width": "20%" },
-            { data: 'orderStatus', "width": "10%" },
-            { data: 'orderTotalStr', "width": "10%" },
+            { data: 'statusPagamento', "width": "10%" },
+            { data: 'totalPedidoStr', "width": "10%" },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="btn-group" role="group">
-                     <a href="/admin/order/details?orderId=${data}" title="Editar encomenda"> <i class="bi bi-pencil-square"></i></a>
+                     <a href="/admin/pedido/detalhes?pedidoId=${data}" title="Editar pedido"> <i class="bi bi-pencil-square"></i></a>
                     </div>`
                 },
                 "width": "10%",
