@@ -5,6 +5,7 @@ using LiddellRoch.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
+using Stripe.Issuing;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -46,6 +47,18 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             shoppingCart.ApplicationUserId = userId;
+            var item = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == shoppingCart.BicicletaId);
+            if (item.Estoque < shoppingCart.Quantidade)
+            {
+                TempData["error"] = "Unidades selecionadas acima do estoque!";
+                CarrinhoCompras cart = new()
+                {
+                    Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == item.Id, includeProperties: "Categoria,Marca,ImagensProduto"),
+                    Quantidade = 1,
+                    BicicletaId = item.Id
+                };
+                return View(cart);
+            }
 
             CarrinhoCompras cartDb = _unitOfWork.CarrinhoCompras.GetFirstOrDefault(u => u.ApplicationUserId == userId
             && u.BicicletaId == shoppingCart.BicicletaId);

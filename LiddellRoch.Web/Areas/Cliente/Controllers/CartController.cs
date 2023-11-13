@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Stripe.Checkout;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace LiddellRoch.Web.Areas.Cliente.Controllers
@@ -99,6 +100,10 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
                 //item.Price = GetPriceBasedOnQuantity(item);
                 item.Preco = item.Bicicleta.Preco;
                 CarrinhoComprasVm.PedidoHeader.TotalPedido += (item.Preco * item.Quantidade);
+
+                // Atualiza estoque do item
+                item.Bicicleta.Estoque -= item.Quantidade;
+                _unitOfWork.Bicicleta.Update(item.Bicicleta);
             }
 
             if (applicationUser.EmpresaId.GetValueOrDefault() == 0)
