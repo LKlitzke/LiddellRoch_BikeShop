@@ -3,149 +3,264 @@
 
 @* <div class="container">
     <main role="main" class="pb-3"> *@
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-4">
-        <div class="row">
-            <div class="col-12 text-center">
-                @if (User.IsInRole(SD.Role_Administrador))
-                {
-                    <h2 class="py-2 text-white">Registrar - ADMIN PORTAL</h2>
-                }
-                else
-                {
-                    <h2 class="py-2 text-white">Registrar</h2>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="card-body p-4">
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                    <h3 class="border-bottom pb-3 mb-4 text-secondary text-center">Criar uma nova conta local</h3>
-                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                    <div class="form-floating mb-3 col-md-12">
-                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                        <label asp-for="Input.Email" class="ms-2 text-muted">E-mail</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Nome" class="form-control" placeholder="name@example.com" />
-                        <label asp-for="Input.Nome" class="ms-2 text-muted">Nome completo</label>
-                        <span asp-validation-for="Input.Nome" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Telefone" class="form-control" placeholder="name@example.com" />
-                        <label asp-for="Input.Telefone" class="ms-2 text-muted">Telefone</label>
-                        <span asp-validation-for="Input.Telefone" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.Password" class="ms-2 text-muted">Senha</label>
-                        <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirme sua senha</label>
-                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                    </div>
 
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Endereco" class="form-control" placeholder="name@example.com" />
-                        <label asp-for="Input.Endereco" class="ms-2 text-muted">Endereço</label>
-                        <span asp-validation-for="Input.Endereco" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Cidade" class="form-control" placeholder="name@example.com" />
-                        <label asp-for="Input.Cidade" class="ms-2 text-muted">Cidade</label>
-                        <span asp-validation-for="Input.Cidade" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.Estado" class="form-control" placeholder="name@example.com" />
-                        <label asp-for="Input.Estado" class="ms-2 text-muted">Estado</label>
-                        <span asp-validation-for="Input.Estado" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating mb-3 col-md-6">
-                        <input asp-for="Input.CodigoPostal" class="form-control" placeholder="name@example.com" />
-                        <label asp-for="Input.CodigoPostal" class="ms-2 text-muted">CEP</label>
-                        <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
-                    </div>
-                    @if (User.IsInRole(SD.Role_Administrador))
-                    {
-                        <div class="form-floating mb-3 col-md-6">
-                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
-                                <option disabled selected>-Selecione Role-</option>
-                            </select>
-                        </div>
-                        <div class="form-floating mb-3 col-md-6">
-                            <select asp-for="Input.EmpresaId" style="display:none;" asp-items="@Model.Input.EmpresaList" class="form-select">
-                                <option disabled selected>-Selecione Empresa-</option>
-                            </select>
-                        </div>
-                    }
-                    <div class="col-12">
-                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Registrar</button>
-                    </div>
-                </form>
-            </div>
-            @if (!User.IsInRole(SD.Role_Administrador))
-            {
-                <div class="col-md-12 p-3 text-center">
-                    <section>
-                        <p class="divider-text d-flex pt-3">OU</p>
-                        @{
-                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+
+<div class="d-md-flex half">
+    <img class="bg" src="~/images/bg_4.jpg" style="object-fit:cover; object-position: left;" alt="imagem-fundo" />
+    <div class="contents">
+
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <div class="form-block mx-auto">
+                        <div class="text-center mb-5">
+                            @if (User.IsInRole(SD.Role_Administrador))
                             {
-                                <div>
-                                    <p>
-                                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                            article
-                                            about setting up this ASP.NET application to support logging in via external services
-                                        </a>.
-                                    </p>
-                                </div>
+                                <h3 class="text-uppercase">Registrar usuário (ADMINISTRADOR)</h3>
                             }
                             else
                             {
-                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                    <div>
-                                        <p class="text-center">
-                                            @foreach (var provider in Model.ExternalLogins!)
-                                            {
-                                                @switch (provider.Name)
-                                                {
-                                                    case "Facebook":
-                                                        <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #0866ff"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
-                                                        break;
-
-                                                    case "Microsoft":
-                                                        <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
-                                                        break;
-                                                    default:
-                                                        <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                                        break;
-                                                }
-                                            }
-                                        </p>
-                                    </div>
-                                </form>
+                                <h3 class="text-uppercase">Registrar-se</h3>
                             }
+                        </div>
+                        <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                            <div class="form-group first mb-3">
+                                <label asp-for="Input.Nome" class="form-label">Nome completo</label>
+                                <input asp-for="Input.Nome" class="form-control" />
+                                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-8">
+                                <label asp-for="Input.Email" class="form-label">E-mail</label>
+                                <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true" id="email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-4">
+                                <label asp-for="Input.Telefone" class="form-label">Telefone</label>
+                                <input asp-for="Input.Telefone" class="form-control"/>
+                                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-6">
+                                <label asp-for="Input.Password" class="form-label">Senha</label>
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-6">
+                                <label asp-for="Input.ConfirmPassword" class="form-label">Confirme sua senha</label>
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"/>
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3 col-md-12">
+                                <label asp-for="Input.Endereco" class="form-label">Endereço</label>
+                                <input asp-for="Input.Endereco" class="form-control"/>
+                                <span asp-validation-for="Input.Endereco" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-6">
+                                <label asp-for="Input.Cidade" class="form-label">Cidade</label>
+                                <input asp-for="Input.Cidade" class="form-control"/>
+                                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-3">
+                                <label asp-for="Input.Estado" class="form-label">Estado</label>
+                                <input asp-for="Input.Estado" class="form-control"/>
+                                <span asp-validation-for="Input.Estado" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-md-3">
+                                <label asp-for="Input.CodigoPostal" class="form-label">CEP</label>
+                                <input asp-for="Input.CodigoPostal" class="form-control"/>
+                                <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
+                            </div>
+                            @if (User.IsInRole(SD.Role_Administrador))
+                            {
+                                <div class="form-group mb-3 col-md-6">
+                                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                        <option disabled selected>-Selecione Role-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3 col-md-6">
+                                    <select asp-for="Input.EmpresaId" style="display:none;" asp-items="@Model.Input.EmpresaList" class="form-select">
+                                        <option disabled selected>-Selecione Empresa-</option>
+                                    </select>
+                                </div>
+                            }
+                    <div class="col-12">
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Registrar</button>
+                    </div>
+
+                    <div class="col-md-12">
+                        @if (!User.IsInRole(SD.Role_Administrador))
+                        {
+                            <div class="col-md-12 p-3 text-center">
+                                <section>
+                                    <p class="divider-text d-flex pt-3">OU</p>
+                                    @{
+                                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                        {
+                                            <div>
+                                                <p>
+                                                    There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                        article
+                                                        about setting up this ASP.NET application to support logging in via external services
+                                                    </a>.
+                                                </p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                <div>
+                                                    <p class="text-center">
+                                                        @foreach (var provider in Model.ExternalLogins!)
+                                                        {
+                                                            @switch (provider.Name)
+                                                            {
+                                                                case "Facebook":
+                                                                            <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
+                                                                    break;
+
+                                                                case "Microsoft":
+                                                                    <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
+                                                                    break;
+                                                                default:
+                                                                    <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                                    break;
+                                                            }
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </form>
+                                        }
+                                    }
+                                </section>
+                            </div>
                         }
-                    </section>
+                        </div>
+                    </form>
+                    </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
 </div>
-@*     </main>
-</div> *@
 <style>
-    #fbBtn:hover {
-        background-color: #5294ff !important;
+    body {
+        background-color: #fff;
     }
 
-    #msBtn:hover {
-        background-color: #5c5c5c !important;
+    p {
+        color: #b3b3b3;
+        font-weight: 300;
+    }
+
+    a {
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+    }
+
+    .content {
+        padding: 7rem 0;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    @@media (min-width: 767.98px) {
+        .half, .half .container > .row {
+            height: 100vh;
+            min-height: 700px;
+        }
+
+        .half .contents {
+            background: #f6f7fc;
+        }
+
+        .half .bg {
+            width: 25%;
+        }
+
+        @@media (max-width: 767.98px) {
+            .half .bg {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        .half .contents {
+            width: 75%;
+        }
+
+        @@media (max-width: 767.98px) {
+            .half .contents {
+                width: 100%;
+            }
+        }
+
+        @@media (max-width: 767.98px) {
+            .form-block {
+                padding: 25px;
+            }
+        }
+
+        .half .contents .form-control, .half .bg .form-control {
+            border: none;
+            border-radius: 4px;
+            height: 54px;
+            background: #efefef;
+        }
+
+        .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
+            outline: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .half .bg {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .half a {
+            color: #444444;
+            text-decoration: underline;
+        }
+
+        .half .btn {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .half .forgot-pass {
+            position: relative;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        .form-block {
+            background: #fff;
+            padding: 40px;
+            max-width: 70%;
+            -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            text-decoration: none !important;
+        }
+
+        #fbBtn:hover {
+            background-color: #4f74c2 !important;
+        }
+
+        #msBtn:hover {
+            background-color: #5c5c5c !important;
+        }
     }
 </style>
 

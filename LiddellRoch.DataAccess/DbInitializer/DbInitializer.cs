@@ -51,7 +51,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                 // Cria um ApplicationUser Administrador
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Administrador@gmail.com",
+                    UserName = "Administrador",
                     Email = "Administrador@gmail.com",
                     Nome = "Administrador",
                     PhoneNumber = "1234567890",
@@ -69,7 +69,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                 // Cria um ApplicationUser Empresa
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Empresa@gmail.com",
+                    UserName = "Empresa",
                     Email = "Empresa@gmail.com",
                     Nome = "Empresa",
                     PhoneNumber = "0987654321",
@@ -87,7 +87,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                 // Cria um ApplicationUser Empregado
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "Empregado@gmail.com",
+                    UserName = "Empregado",
                     Email = "Empregado@gmail.com",
                     Nome = "Empregado",
                     PhoneNumber = "0192837465",
@@ -104,7 +104,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                 // Cria um ApplicationUser Cliente
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "ClienteTester@gmail.com",
+                    UserName = "ClienteTester",
                     Email = "ClienteTester@gmail.com",
                     Nome = "ClienteTester",
                     PhoneNumber = "5647382910",

@@ -4,7 +4,7 @@
 }
 
 <!-- ======= Hero Section ======= -->
- <section id="hero" style="height:700px">
+ <section id="hero" style="height:650px">
     <div id="heroCarousel" data-bs-interval="50000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
@@ -12,7 +12,7 @@
         <div class="carousel-inner" role="listbox">
 
             <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url(assets/img/slide/slide_3.jpg)">
+            <div class="carousel-item active" style="background-image: url(images/slide/slide_3.jpg); background-position: top;">
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Nova Spark RC World Cup Evo disponível!</h2>
@@ -23,7 +23,7 @@
             </div>
 
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url(assets/img/slide/slide_1.jpeg)">
+            <div class="carousel-item" style="background-image: url(images/slide/slide_1.jpeg); background-position: top; background-position-y: 25%;">
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Para todos os gostos</h2>
@@ -34,7 +34,7 @@
             </div>
 
             <!-- Slide 3 -->
-            <div class="carousel-item " style="background-image: url(assets/img/slide/slide_2.png)">
+            <div class="carousel-item " style="background-image: url(images/slide/slide_2.png); background-position: top; background-position-y: 20%">
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">LiddellRoch</h2>
@@ -56,48 +56,63 @@
     </div>
 </section><!-- End Hero -->
 
-<div class="row pb-3">
+<div class="row pb-3 container" style="margin: 0 auto;">
     @foreach (var product in Model)
     {
-        <div class="col-lg-4 col-sm-6">
+        <div class="col-lg-4 col-sm-6 col-xl-3">
             <div class="row p-2 h-100">
                 <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow  border-top border-5 rounded" @* style="height:100%" *@>
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
                         @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
                         {
-                            <img src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="card-img-top rounded" style="height: 350px; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
+                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="card-img-top rounded" style="height: 30vh; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
                         }
                         else
                         {
                             <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
                         }
 
-                        <div class="card-body pb-0">
+                        <div class="card-body pb-0 pt-2">
                             <div class="pl-1">@* 
                                 <p class="card-title text-warning text-center"><b></b></p> *@
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@product.Marca.Nome @product.Nome</p>
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center" style="height: 5vh;">
+                                    <span>
+                                        @product.Marca.Nome @product.Nome
+                                    </span>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="pl-1">
+                                <p class="text-dark text-opacity-75 text-center mb-1">
+                                    De: 
+                                    <span style="text-decoration: line-through;">
+                                        @((product.Preco*1.2m).ToString("c"))
+                                    </span>
+                                </p>
                             </div>
                             <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center mb-0">
-                                    <span style="font-weight:bolder; font-size:larger">
+                                <p class="text-dark text-opacity-75 text-center mb-3">
+                                    Por:
+                                    <span class="text-dark" style="font-weight:bold; font-size:large">
+                                        @((product.Preco*1.1m).ToString("c"))
+                                    </span>
+                                    <br><span style="font-size:small">em 12 vezes sem juros</span>
+                                    <br>
+                                    ou
+                                    <br>
+                                    <span class="text-success" style="font-weight:bolder; font-size:larger">
                                         @product.Preco.ToString("c")
                                     </span>
+                                    <br>(PIX ou boleto)
                                 </p>
-                            </div>@* 
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center">
-                                    Preço no PIX:
-                                    <span>
-                                        @product.Price100.ToString("c")
-                                    </span>
-                                </p>
-                            </div> *@
+                            </div>
+                            
                         </div>
                         <div>
                             @* productId DEVE ter o mesmo nome na assinatura do método Details *@
                             <a asp-action="Detalhes"
                                asp-route-bikeId="@product.Id"
-                               class="btn btn-primary bg-gradient border-0 form-control">
+                               class="btn btn-success bg-gradient border-0 form-control">
                                 Detalhes
                             </a>
                         </div>
