@@ -2116,3 +2116,8 @@ section {
 #footer .credits a:hover {
   color: white;
 }
+
+
+.half .bg {
+    width: 25%;
+}

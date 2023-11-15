@@ -43,13 +43,13 @@ function loadDataTable() {
                               <a onclick=LockUnlock('${data.id}') class="btn btn-success text-white" title="Desbloquear" style="cursor:pointer;">
                                     <i class="bi bi-unlock-fill"></i>
                                 </a>
-                                <a href="/admin/user/RoleManagement?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
+                                <a href="/Admin/Usuario/GerenciarRoles?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
                                      <i class="bi bi-pencil-square"></i>
                                 </a>
-                                 <a href="/admin/user/ClaimManagement?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
+                                 <a href="/Admin/Usuario/GerenciarClaims?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
                                      <i class="bi-check-square"></i>
                                 </a>
-                                <a onclick=Delete('/admin/user/Delete?userId=${data.id}') class="btn btn-danger text-white" title="Excluir" style="cursor:pointer;">
+                                <a onclick=Delete('/Admin/Usuario/Delete?userId=${data.id}') class="btn btn-danger text-white" title="Excluir" style="cursor:pointer;">
                                      <i class="bi bi-trash"></i>
                                 </a>
                         </div>`
@@ -65,7 +65,7 @@ function loadDataTable() {
 function LockUnlock(id) {
     $.ajax({
         type: "POST",
-        url: '/Admin/User/LockUnlock',
+        url: '/Admin/Usuario/LockUnlock',
         data: JSON.stringify(id),
         contentType: "application/json",
         success: function (data) {
