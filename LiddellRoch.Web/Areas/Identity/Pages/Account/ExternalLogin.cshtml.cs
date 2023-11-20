@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using LiddellRoch.Utility;
+using LiddellRoch.Models;
 
 namespace LiddellRoch.Web.Areas.Identity.Pages.Account
 {
@@ -84,6 +86,13 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+            [Required]
+            public string Nome { get; set; }
+            public string? Endereco { get; set; }
+            public string? Cidade { get; set; }
+            public string? Estado { get; set; }
+            public string? CodigoPostal { get; set; }
+            public string? Telefone { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -131,7 +140,8 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        Nome = info.Principal.FindFirstValue(ClaimTypes.Name)
                     };
                 }
                 return Page();
@@ -155,10 +165,17 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.Endereco = Input.Endereco;
+                user.Cidade = Input.Cidade;
+                user.CodigoPostal = Input.CodigoPostal;
+                user.Estado = Input.Estado;
+                user.Nome = Input.Nome;
+                user.PhoneNumber = Input.Telefone;
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, SD.Role_Cliente);
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
@@ -197,11 +214,11 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {

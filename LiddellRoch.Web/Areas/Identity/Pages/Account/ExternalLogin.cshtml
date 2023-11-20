@@ -19,11 +19,41 @@
         <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
+                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email." />
                 <label asp-for="Input.Email" class="form-label"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Nome" class="form-control" autocomplete="email" placeholder="Please enter your Name." />
+                <label asp-for="Input.Nome" class="form-label"></label>
+                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Telefone" class="form-control" autocomplete="email" placeholder="Please enter your PhoneNumber." />
+                <label asp-for="Input.Telefone" class="form-label"></label>
+                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Endereco" class="form-control" autocomplete="email" placeholder="Please enter your StreetAddress." />
+                <label asp-for="Input.Endereco" class="form-label"></label>
+                <span asp-validation-for="Input.Endereco" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Cidade" class="form-control" autocomplete="email" placeholder="Please enter your City." />
+                <label asp-for="Input.Cidade" class="form-label"></label>
+                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Estado" class="form-control" autocomplete="email" placeholder="Please enter your State." />
+                <label asp-for="Input.Estado" class="form-label"></label>
+                <span asp-validation-for="Input.Estado" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.CodigoPostal" class="form-control" autocomplete="email" placeholder="Please enter your PostalCode." />
+                <label asp-for="Input.CodigoPostal" class="form-label"></label>
+                <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Registrar</button>
         </form>
     </div>
 </div>
