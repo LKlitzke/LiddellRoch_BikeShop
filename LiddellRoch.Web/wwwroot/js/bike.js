@@ -7,6 +7,52 @@ function loadDataTable() {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
         },
+        dom: 'Bfrtip',
+        buttons: [
+            //'excelHtml5',
+            {
+                extend: 'colvis',
+                columnText: function (dt, idx, title) {
+                    return (idx + 1) + ': ' + title;
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                title: 'LiddellRoch - Lista de Bikes',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                title: 'LiddellRoch - Lista de Bikes',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'btn-outline-danger btn-sm ',
+                //customize: function (doc) {
+                //    doc.content.splice(1, 0, {
+                //        margin: [0, 0, 0, 12],
+                //        alignment: 'center'
+                //    });
+                //},
+                //titleAttr: 'Generate PDF',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                },
+                title: 'LiddellRoch - Lista de Bikes',
+                messageTop: 'PDF created by PDFMake with Buttons for DataTables.'
+                //customize: function (doc) {
+                //    doc.defaultStyle =
+                //    {
+                //        font: 'Arial',
+                //    };
+                //}
+            }            
+        ],
         "ajax": { url: '/admin/bicicleta/getall' },
         "columns": [
             { data: 'nome', "width": "25%" },
