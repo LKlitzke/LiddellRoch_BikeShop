@@ -3,169 +3,172 @@
 @{
     var coresList = Model.Bicicleta.Cores.Split(",").ToList();
 }
-
-<form method="post">
-    <input hidden asp-for="BicicletaId" />
-    <div class="card shadow border-0 mt-4 mb-4">
-        @* <div class="card-header bg-secondary bg-gradient text-light py-4">
+<div class="row pb-3 container" style="margin: 0 auto;">
+    <form method="post">
+        <input hidden asp-for="BicicletaId" />
+        <div class="card shadow border-0 mt-4 mb-4">
+            @* <div class="card-header bg-secondary bg-gradient text-light py-4">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h3 class="text-white text-uppercase">@Model.Bicicleta.Nome</h3>
-                    <p class="text-white-50 fw-semibold mb-0">@Model.Bicicleta.Marca.Nome</p>
-                </div>
+            <div class="col-12 text-center">
+            <h3 class="text-white text-uppercase">@Model.Bicicleta.Nome</h3>
+            <p class="text-white-50 fw-semibold mb-0">@Model.Bicicleta.Marca.Nome</p>
             </div>
-        </div> *@
-        <div class="card-body">
-            <div class="py-3">
-                <div class="row">
-                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
-                        <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
-                            <small>Voltar</small>
-                        </a>
+            </div>
+            </div> *@
+            <div class="card-body">
+                <div class="py-3">
+                    <div class="row">
+                        <div class="col-6 col-md-2 offset-lg-1 pb-1">
+                            <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <small>Voltar</small>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 text-center mb-3">
-                        @if (Model.Bicicleta.ImagensProduto != null && Model.Bicicleta.ImagensProduto.Count > 0)
-                        {
-                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="object-fit:contain; height: 50vh">
+                    <div class="row">
+                        <div class="col-12 text-center mb-3">
+                            @if (Model.Bicicleta.ImagensProduto != null && Model.Bicicleta.ImagensProduto.Count > 0)
+                            {
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="object-fit:contain; height: 50vh">
 
-                                <div class="carousel-inner">
-                                    <div class="carousel-indicators">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-indicators">
+                                            @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
+                                           .Select((image, index) => new { Image = image, Index = index }))
+                                            {
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@imageWithIndex.Index"
+                                                        class="@(imageWithIndex.Index==0?"active":"")" aria-current="true" aria-label="Slide 1"></button>
+                                            }
+                                        </div>
                                         @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
                                        .Select((image, index) => new { Image = image, Index = index }))
                                         {
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@imageWithIndex.Index"
-                                                    class="@(imageWithIndex.Index==0?"active":"")" aria-current="true" aria-label="Slide 1"></button>
+                                            <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")">
+                                                <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="max-height:600px;object-fit: contain;" alt="...">
+                                            </div>
                                         }
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
                                     </div>
-                                    @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
-                                   .Select((image, index) => new { Image = image, Index = index }))
-                                    {
-                                        <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")">
-                                            <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="max-height:600px;object-fit: contain;" alt="...">
-                                        </div>
-                                    }
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
                                 </div>
+
+                            }
+                            else
+                            {
+                                <img src="@("https://source.unsplash.com/random/500x600?sig=" + Model.BicicletaId)" class="card-img-top rounded" />
+                            }
+
+                        </div>
+                        <div class="col-12">
+                            <div class="ps-2">
+                                @*
+                                <h6 class="text-dark text-opacity-50 ">Marca: @Model.Bicicleta.Marca.Nome</h6> *@
+                                <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" width="20%" />
                             </div>
-
-                        }
-                        else
-                        {
-                            <img src="@("https://source.unsplash.com/random/500x600?sig=" + Model.BicicletaId)" class="card-img-top rounded" />
-                        }
-
-                    </div>
-                    <div class="col-12">
-                        <div class="ps-2">@* 
-                            <h6 class="text-dark text-opacity-50 ">Marca: @Model.Bicicleta.Marca.Nome</h6> *@
-                            <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" width="20%"/>
-                        </div>
-                        <div class="row ps-2">
-                            <h2 class="text-dark text-opacity-50 ">@Model.Bicicleta.Nome</h2>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50 ">@Model.Bicicleta.Categoria.Nome</h6>
-                        </div>
-                        @* <div class="col-12 col-md-6 pb-4">
+                            <div class="row ps-2">
+                                <h2 class="text-dark text-opacity-50 ">@Model.Bicicleta.Nome</h2>
+                            </div>
+                            <div class="row ps-2">
+                                <h6 class="text-dark text-opacity-50 ">@Model.Bicicleta.Categoria.Nome</h6>
+                            </div>
+                            @* <div class="col-12 col-md-6 pb-4">
                             <span class="badge"></span>
-                        </div>
-                        <div class="col-12 col-md-6 pb-4">
+                            </div>
+                            <div class="col-12 col-md-6 pb-4">
                             <span class="badge">@Model.Bicicleta.Nome</span>
-                        </div>
-                        <div class="col-12 col-md-6 pb-4">
+                            </div>
+                            <div class="col-12 col-md-6 pb-4">
                             <span class="badge">@Model.Bicicleta.Categoria.Nome</span>
-                        </div> *@
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50 ">Estoque: @Model.Bicicleta.Estoque</h6>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50  pb-2">
-                                Preço:
-                                <span>
-                                    @Model.Bicicleta.Preco.ToString("c")
-                                </span>
-                            </h6>
-                        </div>
-                        <div class="row ps-2">
-                            <h6 class="text-dark text-opacity-50  pb-2">
-                                Cores:
-                                @foreach(var i in coresList)
-                                {
-                                    var css = "height: 25px;width: 25px;background-color:" + i + ";border-radius: 50%; display: inline-block;" ;
-                                    <span class="dot" style="@css"></span>
-                                }
-                                
-                            </h6>
-                        </div>
-                        @* <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">Quantidade</div>
+                            </div> *@
+                            <div class="row ps-2">
+                                <h6 class="text-dark text-opacity-50 ">Estoque: @Model.Bicicleta.Estoque</h6>
                             </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">1-50</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">51-100</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                                <div class="text-dark text-opacity-50 fw-semibold">100+</div>
-                            </div>
-                        </div>
-                        <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>Preço</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>@Model.Product.Price.ToString("c")</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>@Model.Product.Price50.ToString("c")</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                                <div>@Model.Product.Price100.ToString("c")</div>
-                            </div>
-                        </div> *@
-                        <div class="row pl-2 my-3">
-                            <p class="text-secondary lh-sm">@Html.Raw(Model.Bicicleta.Descricao)</p>
-                        </div>
-                        <div class="row pl-2 mb-3">
-                            <div class="col-md-12">
-                                <div class="input-group mb-3" style="width: 30% !important;min-width: fit-content;">
-                                    <span class="input-group-text bg-primary text-white border-0 fw-semibold"
-                                          id="inputGroup-sizing-default">
-                                        Unidades
+                            <div class="row ps-2">
+                                <h6 class="text-dark text-opacity-50  pb-2">
+                                    Preço:
+                                    <span>
+                                        @Model.Bicicleta.Preco.ToString("c")
                                     </span>
-                                    <input asp-for="Quantidade" type="number" value="1" min="1" max="@Model.Bicicleta.Estoque" class="form-control text-end"
-                                           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                                    
-                                </div>
-                                <span id="Quantidade-error" @* asp-validation-for="Quantidade" *@ class="text-danger"></span>
+                                </h6>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6 pb-1">
-                                <button type="submit" id="submit-btn"
-                                        class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
-                                    <i class="bi bi-cart-plus-fill"></i> Adicionar ao carrinho
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="row ps-2">
+                                <h6 class="text-dark text-opacity-50  pb-2">
+                                    Cores:
+                                    @foreach (var i in coresList)
+                                    {
+                                        var css = "height: 25px;width: 25px;background-color:" + i + ";border-radius: 50%; display: inline-block;";
+                                        <span class="dot" style="@css"></span>
+                                    }
 
+                                </h6>
+                            </div>
+                            @* <div class="row text-center ps-2">
+                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
+                            <div class="text-dark text-opacity-50 fw-semibold">Quantidade</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
+                            <div class="text-dark text-opacity-50 fw-semibold">1-50</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
+                            <div class="text-dark text-opacity-50 fw-semibold">51-100</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
+                            <div class="text-dark text-opacity-50 fw-semibold">100+</div>
+                            </div>
+                            </div>
+                            <div class="row text-center ps-2">
+                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
+                            <div>Preço</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
+                            <div>@Model.Product.Price.ToString("c")</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
+                            <div>@Model.Product.Price50.ToString("c")</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
+                            <div>@Model.Product.Price100.ToString("c")</div>
+                            </div>
+                            </div> *@
+                            <div class="row pl-2 my-3">
+                                <p class="text-secondary lh-sm">@Html.Raw(Model.Bicicleta.Descricao)</p>
+                            </div>
+                            <div class="row pl-2 mb-3">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3" style="width: 30% !important;min-width: fit-content;">
+                                        <span class="input-group-text bg-primary text-white border-0 fw-semibold"
+                                              id="inputGroup-sizing-default">
+                                            Unidades
+                                        </span>
+                                        <input asp-for="Quantidade" type="number" value="1" min="1" max="@Model.Bicicleta.Estoque" class="form-control text-end"
+                                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+
+                                    </div>
+                                    <span id="Quantidade-error" @* asp-validation-for="Quantidade" *@ class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 pb-1">
+                                    <button type="submit" id="submit-btn"
+                                            class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                        <i class="bi bi-cart-plus-fill"></i> Adicionar ao carrinho
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+
+</div>
 
 <script>
     document.getElementById("Quantidade").addEventListener("input", function () {
