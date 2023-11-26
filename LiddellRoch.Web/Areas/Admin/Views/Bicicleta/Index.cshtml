@@ -1,61 +1,85 @@
 ﻿@model List<Bicicleta>
 
 
-<div class="card shadow border-0 my-4">
-    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Bicicleta List</h2>
-            </div>
-        </div>
-    </div>
-    <div class="card-body py-4">
-        <div class="row pb-3">
-            <div class="col-12 text-end">
-                <a asp-controller="Bicicleta" asp-action="Upsert" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Criar bicicleta
-                </a>
-            </div>
+<div class="container">
 
+    <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Bicicleta List</h2>
+                </div>
+            </div>
         </div>
-        <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
-            <thead>
+        <div class="card-body py-4">
+            <div class="row pb-3">
+                <div class="col-12 text-end">
+                    <a asp-controller="Bicicleta" asp-action="Upsert" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Criar bicicleta
+                    </a>
+                </div>
+
+            </div>
+            <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Estoque</th>
+                        <th>Preço</th>
+                        <th>Marca</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                @*<tbody>
+                foreach (var obj in Model)
+                {
                 <tr>
-                    <th>Nome</th>
-                    <th>Estoque</th>
-                    <th>Preço</th>
-                    <th>Marca</th>
-                    <th>Categoria</th>
-                    <th></th>
+                <td>@obj.Title</td>
+                <td>@obj.ISBN</td>
+                <td>@obj.Price</td>
+                <td>@obj.Author</td>
+                <td>@obj.Category.Name</td>
+                <td>
+                <div class="w-75 btn-group" role="group">
+                <a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                <i class="bi bi-trash-fill"></i> Delete
+                </a>
+                </div>
+                </td>
                 </tr>
-            </thead>
-            @*<tbody>
-            foreach (var obj in Model)
-            {
-            <tr>
-            <td>@obj.Title</td>
-            <td>@obj.ISBN</td>
-            <td>@obj.Price</td>
-            <td>@obj.Author</td>
-            <td>@obj.Category.Name</td>
-            <td>
-            <div class="w-75 btn-group" role="group">
-            <a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-            <i class="bi bi-pencil-square"></i> Edit
-            </a>
-            <a asp-controller="Product" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
-            <i class="bi bi-trash-fill"></i> Delete
-            </a>
-            </div>
-            </td>
-            </tr>
-            }
+                }
 
-            </tbody>*@
-        </table>
+                </tbody>*@
+            </table>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <script src="~/js/bike.js"></script>
+
+
+
+
+    
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+    @* <script>
+        $(document).ready(function () {
+            $('#tblData').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script> *@
 }

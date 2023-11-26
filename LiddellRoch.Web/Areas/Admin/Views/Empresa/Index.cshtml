@@ -1,36 +1,39 @@
 ﻿@* @model List<Empresa> *@
 
-<div class="card shadow border-0 my-4">
-    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Lista de Empresas</h2>
+<div class="container">
+    <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Lista de Empresas</h2>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body py-4">
-        <div class="row pb-3">
-            <div class="col-12 text-end">
-                <a asp-controller="Empresa" asp-action="Upsert" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Criar Empresa
-                </a>
-            </div>
+        <div class="card-body py-4">
+            <div class="row pb-3">
+                <div class="col-12 text-end">
+                    <a asp-controller="Empresa" asp-action="Upsert" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Criar Empresa
+                    </a>
+                </div>
 
+            </div>
+            <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Telefone</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
-                    <th>Telefone</th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
     </div>
 </div>
+
 
 @section Scripts {
     <script src="~/js/empresa.js"></script>

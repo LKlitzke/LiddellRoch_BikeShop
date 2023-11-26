@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group mb-3 col-md-8">
                                 <label asp-for="Input.Email" class="form-label">E-mail</label>
-                                <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true" id="email">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true">
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-4">
@@ -84,61 +84,83 @@
                                     </select>
                                 </div>
                             }
-                    <div class="col-12">
-                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Registrar</button>
-                    </div>
-
-                    <div class="col-md-12">
-                        @if (!User.IsInRole(SD.Role_Administrador))
-                        {
-                            <div class="col-md-12 p-3 text-center">
-                                <section>
-                                    <p class="divider-text d-flex pt-3">OU</p>
-                                    @{
-                                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                                        {
-                                            <div>
-                                                <p>
-                                                    There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                                        article
-                                                        about setting up this ASP.NET application to support logging in via external services
-                                                    </a>.
-                                                </p>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div class="col-12">
+                                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Registrar</button>
+                            </div>
+                            </form>
+                        <div class="col-md-12">
+                            @if (!User.IsInRole(SD.Role_Administrador))
+                            {
+                                <div class="col-md-12 p-3 text-center">
+                                    <section>
+                                        <p class="divider-text d-flex pt-3">OU</p>
+                                        @{
+                                            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                            {
                                                 <div>
-                                                    <p class="text-center">
-                                                        @foreach (var provider in Model.ExternalLogins!)
-                                                        {
-                                                            @switch (provider.Name)
-                                                            {
-                                                                case "Facebook":
-                                                                            <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
-                                                                    break;
-
-                                                                case "Microsoft":
-                                                                    <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
-                                                                    break;
-                                                                default:
-                                                                    <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                                                    break;
-                                                            }
-                                                        }
+                                                    <p>
+                                                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                            article
+                                                            about setting up this ASP.NET application to support logging in via external services
+                                                        </a>.
                                                     </p>
                                                 </div>
-                                            </form>
+                                            }
+                                            else
+                                            {
+                                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                    <div>
+                                                        <p class="text-center">
+                                                            @foreach (var provider in Model.ExternalLogins!)
+                                                            {
+                                                                @switch (provider.Name)
+                                                                {
+                                                                    case "Facebook":
+                                                                        <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
+                                                                        break;
+
+                                                                    case "Microsoft":
+                                                                        <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
+                                                                        break;
+                                                                    default:
+                                                                        <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                                        break;
+                                                                }
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                </form>
+                                                // <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                //     <div>
+                                                //         <p class="text-center">
+                                                //             @foreach (var provider in Model.ExternalLogins!)
+                                                //             {
+                                                //                 @switch (provider.Name)
+                                                //                 {
+                                                //                     case "Facebook":
+                                                //                         <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #0866ff"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
+                                                //                         break;
+
+                                                //                     case "Microsoft":
+                                                //                         <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
+                                                //                         break;
+                                                //                     default:
+                                                //                         <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                //                         break;
+                                                //                 }
+                                                //             }
+                                                //         </p>
+                                                //     </div>
+                                                // </form>
+                                            }
                                         }
-                                    }
-                                </section>
-                            </div>
-                        }
+                                    </section>
+                                </div>
+                            }
                         </div>
-                    </form>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

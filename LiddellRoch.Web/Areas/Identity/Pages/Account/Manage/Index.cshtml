@@ -1,29 +1,268 @@
 ﻿@page
+@using LiddellRoch.Models;
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Alterar dados do perfil";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    var appUser = TempData["User"] as ApplicationUser;
+    var userPedidos = TempData["UserPedidos"] as List<PedidoHeader>;
 }
+<div class="d-md-flex half">
+    <partial name="_StatusMessage" for="StatusMessage" />
+    <div class="contents">
+        <div class="">
+            <div class="row mt-5 justify-content-center">
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <div class="form-block mx-auto" style="display: flex; align-items: center;">              @* justify-content-center align-content-center*@
+                            <div style="margin-right:10px">
+                                <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
 
-<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
-                <label asp-for="Username" class="form-label"></label>
+                            </div>
+                            <div style="width: 50dvw;">
+                                <span>Bem-vindo, @appUser.Nome!</span>
+                                <br />
+                                <p class="text-muted mb-0">@appUser.Email</p>
+                            </div>
+                            <div>
+                                <span>Confirmação de E-mail: 
+                                    @if(appUser.EmailConfirmed)
+                                    {
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                    }
+                                    <br />
+                                </span>
+                                <span>
+                                    Confirmação de Telefone:
+                                    @if (appUser.PhoneNumberConfirmed)
+                                    {
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                    }
+                                    <br />
+                                </span>
+                            </div>
+
+                            
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-block" style="margin-right: 0;margin-left: auto;">
+                            <div class="text-center mb-5">
+                                <h3 class="text-uppercase">Alterar dados do perfil</h3>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form id="profile-form" method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Username" class="form-label">Usuário</label>
+                                            <input asp-for="Username" class="form-control" style="background-color:#CCC; cursor: no-drop;" disabled />
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-md-8">
+                                                <label asp-for="Input.Email" class="form-label">E-mail</label>
+                                                <input asp-for="Input.Email" class="form-control" style="background-color:#CCC; cursor: no-drop;" disabled>
+                                            </div>
+                                            <div class="form-group mb-3 col-md-4">
+                                                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                                                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group mb-3">
+                                            <label asp-for="Input.Endereco" class="form-label">Endereço</label>
+                                            <input asp-for="Input.Endereco" class="form-control" placeholder="Please enter your phone number." />
+                                            <span asp-validation-for="Input.Endereco" class="text-danger"></span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-md-8">
+                                                <label asp-for="Input.Cidade" class="form-label"></label>
+                                                <input asp-for="Input.Cidade" class="form-control" placeholder="Please enter your phone number." />
+                                                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
+                                            </div>
+                                            <div class="col-md-form-group mb-3 col-md-4">
+                                                <label asp-for="Input.Estado" class="form-label"></label>
+                                                <input asp-for="Input.Estado" class="form-control" placeholder="Please enter your phone number." />
+                                                <span asp-validation-for="Input.Estado" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Atualizar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-block">
+                            <div class="text-center mb-5">
+                                <h3 class="text-uppercase">PEDIDOS RECENTES</h3>
+                            </div>
+                            <div class="row">
+                                @if (userPedidos.Count > 0)
+                                {
+                                    @foreach(var pedido in userPedidos)
+                                    {
+                                        <div class="col-md-12" style="border:1px #000 solid">
+                                            <span><strong>Data do Pedido:</strong> @pedido.DataPedido</span>
+                                            <br>
+                                            <span><strong>Valor Total:</strong> @pedido.TotalPedido.ToString("c")</span>
+                                            <br>
+                                            <span><strong>Status:</strong> @pedido.StatusPedido</span>
+                                        </div>
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    <span class="text-center">Não existem pedidos registrados em sua conta. Que tal adicionar?</span>
+                                }
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
+        </div>
     </div>
 </div>
+
+
+<style>
+    body {
+        background-color: #fff;
+    }
+
+    p {
+        color: #b3b3b3;
+        font-weight: 300;
+    }
+
+    a {
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+        a:hover {
+            text-decoration: none !important;
+        }
+
+    .content {
+        padding: 7rem 0;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    @@media (min-width: 767.98px) {
+        .half, .half .container > .row {
+            height: 100vh;
+            min-height: 700px;
+        }
+
+            .half .contents {
+                background: #f6f7fc;
+            }
+
+            .half .bg {
+                width: 25%;
+            }
+
+        @@media (max-width: 767.98px) {
+            .half .bg {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        .half .contents {
+            width: 100%;
+        }
+
+        @@media (max-width: 767.98px) {
+            .half .contents {
+                width: 100%;
+            }
+        }
+
+        @@media (max-width: 767.98px) {
+            .form-block {
+                padding: 25px;
+            }
+        }
+
+        .half .contents .form-control, .half .bg .form-control {
+            border: none;
+            border-radius: 4px;
+            height: 54px;
+            background: #efefef;
+        }
+
+            .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        .half .bg {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .half a {
+            color: #444444;
+            text-decoration: underline;
+        }
+
+        .half .btn {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .half .forgot-pass {
+            position: relative;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        .form-block {
+            background: #fff;
+            padding: 40px;
+            max-width: 80%;
+            -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            text-decoration: none !important;
+        }
+
+        #fbBtn:hover {
+            background-color: #4f74c2 !important;
+        }
+
+        #msBtn:hover {
+            background-color: #5c5c5c !important;
+        }
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
