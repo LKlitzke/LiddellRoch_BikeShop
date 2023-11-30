@@ -35,50 +35,55 @@
                             <div>
                                 <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary"><h6 class="mt-1 mb-1">Continuar</h6></button>
                             </div>
-                            <div class="col-md-12">
-                                <section class="pt-2 pb-2">
-                                    <p class="divider-text d-flex pt-3 text-center">OU</p>
-                                    @{
-                                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                                        {
+                        </form>
+                        <div class="col-md-12">
+                            <section class="pt-2 pb-2">
+                                <p class="divider-text d-flex pt-3 text-center">OU</p>
+                                @{
+                                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                    {
+                                        <div>
+                                            <p>
+                                                There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                    article
+                                                    about setting up this ASP.NET application to support logging in via external services
+                                                </a>.
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                                             <div>
-                                                <p>
-                                                    There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                                        article
-                                                        about setting up this ASP.NET application to support logging in via external services
-                                                    </a>.
+                                                <p class="text-center">
+                                                    @foreach (var provider in Model.ExternalLogins!)
+                                                    {
+                                                        @switch (provider.Name)
+                                                        {
+                                                            case "Facebook":
+                                                                <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
+                                                                break;
+
+                                                            case "Microsoft":
+                                                                <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #242424"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
+                                                                break;
+                                                            default:
+                                                                <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName">@provider.DisplayName</button>
+                                                                break;
+                                                        }
+                                                    }
                                                 </p>
                                             </div>
-                                        }
-                                        else
-                                        {
-                                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                                <div>
-                                                    <p class="text-center">
-                                                        @foreach (var provider in Model.ExternalLogins!)
-                                                        {
-                                                            @switch (provider.Name)
-                                                            {
-                                                                case "Facebook":
-                                                                    <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
-                                                                    break;
-
-                                                                case "Microsoft":
-                                                                    <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #242424"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
-                                                                    break;
-                                                                default:
-                                                                    <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName">@provider.DisplayName</button>
-                                                                    break;
-                                                            }
-                                                        }
-                                                    </p>
-                                                </div>
-                                            </form>
-                                        }
+                                        </form>
                                     }
-                                </section>
+                                }
+                            </section>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-center mb-2">
+                                <span class="text-uppercase text-muted">Não possui cadastro?  <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Registre-se</a></span>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

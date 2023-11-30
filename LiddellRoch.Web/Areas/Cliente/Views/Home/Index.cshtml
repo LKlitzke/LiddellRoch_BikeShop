@@ -17,7 +17,7 @@
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Nova Spark RC World Cup Evo disponível!</h2>
                         <p class="animate__animated animate__fadeInUp">Desafiando os limites da imaginação, a nova Scott Spark RC, inspirada na copa do mundo de ciclismo, chegou para elevar os quesitos de qualidade e performance. Leveza, rigidez, suavidade, segurança, potência e performance. Quer saber mais? </p>
-                        <a asp-action="Detalhes" asp-route-bikeId="8" class="btn-get-started animate__animated animate__fadeInUp scrollto">Veja os detalhes</a>
+                        <a asp-action="Detalhes" asp-route-bikeId="8" class="btn-get-started btn-success animate__animated animate__fadeInUp scrollto">Veja os detalhes</a>
                     </div>
                 </div>
             </div>
@@ -72,10 +72,10 @@
                             <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
                         }
 
-                        <div class="card-body pb-0 pt-4">
+                        <div class="card-body pb-0 pt-3">
                             <div class="pl-1">@* 
                                 <p class="card-title text-warning text-center"><b></b></p> *@
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center" style="height: 2vh;">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center" style="height: 2.5rem;">
                                     <span>
                                         @product.Marca.Nome @product.Nome
                                     </span>

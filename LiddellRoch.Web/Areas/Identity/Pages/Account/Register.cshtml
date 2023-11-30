@@ -27,48 +27,48 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                             <div class="form-group first mb-3">
                                 <label asp-for="Input.Nome" class="form-label">Nome completo</label>
-                                <input asp-for="Input.Nome" class="form-control" />
+                                <input asp-for="Input.Nome" class="form-control" placeholder="Digite seu nome"/>
                                 <span asp-validation-for="Input.Nome" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-8">
                                 <label asp-for="Input.Email" class="form-label">E-mail</label>
-                                <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true">
+                                <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true" placeholder="Digite seu melhor e-mail"/>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-4">
                                 <label asp-for="Input.Telefone" class="form-label">Telefone</label>
-                                <input asp-for="Input.Telefone" class="form-control"/>
+                                <input asp-for="Input.Telefone" class="form-control" placeholder="Digite seu telefone" />
                                 <span asp-validation-for="Input.Telefone" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-6">
                                 <label asp-for="Input.Password" class="form-label">Senha</label>
-                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"/>
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Digite uma senha"/>
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-6">
                                 <label asp-for="Input.ConfirmPassword" class="form-label">Confirme sua senha</label>
-                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"/>
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirme sua senha"/>
                                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
 
                             <div class="form-group mb-3 col-md-12">
                                 <label asp-for="Input.Endereco" class="form-label">Endereço</label>
-                                <input asp-for="Input.Endereco" class="form-control"/>
+                                <input asp-for="Input.Endereco" class="form-control" placeholder="Digite seu endereço" />
                                 <span asp-validation-for="Input.Endereco" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-6">
                                 <label asp-for="Input.Cidade" class="form-label">Cidade</label>
-                                <input asp-for="Input.Cidade" class="form-control"/>
+                                <input asp-for="Input.Cidade" class="form-control" placeholder="Digite sua cidade" />
                                 <span asp-validation-for="Input.Cidade" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-3">
                                 <label asp-for="Input.Estado" class="form-label">Estado</label>
-                                <input asp-for="Input.Estado" class="form-control"/>
+                                <input asp-for="Input.Estado" class="form-control" placeholder="Digite seu estado" />
                                 <span asp-validation-for="Input.Estado" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-3">
                                 <label asp-for="Input.CodigoPostal" class="form-label">CEP</label>
-                                <input asp-for="Input.CodigoPostal" class="form-control"/>
+                                <input asp-for="Input.CodigoPostal" class="form-control" placeholder="Digite seu CEP" />
                                 <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
                             </div>
                             @if (User.IsInRole(SD.Role_Administrador))
@@ -130,28 +130,6 @@
                                                         </p>
                                                     </div>
                                                 </form>
-                                                // <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                                //     <div>
-                                                //         <p class="text-center">
-                                                //             @foreach (var provider in Model.ExternalLogins!)
-                                                //             {
-                                                //                 @switch (provider.Name)
-                                                //                 {
-                                                //                     case "Facebook":
-                                                //                         <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #0866ff"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
-                                                //                         break;
-
-                                                //                     case "Microsoft":
-                                                //                         <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
-                                                //                         break;
-                                                //                     default:
-                                                //                         <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                                //                         break;
-                                                //                 }
-                                                //             }
-                                                //         </p>
-                                                //     </div>
-                                                // </form>
                                             }
                                         }
                                     </section>

@@ -4,19 +4,21 @@
     var query = ViewData["query"];
 }
 
-<div>
-    @if(Model.Count() > 0)
-    {
-        @foreach (var bike in Model)
+<div class="container">
+    <div>
+        @if (Model.Count() > 0)
         {
-            <span>@bike.Nome</span>
+            @foreach (var bike in Model)
+            {
+                <span>@bike.Nome</span>
 
-            <br />
+                <br />
+            }
         }
-    }
-    else
-    {
-        <span>Nenhum resultado para a pesquisa "@query" informada.</span>
-    }
+        else
+        {
+            <span>Nenhum resultado para a pesquisa "@query" informada.</span>
+        }
 
+    </div>
 </div>

@@ -19,12 +19,11 @@ function loadDataTable() {
             {
                 data: 'id',
                 "render": function (data) {
-                    return `<div class="w-75 btn-group" role="group">
-                     <a href="/admin/empresa/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
-                     <a onClick=Delete('/admin/empresa/excluir/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
+                    return `<div class="text-center d-flex justify-content-center" role="group">
+                     <a href="/admin/empresa/upsert?id=${data}" class="btn btn-primary mx-2 w-25"> <i class="bi bi-pencil-square"></i> Editar</a>               
+                     <a onClick=Delete('/admin/empresa/excluir/${data}') class="btn btn-danger mx-2 w-25"> <i class="bi bi-trash-fill"></i> Excluir</a>
                     </div>`
-                },
-                "width": "25%"
+                }
             }
         ]
     });
