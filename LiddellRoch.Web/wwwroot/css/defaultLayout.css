@@ -19,8 +19,8 @@ a {
   /*color: #d9232d;*/
 }
 
-a:hover {
-  color: #e24d55;
+a:hover {/*
+  color: #e24d55;*/
   text-decoration: none;
 }
 
@@ -487,8 +487,8 @@ h6 {
 }
 
 #hero .carousel-indicators li.active {
-  opacity: 1;
-  background: #d9232d;
+    opacity: 1;
+    background: #157347;
 }
 
 #hero .btn-get-started {
@@ -503,13 +503,12 @@ h6 {
   line-height: 1;
   color: #fff;
   animation-delay: 0.8s;
-  background: #d9232d;
 }
 
-#hero .btn-get-started:hover {
+/*#hero .btn-get-started:hover {
   background: #df3740;
 }
-
+*/
 @media (max-width: 992px) {
   #hero {
     height: 100vh;
