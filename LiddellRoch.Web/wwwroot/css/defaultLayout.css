@@ -19,8 +19,8 @@ a {
   /*color: #d9232d;*/
 }
 
-a:hover {
-  color: #e24d55;
+a:hover {/*
+  color: #e24d55;*/
   text-decoration: none;
 }
 
@@ -487,8 +487,8 @@ h6 {
 }
 
 #hero .carousel-indicators li.active {
-  opacity: 1;
-  background: #d9232d;
+    opacity: 1;
+    background: #157347;
 }
 
 #hero .btn-get-started {
@@ -503,13 +503,12 @@ h6 {
   line-height: 1;
   color: #fff;
   animation-delay: 0.8s;
-  background: #d9232d;
 }
 
-#hero .btn-get-started:hover {
+/*#hero .btn-get-started:hover {
   background: #df3740;
 }
-
+*/
 @media (max-width: 992px) {
   #hero {
     height: 100vh;
@@ -1984,10 +1983,23 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #4a5562;
-  padding: 0 0 30px 0;
-  color: #fff;
-  font-size: 14px;
+    background: #4a5562;
+    padding: 0 0 30px 0;
+    color: #fff;
+    font-size: 14px;
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 9999;
+    /*bottom: 0;
+    background: #4a5562;
+    height: 2em;
+    left: 0;
+    position: relative;
+    font-size: small;
+    width: 100%;*/
 }
 
 #footer .footer-top {

@@ -1,62 +1,200 @@
 ﻿@page
 @model ExternalLoginModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registro externo";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
-<hr />
+<div class="d-md-flex half">
+    <img class="bg" src="~/images/bg_5.jpg" style="object-fit:cover; object-position: left;" alt="imagem-fundo" />
+    <div class="contents">
 
-<p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
-</p>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-12">
+                    <div class="form-block mx-auto">
+                        <div class="text-center mb-5">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email." />
-                <label asp-for="Input.Email" class="form-label"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            <h1>@ViewData["Title"]</h1>
+                            <h2 id="external-login-title">Associe sua conta @Model.ProviderDisplayName em seu registro</h2>
+                            <hr />
+
+                            <p id="external-login-description" class="text-primary">
+                                Sua conta <strong>@Model.ProviderDisplayName</strong> foi associada com sucesso. Para finalizar,
+                                preencha os campos abaixo para concluir seu cadastro.
+                            </p>
+                            <form asp-page-handler="Confirmation" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                <div class="form-group first mb-3">
+                                    <label asp-for="Input.Nome" class="form-label">Nome completo</label>
+                                    <input asp-for="Input.Nome" class="form-control" />
+                                    <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3 col-md-8">
+                                    <label asp-for="Input.Email" class="form-label">E-mail</label>
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true">
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3 col-md-4">
+                                    <label asp-for="Input.Telefone" class="form-label">Telefone</label>
+                                    <input asp-for="Input.Telefone" class="form-control" />
+                                    <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3 col-md-12">
+                                    <label asp-for="Input.Endereco" class="form-label">Endereço</label>
+                                    <input asp-for="Input.Endereco" class="form-control" />
+                                    <span asp-validation-for="Input.Endereco" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3 col-md-6">
+                                    <label asp-for="Input.Cidade" class="form-label">Cidade</label>
+                                    <input asp-for="Input.Cidade" class="form-control" />
+                                    <span asp-validation-for="Input.Cidade" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3 col-md-3">
+                                    <label asp-for="Input.Estado" class="form-label">Estado</label>
+                                    <input asp-for="Input.Estado" class="form-control" />
+                                    <span asp-validation-for="Input.Estado" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-3 col-md-3">
+                                    <label asp-for="Input.CodigoPostal" class="form-label">CEP</label>
+                                    <input asp-for="Input.CodigoPostal" class="form-control" />
+                                    <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Registrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Nome" class="form-control" autocomplete="email" placeholder="Please enter your Name." />
-                <label asp-for="Input.Nome" class="form-label"></label>
-                <span asp-validation-for="Input.Nome" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Telefone" class="form-control" autocomplete="email" placeholder="Please enter your PhoneNumber." />
-                <label asp-for="Input.Telefone" class="form-label"></label>
-                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Endereco" class="form-control" autocomplete="email" placeholder="Please enter your StreetAddress." />
-                <label asp-for="Input.Endereco" class="form-label"></label>
-                <span asp-validation-for="Input.Endereco" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Cidade" class="form-control" autocomplete="email" placeholder="Please enter your City." />
-                <label asp-for="Input.Cidade" class="form-label"></label>
-                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Estado" class="form-control" autocomplete="email" placeholder="Please enter your State." />
-                <label asp-for="Input.Estado" class="form-label"></label>
-                <span asp-validation-for="Input.Estado" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.CodigoPostal" class="form-control" autocomplete="email" placeholder="Please enter your PostalCode." />
-                <label asp-for="Input.CodigoPostal" class="form-label"></label>
-                <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Registrar</button>
-        </form>
+        </div>
+
     </div>
 </div>
+<style>
+    body {
+        background-color: #fff;
+    }
+
+    p {
+        color: #b3b3b3;
+        font-weight: 300;
+    }
+
+    a {
+        -webkit-transition: .3s all ease;
+        -o-transition: .3s all ease;
+        transition: .3s all ease;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+    }
+
+    label {
+        float: left;
+    }
+    .content {
+        padding: 7rem 0;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    @@media (min-width: 767.98px) {
+        .half, .half .container > .row {
+            height: 100vh;
+            min-height: 700px;
+        }
+
+            .half .contents {
+                background: #f6f7fc;
+            }
+
+            .half .bg {
+                width: 25%;
+            }
+
+        @@media (max-width: 767.98px) {
+            .half .bg {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        .half .contents {
+            width: 75%;
+        }
+
+        @@media (max-width: 767.98px) {
+            .half .contents {
+                width: 100%;
+            }
+        }
+
+        @@media (max-width: 767.98px) {
+            .form-block {
+                padding: 25px;
+            }
+        }
+
+        .half .contents .form-control, .half .bg .form-control {
+            border: none;
+            border-radius: 4px;
+            height: 54px;
+            background: #efefef;
+        }
+
+            .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        .half .bg {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .half a {
+            color: #444444;
+            text-decoration: underline;
+        }
+
+        .half .btn {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .half .forgot-pass {
+            position: relative;
+            top: 2px;
+            font-size: 14px;
+        }
+
+        .form-block {
+            background: #fff;
+            padding: 40px;
+            max-width: 70%;
+            -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            text-decoration: none !important;
+        }
+
+        #fbBtn:hover {
+            background-color: #4f74c2 !important;
+        }
+
+        #msBtn:hover {
+            background-color: #5c5c5c !important;
+        }
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

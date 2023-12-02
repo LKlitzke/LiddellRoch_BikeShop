@@ -63,9 +63,9 @@ function loadDataTable() {
             {
                 data: 'id',
                 "render": function (data) {
-                    return `<div class="w-75 btn-group" role="group">
-                     <a href="/Admin/Bicicleta/Upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
-                     <a onClick=Delete('/Admin/Bicicleta/Delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
+                    return `<div class="text-center d-flex justify-content-center" role="group">
+                     <a href="/Admin/Bicicleta/Upsert?id=${data}" class="btn btn-primary mx-2 w-25"> <i class="bi bi-pencil-square"></i> Editar</a>               
+                     <a onClick=Delete('/Admin/Bicicleta/Delete/${data}') class="btn btn-danger mx-2 w-25"> <i class="bi bi-trash-fill"></i> Excluir</a>
                     </div>`
                 },
                 "width": "25%"
@@ -76,13 +76,14 @@ function loadDataTable() {
 
 function Delete(url) {
     Swal.fire({
-        title: 'Você tem certeza?',
-        text: "Esta ação é irreversível!",
+        title: 'Confirmar exclusão',
+        text: "Deseja excluir este registro? Esta ação é irreversível!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, exclua!'
+        confirmButtonText: 'Excluir',
+        cancelButtonText: "Cancelar"
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({

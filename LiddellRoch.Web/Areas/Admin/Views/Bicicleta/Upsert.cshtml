@@ -1,117 +1,128 @@
 ﻿@model BicicletaVm
-
-<div class="card shadow border-0 my-4">
-    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Bicicleta.Id != 0 ? "Atualizar" : "Criar") bicicleta</h2>
+<div class="container">
+    <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@(Model.Bicicleta.Id != 0 ? "Atualizar" : "Criar") bicicleta</h2>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body py-4">
-        <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="Bicicleta.Id" hidden />
-            <input asp-for="Bicicleta.Tamanhos" hidden />
-            <input asp-for="Bicicleta.Cores" hidden />
-            <div class="row">
-                <div class="col-10">
-                    <div class="border p-3">
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Bicicleta.Nome" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Nome" type="text" class="ms-2"></label>
-                            <span asp-validation-for="Bicicleta.Nome" class="text-danger"></span>
-                        </div>
-                        <div class="py-2 col-12">
-                            <label asp-for="Bicicleta.Descricao" type="text" class="ms-2 text-muted">Descrição</label>
-                            <textarea asp-for="Bicicleta.Descricao" class="form-control border-0 shadow"></textarea>
-                        </div>
-                        <div class="form-floating py-2 col-6">
-                            <input asp-for="Bicicleta.Estoque" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Estoque" type="text" class="ms-2">Estoque (Unidades)</label>
-                            <span asp-validation-for="Bicicleta.Estoque" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-6">
-                            <input asp-for="Bicicleta.Peso" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Peso" class="ms-2">Peso (kg)</label>
-                            <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <select asp-for="@Model.Bicicleta.MarcaId" asp-items="@Model.MarcaList" class="form-select border-0 shadow">
-                                <option disabled selected>Selecione a marca...</option>
-                            </select>
-                            <label asp-for="Bicicleta.MarcaId" type="text" class="ms-2">Marca</label>
-                            <span asp-validation-for="Bicicleta.MarcaId" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="Bicicleta.Preco" class="form-control border-0 shadow" />
-                            <label asp-for="Bicicleta.Preco" type="text" class="ms-2">Preço (R$)</label>
-                            <span asp-validation-for="Bicicleta.Preco" class="text-danger"></span>
-                        </div>
-
-                        <div class="py-2 col-12">
-                            <label asp-for="@Model.CoresListSplit" type="text" class="ms-2">Cores</label>
-                            <select asp-for="@Model.CoresListSplit" asp-items="@Model.CoresListEnum" class="form-select border-0 shadow" multiple id="cores-select">
-                                @* <option disabled selected>Select Tamanhos</option> *@
-                            </select>
-                            <span asp-validation-for="@Model.CoresListSplit" class="text-danger"></span>
-                        </div>
-
-                        <div class="py-2 col-12">
-                            <label asp-for="@Model.TamanhosListSplit" type="text" class="ms-2">Tamanhos</label>
-                            <select asp-for="@Model.TamanhosListSplit" asp-items="@Model.TamanhosListEnum" class="form-select border-0 shadow"multiple id="tamanhos-select">
-                                @* <option disabled selected>Select Tamanhos</option> *@
-                            </select>
-                            <span asp-validation-for="@Model.TamanhosListSplit" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <select asp-for="@Model.Bicicleta.CategoriaId" asp-items="@Model.CategoriaList" class="form-select border-0 shadow">
-                                <option disabled selected>Selecione a Categoria</option>
-                            </select>
-                            <label asp-for="Bicicleta.CategoriaId" type="text" class="ms-2">Categoria</label>
-                            <span asp-validation-for="Bicicleta.CategoriaId" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input type="file" name="files" class="form-control border-0 shadow" multiple />
-                            <label asp-for="Bicicleta.ImagensProduto" class="ms-2">Imagens do Produto</label>
-                        </div>
-                        <div class="row pt-2">
-                            <div class="col-6 col-md-3">
-                                @if (Model.Bicicleta.Id != 0)
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">Atualizar</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="btn btn-primary form-control">Criar</button>
-                                }
-
+        <div class="card-body py-4">
+            <form method="post" class="row" enctype="multipart/form-data">
+                <input asp-for="Bicicleta.Id" hidden />
+                <input asp-for="Bicicleta.Tamanhos" hidden />
+                <input asp-for="Bicicleta.Cores" hidden />
+                <div class="row">
+                    <div class="col-sm-12 col-md-10">
+                        <div class="border p-3">
+                            <div class="row">
+                                <div class="form-group py-2 col-sm-12 col-md-8">
+                                    <label asp-for="Bicicleta.Nome" type="text" class="mb-1"></label>
+                                    <input asp-for="Bicicleta.Nome" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.Nome" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-12  col-md-4">
+                                    <label asp-for="Bicicleta.MarcaId" type="text" class="mb-1">Marca</label>
+                                    <select asp-for="@Model.Bicicleta.MarcaId" asp-items="@Model.MarcaList" class="form-select">
+                                        <option disabled selected>Selecione a marca...</option>
+                                    </select>
+                                    <span asp-validation-for="Bicicleta.MarcaId" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="col-6 col-md-3">
-                                <a asp-controller="Bicicleta" asp-action="Index" class="btn btn-outline-primary border form-control">
-                                    Voltar à listagem
-                                </a>
+                            
+                            <div class="form-group py-2 col-12">
+                                <label asp-for="Bicicleta.Descricao" type="text">Descrição</label>
+                                <textarea asp-for="Bicicleta.Descricao" class="form-control"></textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group py-2 col-sm-12 col-md-5">
+                                    <label asp-for="Bicicleta.Estoque" type="text" class="mb-1">Estoque (Unidades)</label>
+                                    <input asp-for="Bicicleta.Estoque" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.Estoque" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-12 col-md-3">
+                                    <label asp-for="Bicicleta.Peso" class="mb-1">Peso (kg)</label>
+                                    <input asp-for="Bicicleta.Peso" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-12 col-md-4">
+                                    <label asp-for="Bicicleta.Preco" type="text" class="mb-1">Preço (R$)</label>
+                                    <input asp-for="Bicicleta.Preco" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.Preco" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="py-2 col-sm-12 col-md-6">
+                                    <label asp-for="@Model.CoresListSplit" type="text" class="mb-1">Cores</label>
+                                    <select asp-for="@Model.CoresListSplit" asp-items="@Model.CoresListEnum" class="form-select" multiple id="cores-select">
+                                        @* <option disabled selected>Select Tamanhos</option> *@
+                                    </select>
+                                    <span asp-validation-for="@Model.CoresListSplit" class="text-danger"></span>
+                                </div>
+
+                                <div class="py-2 col-sm-12 col-md-6">
+                                    <label asp-for="@Model.TamanhosListSplit" type="text" class="mb-1">Tamanhos</label>
+                                    <select asp-for="@Model.TamanhosListSplit" asp-items="@Model.TamanhosListEnum" class="form-select" multiple id="tamanhos-select">
+                                        @* <option disabled selected>Select Tamanhos</option> *@
+                                    </select>
+                                    <span asp-validation-for="@Model.TamanhosListSplit" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group py-2 col-12">
+                                <label asp-for="Bicicleta.CategoriaId" type="text" class="mb-1">Categoria</label>
+                                <select asp-for="@Model.Bicicleta.CategoriaId" asp-items="@Model.CategoriaList" class="form-select">
+                                    <option disabled selected>Selecione a Categoria</option>
+                                </select>
+                                <span asp-validation-for="Bicicleta.CategoriaId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group py-2 col-12">
+                                <label asp-for="Bicicleta.ImagensProduto" class="mb-1">Imagens do Produto</label>
+                                <input type="file" name="files" class="form-control" multiple />
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-6 col-md-3">
+                                    @if (Model.Bicicleta.Id != 0)
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Atualizar</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary form-control">Criar</button>
+                                    }
+
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <a asp-controller="Bicicleta" asp-action="Index" class="btn btn-outline-primary border form-control">
+                                        Voltar à listagem
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    @if (Model.Bicicleta.ImagensProduto != null)
-                    {
-                        foreach (var image in Model.Bicicleta.ImagensProduto)
+                    <div class="col-sm-12 col-md-2">
+                        @if (Model.Bicicleta.ImagensProduto != null)
                         {
-                            <div class="border p-1 m-2 text-center">
-                                <img src="@image.ImagemUrl" width="100%"
-                                     style="border-radius:5px; border:1px solid #bbb9b9" />
-                                <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
-                                    <i class="bi bi-trash-fill"></i> Excluir
-                                </a>
-                            </div>
+                            foreach (var image in Model.Bicicleta.ImagensProduto)
+                            {
+                                <div class="border p-1 m-2 text-center">
+                                    <img src="@image.ImagemUrl" width="100%"
+                                         style="border-radius:5px; border:1px solid #bbb9b9" />
+                                    <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
+                                        <i class="bi bi-trash-fill"></i> Excluir
+                                    </a>
+                                </div>
+                            }
                         }
-                    }
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
+
 </div>
 
 

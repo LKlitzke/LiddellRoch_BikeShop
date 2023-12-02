@@ -20,18 +20,18 @@
                     <div class="row">
                         <div class="col-6 col-md-2 offset-lg-1 pb-1">
                             <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
-                                <small>Voltar</small>
+                                <i class="fa-solid fa-circle-chevron-left"></i>&nbsp; &nbsp;<span>Voltar</span>
                             </a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 text-center mb-3">
+                        <div class="col-12 text-center mb-3 geeks">
                             @if (Model.Bicicleta.ImagensProduto != null && Model.Bicicleta.ImagensProduto.Count > 0)
                             {
-                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="object-fit:contain; height: 50vh">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="50000" style="object-fit:contain;width: 60%;display: flex; margin: 0 auto;">
 
-                                    <div class="carousel-inner">
-                                        <div class="carousel-indicators">
+                                    <div class="carousel-inner" style="border:1px black solid">
+                                        <div class="carousel-indicators" style="height:0.5rem">
                                             @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
                                            .Select((image, index) => new { Image = image, Index = index }))
                                             {
@@ -42,18 +42,22 @@
                                         @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
                                        .Select((image, index) => new { Image = image, Index = index }))
                                         {
-                                            <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")">
-                                                <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="max-height:600px;object-fit: contain;" alt="...">
+                                            <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")" id="container" @* style="width: 80%;margin-left: 10%;" *@>
+                                                <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="max-height:600px;object-fit: contain" alt="Bike imagem" id="img-@imageWithIndex.Index">
                                             </div>
                                         }
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
+                                        @if (Model.Bicicleta.ImagensProduto.Count > 1)
+                                        {
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="background-color:rgba(214, 214, 214, 0.3); width: 10%">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="background-color:rgba(214, 214, 214, 0.3); width: 10%">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        }
+                                        
                                     </div>
                                 </div>
 
@@ -183,6 +187,7 @@
             document.getElementById("submit-btn").classList.remove("disabled");
         }
     });
+
 </script>
 
 @section Scripts {
@@ -194,4 +199,21 @@
         width: 640px;
         height:360px;
     }
+
+    /* .geeks {
+        /* width: 300px;
+        height: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .geeks img {
+        width: 100%;
+        transition: 0.5s all ease-in-out;
+    }
+
+    .geeks:hover img {
+        transform: scale(1.25);
+    } */
 </style>
+
