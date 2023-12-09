@@ -4,6 +4,7 @@ using LiddellRoch.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiddellRoch.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231206031625_AddingDescontoBike_AddingAvaliacaoTable")]
+    partial class AddingDescontoBike_AddingAvaliacaoTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,10 @@ namespace LiddellRoch.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AvaliacaoCompra")
                         .HasColumnType("int");
@@ -46,14 +53,11 @@ namespace LiddellRoch.DataAccess.Migrations
                     b.Property<DateTime>("DataAvaliacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PedidoHeaderId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BicicletaId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("PedidoHeaderId");
+                    b.HasIndex("BicicletaId");
 
                     b.ToTable("Avaliacoes");
                 });
@@ -117,7 +121,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 1,
                             CategoriaId = 1,
                             Cores = "Black,DarkGray,Red",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8241),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3155),
                             DescontoPromocao = 0,
                             Descricao = "A nova Big Wheel 7.4 2022 faz parte da linha de bicicletas de alta performance em alumínio da Oggi.\r\nO novo quadro com a geometria mais agressiva e moderna é ideal para quem deseja encarar desafios técnicos maiores, sem perder o rendimento em outras condições do cross-country. Além disso ela conta com cabeamento interno e padrão Boost, seguindo as tendências das grandes marcas importadas. Esse novo padrão possibilita ao ciclista fazer upgrades com componentes de alto padrão disponíveis no mercado.\r\nOs componentes que equipam essa nova versão foram especialmente selecionados, afim de entregar máxima performance em qualquer ocasião além de um visual moderno e agressivo. Conta com sistema de transmissão Shimano SLX de 12 velocidades, suspensão Manitou Machete com trava no guidão e 100 milímetros de curso e cockpit com componentes ITM NH1.",
                             Estoque = 50,
@@ -132,7 +136,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 2,
                             CategoriaId = 1,
                             Cores = "Gold",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8248),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3163),
                             DescontoPromocao = 0,
                             Descricao = "A Agile Squadra XX1 AXS é uma bicicleta hardtail super leve, com desempenho suficiente para correr etapas da Copa do Mundo de MTB. Para isso, ela aposta no quadro e nas rodas de fibra de carbono, nas suspensão Fox 32 Factory Step Cast Kashima, no grupo eletrônico topo de linha e na geometria mais avançada jamais criada pela engenharia da Oggi.\r\n\r\nPeso total de 9.3Kg com novo quadro em carbono Super Light Oggi, rodas DT Swiss XRC 1501 de 1600g em carbono, cubos DT 250 e roda livre Ratchet EXP 36;\r\nGrupo eletrônico SRAM Eagle XX1 AXS 12V, um dos mais leves e modernos do mundo;\r\nSuspensão Fox 32 Factory Step-Cast Kashima 10mm, câmara de ar Float Evol e cartucho FIT 4 com trava no guidão, com excelente leitura de terreno e suporte nas trilhas inclinadas;\r\nCanote retrátil eletrônico SRAM Reverb AXS, pneus Kenda Booster Pro 2.4 e freios Level Ultimate para total controle.",
                             Estoque = 20,
@@ -147,7 +151,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 3,
                             CategoriaId = 2,
                             Cores = "DarkGray,DarkRed",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8257),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3172),
                             DescontoPromocao = 0,
                             Descricao = "A combinação entre esportividade, rigidez, baixo peso e conforto faz com que a nova Oggi Velloce Disc 2022 tenha um grande desempenho em diversos lugares, graças ao seu novo quadro, proporcionando mais agressividade e aerodinâmica ao ciclista.",
                             Estoque = 30,
@@ -162,7 +166,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 4,
                             CategoriaId = 1,
                             Cores = "Black",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8263),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3178),
                             DescontoPromocao = 0,
                             Descricao = "Uma pura mountain bike de XC Repleta de atributos de performance que asseguram a vitória e pesando quase nada. Quadro em carbono Hi-MOD BallisTec / Garfo Lefty Ocho Carbon 100mm / conectividade com App Cannondale integrado\r\nCâmbios Shimano XTR 12 velocidades / pedivela HollowGram\r\nJogo de rodas de carbono HollowGram 25 / guidão de carbono Cannondale 1 / canote ENVE.",
                             Estoque = 10,
@@ -177,7 +181,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 5,
                             CategoriaId = 3,
                             Cores = "MediumVioletRed",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8271),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3183),
                             DescontoPromocao = 0,
                             Descricao = "Uma pura mountain bike de XC Repleta de atributos de performance que asseguram a vitória e pesando quase nada. Quadro em carbono Hi-MOD BallisTec / Garfo Lefty Ocho Carbon 100mm / conectividade com App Cannondale integrado\r\nCâmbios Shimano XTR 12 velocidades / pedivela HollowGram\r\nJogo de rodas de carbono HollowGram 25 / guidão de carbono Cannondale 1 / canote ENVE.",
                             Estoque = 50,
@@ -192,7 +196,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 6,
                             CategoriaId = 5,
                             Cores = "Beige,DarkSeaGreen",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8281),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3193),
                             DescontoPromocao = 0,
                             Descricao = "Para você, que valoriza a mobilidade urbana e ainda quer aproveitar sua bike para a prática esportiva, a Activ é a bike ideal. Uma bicicleta versátil, prática, segura e de fácil manutenção, que lhe permite ir além dos centros urbanos e descobrir novas sensações.\r\n\r\nA Activ é oferecida em duas cores e vem montada com seu quadro em alumínio leve, transmissão Shimano Altus 27 velocidades, freios a disco hidráulico, pneus 700X38 e uma linda bolsa, especialmente desenvolvida pela Draisiana.",
                             Estoque = 100,
@@ -207,7 +211,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 7,
                             CategoriaId = 7,
                             Cores = "Black",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8285),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3197),
                             DescontoPromocao = 0,
                             Descricao = "Penny-farthing, high wheel e ordinary são termos utilizados para descrever um tipo de bicicleta com a roda dianteira de grande dimensão e a traseira pequena. O modelo tornou-se popular depois do boneshaker e antes do desenvolvimento da \"bicicleta segura\", na década de 1880. Foram os primeiros veículos a serem chamados bicicletas.",
                             Estoque = 5,
@@ -222,7 +226,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 8,
                             CategoriaId = 1,
                             Cores = "DarkGray",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8290),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3202),
                             DescontoPromocao = 0,
                             Descricao = "A Spark RC World Cup é construída com um quadro de carbono HMX de alta qualidade, que combina rigidez e leveza para uma transferência de potência eficiente e ágil nas trilhas. A fibra de carbono HMX da Scott é conhecida por sua natureza leve e excelente rigidez, o que permite a construção de bicicletas com maior transferência de potência e características de manuseio responsivas. Ao utilizar a fibra de carbono HMX, a Scott produz quadros e componentes leves, mas incrivelmente fortes, permitindo que os ciclistas maximizem seu desempenho na estrada ou na trilha.",
                             Estoque = 3,
@@ -237,7 +241,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 9,
                             CategoriaId = 5,
                             Cores = "Black,Green,Yellow",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8326),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3210),
                             DescontoPromocao = 0,
                             Descricao = "Passear de bike é algo extremamente prazeroso, seja em um fim de tarde na praça, ciclovia, e a Caloi desenvolveu a bike perfeita para você fazer esses passeios. A Caloi 400 conta com geometria confort, propiciando uma posição de pilotagem ereta e juntamente ao guidão com uma ergonomia mais elevada oferecendo maior conforto ao pedalar. Além do mais o pedivela ficou levemente posicionado mais a frente, garantindo que a pedalada seja mais fácil e agradável. E para movimenta-la a Caloi selecionou um sistema de transmissão Shimano, sinônimo de confiabilidade e resistência com 21 velocidades, para você poder usufruir de sua bike com a total tranquilidade para relaxar.",
                             Estoque = 30,
@@ -252,7 +256,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 10,
                             CategoriaId = 1,
                             Cores = "Yellow,DarkGray",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8332),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3216),
                             DescontoPromocao = 0,
                             Descricao = "A Cattura Pro apresenta um design moderno e robusto, além de trazer tudo o que um praticante mountain bike busca e espera de uma bike dessa categoria. Apresentando uma geometria race, a Cattura é uma bike muito ágil e tem uma resposta excelente nos mais diversos terrenos com seu quadro projetado em full carbon, possuindo ainda excelente rigidez e baixo peso.",
                             Estoque = 20,
@@ -321,49 +325,49 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7971),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2858),
                             Nome = "Mountain Bike",
                             OrdemExibicao = 1
                         },
                         new
                         {
                             Id = 2,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7982),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2871),
                             Nome = "Estrada",
                             OrdemExibicao = 2
                         },
                         new
                         {
                             Id = 3,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7983),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2872),
                             Nome = "Gravel",
                             OrdemExibicao = 3
                         },
                         new
                         {
                             Id = 4,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7984),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2873),
                             Nome = "Elétrica",
                             OrdemExibicao = 4
                         },
                         new
                         {
                             Id = 5,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7985),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2874),
                             Nome = "Urbano e Lazer",
                             OrdemExibicao = 5
                         },
                         new
                         {
                             Id = 6,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7986),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2875),
                             Nome = "BMX",
                             OrdemExibicao = 6
                         },
                         new
                         {
                             Id = 7,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(7987),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(2876),
                             Nome = "Clássico",
                             OrdemExibicao = 7
                         });
@@ -437,7 +441,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 1,
                             Cidade = "Marechal Floriano",
                             CodigoPostal = "29255-000",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8141),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3030),
                             Endereco = "Av Arthur Haese",
                             Estado = "ES",
                             Nome = "Uprise Eventos",
@@ -448,7 +452,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 2,
                             Cidade = "Domingos Martins",
                             CodigoPostal = "29260-000",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8143),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3031),
                             Endereco = "Tv. Augusto Schwambach",
                             Estado = "ES",
                             Nome = "Agência AJM",
@@ -459,7 +463,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 3,
                             Cidade = "Serra",
                             CodigoPostal = "29160-904",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8144),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3032),
                             Endereco = "Av. Brg. Eduardo Gomes",
                             Estado = "ES",
                             Nome = "EryZ FuturAI",
@@ -470,7 +474,7 @@ namespace LiddellRoch.DataAccess.Migrations
                             Id = 4,
                             Cidade = "São Paulo",
                             CodigoPostal = "01153-000",
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8145),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3033),
                             Endereco = "Av. Violet Hill",
                             Estado = "SP",
                             Nome = "Dani Floricultura",
@@ -538,7 +542,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8113),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3002),
                             IconUrl = "\\images\\marcas\\oggi_logo.svg",
                             Nome = "Oggi",
                             PaisOrigem = "Brasil",
@@ -547,7 +551,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8115),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3003),
                             IconUrl = "\\images\\marcas\\cannondale_logo.svg",
                             Nome = "Cannondale",
                             PaisOrigem = "Estados Unidos da América",
@@ -556,7 +560,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8116),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3004),
                             IconUrl = "\\images\\marcas\\caloi_logo.png",
                             Nome = "Caloi",
                             PaisOrigem = "Brasil",
@@ -565,7 +569,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8117),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3005),
                             IconUrl = "\\images\\marcas\\specialized_logo.svg",
                             Nome = "Specialized",
                             PaisOrigem = "Estados Unidos da América",
@@ -574,7 +578,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 5,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8118),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3006),
                             IconUrl = "\\images\\marcas\\tsw_logo.svg",
                             Nome = "TSW",
                             PaisOrigem = "África do Sul",
@@ -583,7 +587,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 6,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8119),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3007),
                             IconUrl = "\\images\\marcas\\sense_logo.png",
                             Nome = "Sense",
                             PaisOrigem = "Brasil",
@@ -592,7 +596,7 @@ namespace LiddellRoch.DataAccess.Migrations
                         new
                         {
                             Id = 7,
-                            CriadoEm = new DateTime(2023, 12, 6, 0, 54, 12, 415, DateTimeKind.Local).AddTicks(8120),
+                            CriadoEm = new DateTime(2023, 12, 6, 0, 16, 25, 828, DateTimeKind.Local).AddTicks(3008),
                             IconUrl = "\\images\\marcas\\scott_logo.svg",
                             Nome = "Scott",
                             PaisOrigem = "Suiça",
@@ -947,21 +951,21 @@ namespace LiddellRoch.DataAccess.Migrations
 
             modelBuilder.Entity("LiddellRoch.Models.Avaliacao", b =>
                 {
+                    b.HasOne("LiddellRoch.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LiddellRoch.Models.Bicicleta", "Bicicleta")
                         .WithMany()
                         .HasForeignKey("BicicletaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LiddellRoch.Models.PedidoHeader", "PedidoHeader")
-                        .WithMany()
-                        .HasForeignKey("PedidoHeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Bicicleta");
-
-                    b.Navigation("PedidoHeader");
                 });
 
             modelBuilder.Entity("LiddellRoch.Models.Bicicleta", b =>
