@@ -12,6 +12,7 @@ using LiddellRoch.Application.Services.Interfaces;
 using LiddellRoch.Application.Services;
 using System.Security.Cryptography.X509Certificates;
 using Azure.Identity;
+using Microsoft.AspNetCore.Localization;
 
 // Globalization
 var cultureInfo = new CultureInfo("pt-BR");
@@ -81,6 +82,13 @@ builder.Services.AddAuthentication().AddFacebook(option =>
 builder.Services.AddAuthentication().AddMicrosoftAccount(option =>
 {
     var msSettings = builder.Configuration.GetSection("Microsoft");
+    option.ClientId = msSettings["ClientId"];
+    option.ClientSecret = msSettings["ClientSecret"];
+});
+
+builder.Services.AddAuthentication().AddGoogle(option =>
+{
+    var msSettings = builder.Configuration.GetSection("Google");
     option.ClientId = msSettings["ClientId"];
     option.ClientSecret = msSettings["ClientSecret"];
 });

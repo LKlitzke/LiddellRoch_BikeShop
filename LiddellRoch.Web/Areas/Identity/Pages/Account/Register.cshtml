@@ -26,49 +26,49 @@
                         <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                             <div class="form-group first mb-3">
-                                <label asp-for="Input.Nome" class="form-label">Nome completo</label>
+                                <label asp-for="Input.Nome" class="form-label">Nome completo <span class="required">*</span></label>
                                 <input asp-for="Input.Nome" class="form-control" placeholder="Digite seu nome"/>
                                 <span asp-validation-for="Input.Nome" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-8">
-                                <label asp-for="Input.Email" class="form-label">E-mail</label>
+                                <label asp-for="Input.Email" class="form-label">E-mail <span class="required">*</span></label>
                                 <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true" placeholder="Digite seu melhor e-mail"/>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-4">
-                                <label asp-for="Input.Telefone" class="form-label">Telefone</label>
-                                <input asp-for="Input.Telefone" class="form-control" placeholder="Digite seu telefone" />
+                                <label asp-for="Input.Telefone" class="form-label">Telefone ou Celular <span class="required">*</span></label>
+                                <input asp-for="Input.Telefone" id="phoneInput" class="form-control" placeholder="Digite seu telefone" />
                                 <span asp-validation-for="Input.Telefone" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-6">
-                                <label asp-for="Input.Password" class="form-label">Senha</label>
+                                <label asp-for="Input.Password" class="form-label">Senha <span class="required">*</span></label>
                                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Digite uma senha"/>
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-6">
-                                <label asp-for="Input.ConfirmPassword" class="form-label">Confirme sua senha</label>
+                                <label asp-for="Input.ConfirmPassword" class="form-label">Confirme sua senha <span class="required">*</span></label>
                                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirme sua senha"/>
                                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
 
                             <div class="form-group mb-3 col-md-12">
-                                <label asp-for="Input.Endereco" class="form-label">Endereço</label>
+                                <label asp-for="Input.Endereco" class="form-label">Endereço <span class="required">*</span></label>
                                 <input asp-for="Input.Endereco" class="form-control" placeholder="Digite seu endereço" />
                                 <span asp-validation-for="Input.Endereco" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-6">
-                                <label asp-for="Input.Cidade" class="form-label">Cidade</label>
+                                <label asp-for="Input.Cidade" class="form-label">Cidade <span class="required">*</span></label>
                                 <input asp-for="Input.Cidade" class="form-control" placeholder="Digite sua cidade" />
                                 <span asp-validation-for="Input.Cidade" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-3">
-                                <label asp-for="Input.Estado" class="form-label">Estado</label>
+                                <label asp-for="Input.Estado" class="form-label">Estado <span class="required">*</span></label>
                                 <input asp-for="Input.Estado" class="form-control" placeholder="Digite seu estado" />
                                 <span asp-validation-for="Input.Estado" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-3 col-md-3">
-                                <label asp-for="Input.CodigoPostal" class="form-label">CEP</label>
-                                <input asp-for="Input.CodigoPostal" class="form-control" placeholder="Digite seu CEP" />
+                                <label asp-for="Input.CodigoPostal" class="form-label">CEP <span class="required">*</span></label>
+                                <input asp-for="Input.CodigoPostal" id="cepInput" class="form-control" placeholder="Digite seu CEP" />
                                 <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
                             </div>
                             @if (User.IsInRole(SD.Role_Administrador))
@@ -92,7 +92,7 @@
                             @if (!User.IsInRole(SD.Role_Administrador))
                             {
                                 <div class="col-md-12 p-3 text-center">
-                                    <section>
+                                    <section class="pb-0 pt-1">
                                         <p class="divider-text d-flex pt-3">OU</p>
                                         @{
                                             if ((Model.ExternalLogins?.Count ?? 0) == 0)
@@ -122,6 +122,11 @@
                                                                     case "Microsoft":
                                                                         <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
                                                                         break;
+
+                                                                    case "Google":
+                                                                        <button id="ggBtn" type="submit" class="btn btn-danger bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: rgb(213, 13, 13)"><i class="bi bi-google"></i>&nbsp; Google</button>
+                                                                        break;
+
                                                                     default:
                                                                         <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                                                         break;
@@ -253,7 +258,7 @@
         .btn {
             text-decoration: none !important;
         }
-
+    }
         #fbBtn:hover {
             background-color: #4f74c2 !important;
         }
@@ -261,7 +266,16 @@
         #msBtn:hover {
             background-color: #5c5c5c !important;
         }
-    }
+
+        #ggBtn:hover {
+            background-color: #d64b4b !important;
+        }
+
+        span.required {
+            color: red;
+            font-size: small;
+        }
+    
 </style>
 
 @section Scripts {
@@ -276,7 +290,20 @@
                 else {
                     $('#Input_EmpresaId').hide();
                 }
-            })
+            });
+
+            $('#phoneInput').inputmask({
+                mask: ['99 99999-9999'],
+                greedy: false,
+                removeMaskOnSubmit: true
+            });
+
+            $('#cepInput').inputmask({
+                mask: ['99999-999'],
+                greedy: false,
+                removeMaskOnSubmit: true
+            });
+            
         })
     </script>
 }

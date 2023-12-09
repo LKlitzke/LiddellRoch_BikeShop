@@ -116,12 +116,21 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
 
 
             [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(10, ErrorMessage = "Insira um nome com ao menos 10 dígitos")]
             public string Nome { get; set; }
-            public string? Endereco { get; set; }
-            public string? Cidade { get; set; }
-            public string? Estado { get; set; }
-            public string? CodigoPostal { get; set; }
-            public string? Telefone { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(15, ErrorMessage = "Insira um endereço com ao menos 15 dígitos")]
+            public string Endereco { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            public string Cidade { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            public string Estado { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(8,ErrorMessage = "Insira um CEP válido")]
+            public string CodigoPostal { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(11, ErrorMessage = "O campo deve possuir 11 dígitos")]
+            public string Telefone { get; set; }
             public int? EmpresaId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> EmpresaList { get; set; }

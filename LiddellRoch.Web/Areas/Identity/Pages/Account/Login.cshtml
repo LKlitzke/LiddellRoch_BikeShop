@@ -38,7 +38,7 @@
                         </form>
                         <div class="col-md-12">
                             <section class="pt-2 pb-2">
-                                <p class="divider-text d-flex pt-3 text-center">OU</p>
+                                <p class="divider-text d-flex pt-3 text-center fw-bold">OU</p>
                                 @{
                                     if ((Model.ExternalLogins?.Count ?? 0) == 0)
                                     {
@@ -61,12 +61,17 @@
                                                         @switch (provider.Name)
                                                         {
                                                             case "Facebook":
-                                                                <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
+                                                                <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient mb-1" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
                                                                 break;
 
                                                             case "Microsoft":
-                                                                <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #242424"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
+                                                                <button id="msBtn" type="submit" class="btn btn-primary bg-gradient mb-1" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: #242424"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
                                                                 break;
+
+                                                            case "Google":
+                                                                <button id="ggBtn" type="submit" class="btn btn-danger bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: rgb(213, 13, 13)"><i class="bi bi-google"></i>&nbsp; Google</button>
+                                                                break;
+
                                                             default:
                                                                 <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName">@provider.DisplayName</button>
                                                                 break;
@@ -192,6 +197,10 @@
 
     #msBtn:hover {
         background-color: #5c5c5c !important;
+    }
+
+    #ggBtn:hover {
+        background-color: #d64b4b !important;
     }
 }
 </style>
