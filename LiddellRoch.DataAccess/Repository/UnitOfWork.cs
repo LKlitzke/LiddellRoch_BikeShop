@@ -20,6 +20,8 @@ namespace LiddellRoch.DataAccess.Repository
         public IPedidoHeaderRepository PedidoHeader { get; private set; }
         public IPedidoDetalheRepository PedidoDetalhes { get; private set; }
         public IImagemProdutoRepository ImagemProduto { get; private set; }
+        public IComponenteRepository Componente { get; private set; }
+        public IAvaliacaoRepository Avaliacao { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -33,6 +35,8 @@ namespace LiddellRoch.DataAccess.Repository
             PedidoHeader = new PedidoHeaderRepository(_db);
             PedidoDetalhes = new PedidoDetalheRepository(_db);
             ImagemProduto = new ImagemProdutoRepository(_db);
+            Componente = new ComponenteRepository(_db);
+            Avaliacao = new AvaliacaoRepository(_db);
         }
         public void Save()
         {

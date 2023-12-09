@@ -23,7 +23,18 @@
             </div>
 
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url(images/slide/slide_1.jpeg); background-position: top; background-position-y: 25%;">
+            <div class="carousel-item" style="background-image: url(images/slide/slide_4.png); background-position: top; background-position-y: 25%;">
+                <div class="carousel-container">
+                    <div class="container">
+                        @* <h2 class="animate__animated animate__fadeInDown">Para todos os gostos</h2>
+                        <p class="animate__animated animate__fadeInUp">De bicicletas clássicas até as mais modernas Mountain Bikes lançadas. Escolha a sua agora!</p>@* 
+                        <a  href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a> *@
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-image: url(images/slide/slide_1.jpeg); background-position: top; background-position-y: 25%; ">
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Para todos os gostos</h2>
@@ -34,14 +45,14 @@
             </div>
 
             <!-- Slide 3 -->
-            <div class="carousel-item " style="background-image: url(images/slide/slide_2.png); background-position: top; background-position-y: 20%">
+            @* <div class="carousel-item " style="background-image: url(images/slide/slide_2.png); background-position: top; background-position-y: 20%">
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">LiddellRoch</h2>
                         <p class="animate__animated animate__fadeInUp">Sua próxima conquista começa com uma escolha certa.</p>
                     </div>
                 </div>
-            </div>
+            </div> *@
 
         </div>
 
@@ -62,11 +73,16 @@
         <div class="col-lg-4 col-md-6 col-xl-3">
             <div class="row p-2 h-100">
                 <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
+                    <div class="bikeDiv card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
                         @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
                         {
-                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
-                        }
+                            @if(product.Estoque < 10)
+                            {
+                                <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque RESTANTES!</span>
+                            }
+                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
+                            
+                           }
                         else
                         {
                             <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
@@ -100,7 +116,7 @@
                                     <br>
                                     ou
                                     <br>
-                                    <span class="text-success" style="font-weight:bolder; font-size:larger">
+                                    <span class="text-success" style="font-weight:bolder; font-size:x-large">
                                         @product.Preco.ToString("c")
                                     </span>
                                     <br>(PIX ou boleto)
@@ -113,7 +129,7 @@
                             <a asp-action="Detalhes"
                                asp-route-bikeId="@product.Id"
                                class="btn btn-success bg-gradient border-0 form-control">
-                                Detalhes
+                                <i class="bi bi-cart-plus-fill"></i> &nbsp;COMPRAR
                             </a>
                         </div>
                     </div>
@@ -122,6 +138,30 @@
         </div>
     }
 </div>
+<style>
+    span.badge {
+       /*  width: 50%;
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center; */
+    }
+
+    .bikeDiv {
+        /* position: relative;
+        padding-top: 20px;
+        display: inline-block; */
+    }
+
+    .bikeBadge {
+        position: absolute;
+        left: 30px;
+        top: 25px;
+        text-align: center;
+        border-radius: 30px 30px 30px 30px;
+        width:40%;
+    }
+</style>
 @* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>

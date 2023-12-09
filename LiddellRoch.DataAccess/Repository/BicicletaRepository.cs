@@ -19,6 +19,8 @@ namespace LiddellRoch.DataAccess.Repository
             {
                 objFromDb.Nome = obj.Nome;
                 objFromDb.Descricao = obj.Descricao;
+                //objFromDb.Especificoes = obj.Especificoes;
+                objFromDb.Componentes = obj.Componentes;
                 objFromDb.Peso = obj.Peso;
                 objFromDb.Cores = obj.Cores;
                 objFromDb.CategoriaId = obj.CategoriaId;

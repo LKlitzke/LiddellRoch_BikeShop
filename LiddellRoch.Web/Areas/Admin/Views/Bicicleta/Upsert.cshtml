@@ -36,6 +36,72 @@
                                 <textarea asp-for="Bicicleta.Descricao" class="form-control"></textarea>
                             </div>
                             
+                            @* <div class="form-group py-2 col-12">
+                                <label asp-for="Bicicleta.Especificoes" type="text">Especificações</label>
+                                <textarea asp-for="Bicicleta.Especificoes" class="form-control"></textarea>
+                            </div> 
+                            <div class="form-group">
+                                <label asp-for="Bicicleta.Componentes" class="control-label"></label>
+
+
+                                <!-- Exemplo de campos para componentes na bicicleta -->
+                                <div id="componentes-container">
+                                    @for(int i=0; i < Model.Bicicleta.Componentes.Count;i++)
+                                    {
+                                        <div class="componente row">
+                                        <select asp-for="Bicicleta.Componentes[i].TipoComponenteId" asp-items="@Model.ComponentesList" class="form-select col-2" style="width: 30%" id="componente-select">
+                                        </select>
+                                        <input asp-for="Bicicleta.Componentes[i].Valor" class="form-control  col-10" placeholder="Valor" style="width: 70%"  />
+                                        </div>
+                                    }
+
+                                </div>
+
+                                <button type="button" onclick="adicionarComponente(@Model.Bicicleta.Componentes.Count)">Adicionar Componente</button>
+                            </div>*@
+
+                            <div class="form-group py-2 col-12">
+                                <label asp-for="Bicicleta.Descricao" type="text">Componentes</label>
+                                <div class="form-control col-md-12 p-0 m-0 bg-light">
+                                    <table id="CompTable" class="table table-md mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 40%">Tipo</th>
+                                                <th style="width: 40%">Valor</th>
+                                                <th style="width: 20%">
+                                                    <button id="btnAddComponent" type="button" class="btn btn-md btn-info visible" style="float: right;"
+                                                        onclick="AddItem(this)">
+                                                        <span class="text-md-center"><i class="bi bi-plus-circle"></i> Adicionar</span>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for(int i = 0; i < Model.Bicicleta.Componentes.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <select asp-for="Bicicleta.Componentes[i].TipoComponenteId" asp-items="@Model.ComponentesList" class="form-select col-2" id="componente-select">
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input asp-for="Bicicleta.Componentes[i].Valor" class="form-control" placeholder="Valor" />
+                                                    </td>
+                                                    <td>
+                                                        <button id="btnremove-@i" type="button" class="btn btn-md btn-danger visible"
+                                                        onclick="DeleteItem(@i)">
+                                                            <span class="text-md-center"><i class="bi bi-trash-fill"></i> Excluir</span>
+                                                       
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+
                             <div class="row">
                                 <div class="form-group py-2 col-sm-12 col-md-5">
                                     <label asp-for="Bicicleta.Estoque" type="text" class="mb-1">Estoque (Unidades)</label>
@@ -126,16 +192,28 @@
 </div>
 
 
+<style>
+    table td {
+        max-width: 120px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        overflow: hidden;
+    }
+</style>
+
 @section Scripts {
     <script>
         $(document).ready(function () {
             $("#tamanhos-select").select2({
                 placeholder: 'Selecione uma ou mais opções',
-                allowClear: true
+                allowClear: true,
+                width: '100%'
             });
             $("#cores-select").select2({
                 placeholder: 'Selecione uma ou mais opções',
-                allowClear: true
+                allowClear: true,
+                width: '100%'
             });
         });
         tinymce.init({
@@ -143,8 +221,46 @@
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         })
+
+        function AddItem(btn) {
+            var table = document.getElementById('CompTable');
+            var row = table.getElementsByTagName('tr');
+
+            var lastRowIdx = row.length - 1;
+            console.log(lastRowIdx);
+
+            if (lastRowIdx == 0) {
+                var newRowEmp = table.insertRow();
+            }
+            var rowOuterHtml = row[lastRowIdx].outerHTML;
+
+            lastRowIdx = lastRowIdx - 1;
+
+            var nextRowIdx = eval(lastRowIdx) + 1;
+
+            rowOuterHtml = rowOuterHtml.replaceAll('_' + lastRowIdx + '_', '_' + nextRowIdx + '_');
+            rowOuterHtml = rowOuterHtml.replaceAll('[' + lastRowIdx + ']', '[' + nextRowIdx + ']');
+            rowOuterHtml = rowOuterHtml.replaceAll('-' + lastRowIdx, '-' + nextRowIdx);
+
+            var newRow = table.insertRow();
+            newRow.innerHTML = rowOuterHtml;
+        }
+
+        function DeleteItem(index) {
+            var table = document.getElementById('CompTable');
+            var rows = table.getElementsByTagName('tr');
+
+            console.log(rows);
+            console.log(index);
+            //btn.remove();
+
+            console.log(rows[index]);
+
+            rows[index + 1].remove();
+            //va
+        }
     </script>
     @{
-        <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
     }
 }

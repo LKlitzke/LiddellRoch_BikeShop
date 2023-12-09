@@ -19,6 +19,9 @@ namespace LiddellRoch.Models
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public string Descricao { get; set; }
 
+        //[Required(ErrorMessage = "Campo de preenchimento obrigatório")]
+        //public string Especificoes { get; set; }
+
         [Required]
         [Display(Name = "Preço")]
         [DataType(DataType.Currency)]
@@ -33,6 +36,8 @@ namespace LiddellRoch.Models
 
         [ValidateNever]
         public string Cores { get; set; }
+        [Range(5,50, ErrorMessage = "Selecione um estoque entre 5 a 50")]
+        public int DescontoPromocao { get; set; }
 
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         [Range(1,100, ErrorMessage = "Selecione um estoque entre 1 a 100")]
@@ -56,5 +61,8 @@ namespace LiddellRoch.Models
 
         [ValidateNever]
         public List<ImagemProduto> ImagensProduto { get; set; }
+
+        [ValidateNever]
+        public List<Componente> Componentes { get; set; }
     }
 }
