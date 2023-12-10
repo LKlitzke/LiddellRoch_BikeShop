@@ -106,17 +106,25 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+
+            ApplicationUser user = await _userManager.GetUserAsync(User) as ApplicationUser;
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            user.PhoneNumber = Input.PhoneNumber;
+            user.Endereco = Input.Endereco;
+            user.Estado = Input.Estado;
+            user.Cidade = Input.Cidade;
 
             if (!ModelState.IsValid)
             {
                 await LoadAsync(user);
                 return Page();
             }
+            await _userManager.UpdateAsync(user);
+
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
@@ -124,13 +132,14 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+
+                    TempData["error"] = "Unexpected error when trying to set phone number!";
                     return RedirectToPage();
                 }
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            TempData["success"] = "Perfil atualizado com sucesso!";
             return RedirectToPage();
         }
     }
