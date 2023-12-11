@@ -191,6 +191,40 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             return View(pedidoHeaderId);
         }
 
+        public IActionResult AvaliarPedido(int pedidoId)
+        {
+            PedidoVm = new()
+            {
+                PedidoHeader = _unitOfWork.PedidoHeader.GetFirstOrDefault(u => u.Id == pedidoId, includeProperties: "ApplicationUser"),
+                PedidoDetalhe = _unitOfWork.PedidoDetalhes.GetAll(u => u.PedidoHeaderId == pedidoId, includeProperties: "Bicicleta")
+            };
+            return View(PedidoVm);
+        }
+
+        [HttpPost]
+        public IActionResult AvaliarPedido(int rate, string textArea, PedidoHeader pedidoHeader, PedidoDetalhe pedidoDetalhe)
+        {
+            Avaliacao avaliacao = new Avaliacao()
+            {
+                //PedidoHeader =
+                // CORRIGIR AO TRAZER PEDIDO HEADER
+                //ComentarioCompra = textArea,
+                //AvaliacaoCompra = rate,
+                //DataAvaliacao = DateTime.Now,
+                CriadoEm = DateTime.Now
+
+            };
+
+            _unitOfWork.Avaliacao.Add(avaliacao);
+            return RedirectToAction(nameof(AvaliarPedido),1);
+            //PedidoVm = new()
+            //{
+            //    PedidoHeader = _unitOfWork.PedidoHeader.GetFirstOrDefault(u => u.Id == pedidoId, includeProperties: "ApplicationUser"),
+            //    PedidoDetalhe = _unitOfWork.PedidoDetalhes.GetAll(u => u.PedidoHeaderId == pedidoId, includeProperties: "Bicicleta")
+            //};
+            //return View(PedidoVm);
+        }
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll(string status)

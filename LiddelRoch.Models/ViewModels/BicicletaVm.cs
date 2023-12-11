@@ -21,6 +21,9 @@ namespace LiddellRoch.Models.ViewModels
         public IEnumerable<SelectListItem> CoresListEnum { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> TamanhosListEnum { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> ComponentesList { get; set; }
+
 
         [ValidateNever]
         [Required(ErrorMessage = "Selecione um ou mais tamanhos")]

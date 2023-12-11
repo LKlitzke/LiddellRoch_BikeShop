@@ -7,6 +7,7 @@ function loadDataTable() {
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
         },
+        scrollX: true,
         dom: 'Bfrtip',
         buttons: [
             //'excelHtml5',
@@ -15,6 +16,11 @@ function loadDataTable() {
                 columnText: function (dt, idx, title) {
                     return (idx + 1) + ': ' + title;
                 }
+            },
+            {
+                extend: 'spacer',
+                style: 'bar',
+                text: 'Exportar:'
             },
             {
                 extend: 'excelHtml5',
@@ -45,12 +51,6 @@ function loadDataTable() {
                 },
                 title: 'LiddellRoch - Lista de Bikes',
                 messageTop: 'PDF created by PDFMake with Buttons for DataTables.'
-                //customize: function (doc) {
-                //    doc.defaultStyle =
-                //    {
-                //        font: 'Arial',
-                //    };
-                //}
             }            
         ],
         "ajax": { url: '/admin/bicicleta/getall' },
@@ -64,8 +64,8 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="text-center d-flex justify-content-center" role="group">
-                     <a href="/Admin/Bicicleta/Upsert?id=${data}" class="btn btn-primary mx-2 w-25"> <i class="bi bi-pencil-square"></i> Editar</a>               
-                     <a onClick=Delete('/Admin/Bicicleta/Delete/${data}') class="btn btn-danger mx-2 w-25"> <i class="bi bi-trash-fill"></i> Excluir</a>
+                     <a href="/Admin/Bicicleta/Upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
+                     <a onClick=Delete('/Admin/Bicicleta/Delete/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
                     </div>`
                 },
                 "width": "25%"

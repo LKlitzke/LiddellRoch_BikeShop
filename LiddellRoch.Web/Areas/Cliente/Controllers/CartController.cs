@@ -205,6 +205,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
             _unitOfWork.CarrinhoCompras.RemoveRange(carts);
             _unitOfWork.Save();
 
+            ViewData["endereco"] = pedidoHeader.Cidade;
             return View(id);
         }
 

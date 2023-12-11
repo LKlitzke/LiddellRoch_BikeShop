@@ -18,6 +18,8 @@ namespace LiddellRoch.DataAccess.Repository.Interfaces
         IPedidoDetalheRepository PedidoDetalhes { get; }
         IPedidoHeaderRepository PedidoHeader { get; }
         IImagemProdutoRepository ImagemProduto { get; }
+        IComponenteRepository Componente { get; }
+        IAvaliacaoRepository Avaliacao { get; }
         void Save();
     }
 }

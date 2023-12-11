@@ -23,6 +23,7 @@
                     <tr>
                         <th>Nome</th>
                         <th class="text-center">Ordem</th>
+                        <th class="text-center">Data de Criação</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -32,6 +33,7 @@
                         <tr>
                             <td>@obj.Nome</td>
                             <td class="text-center">@obj.OrdemExibicao</td>
+                            <td class="text-center">@obj.CriadoEm.ToShortDateString()</td>
                             <td class="d-flex justify-content-center">
                                 <div class="text-center" role="group">
                                     <a asp-controller="Categoria" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">

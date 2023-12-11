@@ -1,4 +1,5 @@
-﻿using LiddellRoch.DataAccess.Repository.Interfaces;
+﻿using LiddellRoch.Application.DTOs;
+using LiddellRoch.DataAccess.Repository.Interfaces;
 using LiddellRoch.Models;
 using LiddellRoch.Models.ViewModels;
 using LiddellRoch.Utility;
@@ -57,15 +58,25 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                     Value = i.ToString()
                 }),
 
+                ComponentesList = Componentes.GetAll().Select(i => new SelectListItem
+                {
+                    Text = $"{i.Nome}",
+                    Value = i.Id.ToString()
+                }).OrderBy(e => e.Text),
+
                 Bicicleta = new Bicicleta()
             };
+
+            // Acertar isso aqui. Quando cria um novo registro, PRECISA ter uma row vazia para componente
+            //bicicletaVm.Bicicleta.Componentes.Add(new Componente());
+
 
             // Create OR Update
             if (id == null || id == 0)
                 return View(bicicletaVm);
             else
             {
-                bicicletaVm.Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == id, includeProperties: "ImagensProduto");
+                bicicletaVm.Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == id, includeProperties: "ImagensProduto,Componentes");
 
                 bicicletaVm.TamanhosListSplit = bicicletaVm.Bicicleta.Tamanhos.Split(',').ToList();
                 bicicletaVm.CoresListSplit = bicicletaVm.Bicicleta.Cores.Split(',').ToList();
@@ -81,6 +92,10 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             {
                 obj.Bicicleta.Tamanhos = string.Join(",", obj.TamanhosListSplit);
                 obj.Bicicleta.Cores = string.Join(",", obj.CoresListSplit);
+
+                var componentes = _unitOfWork.Componente.GetAll(u => u.BicicletaId == obj.Bicicleta.Id);
+                _unitOfWork.Componente.RemoveRange(componentes);
+                
                 if (obj.Bicicleta.Id == 0)
                 {
                     _unitOfWork.Bicicleta.Add(obj.Bicicleta);
