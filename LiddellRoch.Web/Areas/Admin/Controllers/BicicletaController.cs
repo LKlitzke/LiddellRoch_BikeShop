@@ -62,7 +62,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                 {
                     Text = $"{i.Nome}",
                     Value = i.Id.ToString()
-                }),
+                }).OrderBy(e => e.Text),
 
                 Bicicleta = new Bicicleta()
             };
