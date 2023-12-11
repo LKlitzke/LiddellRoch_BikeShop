@@ -1,16 +1,51 @@
 ﻿@model int
 
-<div class="container row pt-4">
-    <div class="col-12 text-center">
+<div class="container row pt-4" style="margin: 0 auto;">
+    <div class="card shadow border-0 mt-4 mb-4 text-center ">
         <h1 class="text-primary text-center">Pedido concluído com sucesso!</h1>
-        Seu número de pedido é: @Model <br /><br />
-        <img src="~/assets/img/slide/slide_3" width="65%" />
-    </div>
-    <div class="col-12 text-center" style="color:maroon">
-        <br />
-        Seu pedido foi confirmado e em breve será processado para envio. Para mais detalhes, acesse: 
+        <span>Número de pedido: <strong>#@Model</strong> </span><br />
+        
+        Seu pedido foi confirmado e em breve será processado para envio. Para mais detalhes, acesse:
         <a asp-area="Admin" asp-controller="Pedido" asp-action="Index"> Gerenciar pedidos</a>
         <br />
+        <div style="display:inline-flex; align-self: center;">
+            <div class="envioLine">
+                <i class="fa-solid fa-truck fa-xl text-primary"></i>
+                <span>LiddellRoch</span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right fa-lg text-secondary"></i>
+            <div class="envioLine">
+                <i class="fa-solid fa-circle-check text-success fa-xl"></i>
+                <span>Pedido confirmado</span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right fa-lg text-secondary"></i>
+            <div class="envioLine">
+                <i class="fa-regular fa-circle-check text-muted fa-xl"></i>
+                <span>Em rota de entrega</span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right fa-lg text-secondary"></i>
+            <div class="envioLine">
+                <i class="fa-solid fa-house fa-xl text-primary"></i>
+                <span>@ViewData["endereco"]</span>
+            </div>
+        </div>
+        Estimativa de entrega: @DateTime.Now.AddDays(7).ToShortDateString() a @DateTime.Now.AddDays(14).ToShortDateString()
+
+        <br />
+        <img src="~/images/bg_2.jpg" style="align-self: center;" class="my-3" width="65%" />
+
+        <div class="col-12 text-center" style="color:maroon">
+            
+        </div>
     </div>
+    
 
 </div> 
+
+<style>
+    div.envioLine {
+        display: FLEX;
+        line-height: 55px;
+        flex-flow: column;
+    }
+</style>
