@@ -11,6 +11,7 @@ namespace LiddellRoch.Application.Services.Interfaces
     {
         List<Avaliacao> GetAvaliacoesByBikeId(int bikeId);
         Avaliacao GetAvaliacaoById(int id);
+        bool AvaliacaoExists(int bikeHeaderId);
         double GetMediaAvaliacoes(int bikeId);
         void CreateAvaliacao(Avaliacao avaliacao);
         void UpdateAvaliacao(Avaliacao avaliacao);

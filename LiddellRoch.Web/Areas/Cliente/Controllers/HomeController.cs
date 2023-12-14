@@ -24,7 +24,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
         
         public IActionResult Index()
         {
-            IEnumerable<Bicicleta> bikeList = _unitOfWork.Bicicleta.GetAll(includeProperties: "Categoria,Marca,ImagensProduto"); //,ProductImage
+            IEnumerable<Bicicleta> bikeList = _unitOfWork.Bicicleta.GetAll(includeProperties: "Categoria,Marca,ImagensProduto,Avaliacoes"); //,ProductImage
             return View(bikeList);
         }
 

@@ -64,5 +64,8 @@ namespace LiddellRoch.Models
 
         [ValidateNever]
         public List<Componente> Componentes { get; set; }
+
+        [ValidateNever]
+        public List<Avaliacao> Avaliacoes { get; set; }
     }
 }

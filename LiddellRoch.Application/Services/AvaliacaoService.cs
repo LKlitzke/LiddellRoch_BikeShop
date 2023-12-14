@@ -19,13 +19,16 @@ namespace LiddellRoch.Application.Services
         public List<Avaliacao> GetAvaliacoesByBikeId(int bikeId)
         {
             return _unitOfWork.Avaliacao.GetAll(u => u.BicicletaId == bikeId).ToList();
-
-
         }
 
         public Avaliacao GetAvaliacaoById(int id)
         {
             return _unitOfWork.Avaliacao.GetFirstOrDefault(u => u.Id == id);
+        }
+
+        public bool AvaliacaoExists(int bikeHeaderId)
+        {
+            return _unitOfWork.Avaliacao.GetFirstOrDefault(e => e.PedidoHeaderId == bikeHeaderId) != null;
         }
 
         public double GetMediaAvaliacoes(int bikeId)

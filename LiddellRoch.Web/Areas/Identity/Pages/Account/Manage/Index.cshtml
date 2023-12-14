@@ -1,5 +1,9 @@
 ﻿@page
 @using LiddellRoch.Models;
+
+@using LiddellRoch.Application.Services.Interfaces
+@inject IAvaliacaoService AvaliacaoService
+
 @model IndexModel
 @{
     ViewData["Title"] = "Alterar dados do perfil";
@@ -125,10 +129,15 @@
                                             <span><strong>Status:</strong> @pedido.StatusPedido</span>
                                         </div>
                                         <div class="col-md-5">
-                                            @* VERIFICAR SE EXISTE AVALIACAO P/ PEDIDO *@
-                                            <a asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-info">
-                                                AVALIAR COMPRA
-                                            </a>
+                                            @{
+                                                var hasAvaliacao = AvaliacaoService.AvaliacaoExists(pedido.Id);
+                                                if (!hasAvaliacao && pedido.StatusPedido == SD.StatusShipped)
+                                                {
+                                                    <a asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-info">
+                                                        AVALIAR COMPRA
+                                                    </a>
+                                                }
+                                            }
                                         </div>
                                     }
                                     

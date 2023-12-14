@@ -202,20 +202,24 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AvaliarPedido(int rate, string textArea, PedidoHeader pedidoHeader, PedidoDetalhe pedidoDetalhe)
+        public IActionResult AvaliarPedido(int rating, string comment, int pedidoDetalheId)
         {
+            var pedidoDetalhe = _unitOfWork.PedidoDetalhes.GetFirstOrDefault(e => e.Id == pedidoDetalheId);
+
+
             Avaliacao avaliacao = new Avaliacao()
             {
-                //PedidoHeader =
-                // CORRIGIR AO TRAZER PEDIDO HEADER
-                //ComentarioCompra = textArea,
-                //AvaliacaoCompra = rate,
-                //DataAvaliacao = DateTime.Now,
+                PedidoHeaderId = pedidoDetalhe.PedidoHeaderId,
+                AvaliacaoCompra = rating,
+                ComentarioCompra = comment,
+                BicicletaId = pedidoDetalhe.BicicletaId,
+                DataAvaliacao = DateTime.Now,
                 CriadoEm = DateTime.Now
 
             };
 
             _unitOfWork.Avaliacao.Add(avaliacao);
+            _unitOfWork.Save();
             return RedirectToAction(nameof(AvaliarPedido),1);
             //PedidoVm = new()
             //{
