@@ -207,7 +207,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             var pedidoDetalhe = _unitOfWork.PedidoDetalhes.GetFirstOrDefault(e => e.Id == pedidoDetalheId);
 
 
-            Avaliacao avaliacao = new Avaliacao()
+            Avaliacao avaliacao = new ()
             {
                 PedidoHeaderId = pedidoDetalhe.PedidoHeaderId,
                 AvaliacaoCompra = rating,

@@ -125,7 +125,6 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account.Manage
             }
             await _userManager.UpdateAsync(user);
 
-
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {

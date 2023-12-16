@@ -1,12 +1,6 @@
-﻿using LiddellRoch.Utility;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LiddellRoch.Models.ViewModels
 {
@@ -23,7 +17,6 @@ namespace LiddellRoch.Models.ViewModels
         public IEnumerable<SelectListItem> TamanhosListEnum { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> ComponentesList { get; set; }
-
 
         [ValidateNever]
         [Required(ErrorMessage = "Selecione um ou mais tamanhos")]

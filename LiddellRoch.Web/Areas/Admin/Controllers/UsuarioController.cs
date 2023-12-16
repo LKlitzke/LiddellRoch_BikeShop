@@ -108,7 +108,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             };
             foreach (Claim claim in SD.ClaimList)
             {
-                UserClaim userClaim = new UserClaim
+                UserClaim userClaim = new ()
                 {
                     ClaimType = claim.Type
                 };
@@ -154,10 +154,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             {
                 user.Role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().FirstOrDefault();
 
-                if (user.Empresa == null)
-                {
-                    user.Empresa = new() { Nome = "" };
-                }
+                user.Empresa ??= new() { Nome = "" };
             }
             return Json(new { data = users });
         }
