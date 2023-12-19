@@ -36,7 +36,7 @@ namespace LiddellRoch.Application.Services
 
             PieChartVm pieChartVm = new()
             {
-                Labels = new string[] { "New Customer Compras", "Returning Customer Compras" },
+                Labels = new string[] { "Compras de novos usuários", "Compras de usuários regressos" },
                 Series = new decimal[] { comprasUnicasPorNovoUsuario, comprasUnicasPorUsuario }
             };
 
@@ -49,7 +49,7 @@ namespace LiddellRoch.Application.Services
                 u.StatusPedido != SD.StatusCancelled
                 || u.StatusPedido != SD.StatusPending);
 
-            var totalLucro = Convert.ToInt32(totalCompras.Sum(e => e.TotalPedido));
+            var totalLucro = Decimal.ToDouble(totalCompras.Sum(e => e.TotalPedido));
 
             var totalLucroMesAtual = Decimal.ToDouble(totalCompras.Where(u => u.DataPedido >= mesInicialAtual && u.DataPedido <= DateTime.Now).Sum(e => e.TotalPedido));
             var totalLucroAnterior = Decimal.ToDouble(totalCompras.Where(u => u.DataPedido >= mesInicialAnterior && u.DataPedido <= mesInicialAtual).Sum(e => e.TotalPedido));
@@ -138,7 +138,7 @@ namespace LiddellRoch.Application.Services
             return LineChartVm;
         }
 
-        private static RadialBarChartVm GetRadialChartDataModel(int totalCount, double countMesAtual, double countMesAnterior)
+        private static RadialBarChartVm GetRadialChartDataModel(double totalCount, double countMesAtual, double countMesAnterior)
         {
             RadialBarChartVm radialBarChartVm = new();
 
@@ -155,6 +155,35 @@ namespace LiddellRoch.Application.Services
             radialBarChartVm.Series = new int[] { increaseRate };
 
             return radialBarChartVm;
+        }
+
+        public async Task<PieChartVm> GetStatusComprasPieChartData()
+        {
+            var totalCompras = _unitOfWork.PedidoHeader.GetAll(u =>
+                u.DataPedido >= DateTime.Now.AddDays(-30));
+
+            var cPendentes = totalCompras.Where(e => e.StatusPedido == SD.StatusPending).Count();
+            var cAprovadadas = totalCompras.Where(e => e.StatusPedido == SD.StatusApproved).Count();
+            var cProcessadas = totalCompras.Where(e => e.StatusPedido == SD.StatusInProcess).Count();
+            var cCanceladas = totalCompras.Where(e => e.StatusPedido == SD.StatusCancelled).Count();
+            var cReembolsadas = totalCompras.Where(e => e.StatusPedido == SD.StatusRefunded).Count();
+            var cEnviadas = totalCompras.Where(e => e.StatusPedido == SD.StatusShipped).Count();
+
+            PieChartVm pieChartVm = new()
+            {
+                Labels = new string[] 
+                { 
+                    SD.StatusPending,
+                    SD.StatusApproved,
+                    SD.StatusInProcess,
+                    SD.StatusCancelled,
+                    SD.StatusRefunded,
+                    SD.StatusShipped
+                },
+                Series = new decimal[] { cPendentes, cAprovadadas, cProcessadas, cCanceladas, cReembolsadas, cEnviadas }
+            };
+
+            return pieChartVm;
         }
     }
 }

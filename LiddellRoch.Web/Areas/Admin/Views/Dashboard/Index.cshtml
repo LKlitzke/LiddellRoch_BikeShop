@@ -4,9 +4,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0">Dashboard</h4>
+                    <h4 class="mb-0 mt-1">Dashboard LiddellRoch</h4>
+                        
                 </div>
             </div>
+            <hr />
             <div class="row">
                 <div class="col-md-6 col-xl-4 mt-2">
                     <div class="card">
@@ -81,7 +83,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div>
-                                <p class="text-muted mb-0">New Members And Bookings In Past 30 Days</p>
+                                <p class="text-muted mb-0">Novos usuários e compras nos últimos 30 dias</p>
                             </div>
                             <div id="newUsersAndComprasLineChart" data-colors='["--bs-warning","--bs-primary"]'>
                             </div>
@@ -98,7 +100,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="">
-                                <p class="text-muted mb-0">Compras por Categoria nos últimos 30 dias</p>
+                                <p class="text-muted mb-0">Compras por tipo de usuário nos últimos 30 dias</p>
                             </div>
                             <div id="ComprasCategoriasPieChart" data-colors='["--bs-warning","--bs-primary"]'>
                             </div>
@@ -112,6 +114,17 @@
                         </div>
                     </div>
                 </div> 
+                <div class="col-md-12 col-xl-4 mt-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="">
+                                <p class="text-muted mb-0">Status das compras nos últimos 30 dias</p>
+                            </div>
+                            <div id="StatusComprasPieChart" data-colors='["--bs-warning","--bs-primary","--bs-secondary", "--bs-danger", "--bs-info","--bs-dark"]'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -119,9 +132,11 @@
 
 @section scripts{
     <script src="~/js/dashboard/radialChart.js"></script>
+    <script src="~/js/dashboard/pieChart.js"></script>
     <script src="~/js/dashboard/getTotalComprasRadial.js"></script>
     <script src="~/js/dashboard/getTotalLucroRadial.js"></script>
     <script src="~/js/dashboard/getTotalUserRadial.js"></script>
     <script src="~/js/dashboard/getComprasCategoriasPieChart.js"></script>
     <script src="~/js/dashboard/getUsersAndComprasLineChart.js"></script>
+    <script src="~/js/dashboard/getStatusComprasPieChart.js"></script>
 }

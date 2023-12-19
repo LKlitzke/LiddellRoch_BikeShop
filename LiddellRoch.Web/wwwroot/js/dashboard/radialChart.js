@@ -4,10 +4,13 @@
         fill: {
             colors: chartColors
         },
+        legend: {
+            show: false
+        },
         series: data.series,
         chart: {
-            height: 90,
-            width: 90,
+            height: 100,
+            width: 100,
             sparkline: {
                 enabled: true
             },
@@ -17,11 +20,18 @@
         plotOptions: {
             radialBar: {
                 hollow: {
-                    size: '70%',
+                    size: '65%',
+                },
+                dataLabels: {
+                    name: {
+                        show: false
+                    },
+                    value: {
+                        offsetY: 5
+                    }
                 }
             },
-        },
-        labels: ['remover'],
+        }
     };
 
     var chart = new ApexCharts(document.querySelector("#" + id), options);

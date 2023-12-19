@@ -16,5 +16,6 @@ namespace LiddellRoch.Application.Services.Interfaces
         Task<RadialBarChartVm> GetLucrosChartData();
         Task<PieChartVm> GetComprasCategoriasPieChartData();
         Task<LineChartVm> GetUsersAndComprasLineChartData();
+        Task<PieChartVm> GetStatusComprasPieChartData();
     }
 }

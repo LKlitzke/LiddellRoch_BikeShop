@@ -8,7 +8,7 @@ namespace LiddellRoch.Models.ViewModels
 {
     public class RadialBarChartVm
     {
-        public decimal TotalCount { get; set; }
+        public double TotalCount { get; set; }
         public double CountInCurrentMonth { get; set; }
         public decimal IncreaseRate { get; set; }
         public bool HasRatioIncreased { get; set; }

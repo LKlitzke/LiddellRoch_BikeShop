@@ -48,5 +48,10 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         {
             return Json(await _dashboardService.GetUsersAndComprasLineChartData());
         }
+
+        public async Task<IActionResult> GetStatusComprasPieChartData()
+        {
+            return Json(await _dashboardService.GetStatusComprasPieChartData());
+        }
     }
 }
