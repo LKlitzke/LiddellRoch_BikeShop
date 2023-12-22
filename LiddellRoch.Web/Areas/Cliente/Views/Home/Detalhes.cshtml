@@ -1,6 +1,10 @@
-﻿@model CarrinhoCompras
-
+﻿@using LiddellRoch.Application.DTOs
+@using LiddellRoch.Application.Services
+@using LiddellRoch.Application.Services.Interfaces
+@model CarrinhoCompras
+@inject IAvaliacaoService AvaliacaoService
 @{
+    var compList = Componentes.GetAll();
     var coresList = Model.Bicicleta.Cores.Split(",").ToList();
 }
 <div class="row pb-3 container" style="margin: 0 auto;">
@@ -18,17 +22,47 @@
             <div class="card-body">
                 <div class="py-3">
                     <div class="row">
-                        <div class="col-6 col-md-2 offset-lg-1 pb-1">
-                            <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                        <div class="col-6 mx-5 pb-1">
+                            <a asp-action="Index" class="btn btn-outline-primary mb-1 bg-gradient fw-semibold btn-sm text-uppercase">
                                 <i class="fa-solid fa-circle-chevron-left"></i>&nbsp; &nbsp;<span>Voltar</span>
                             </a>
+                            @if(User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
+                            {
+                                <a asp-area="Admin" asp-controller="Bicicleta" asp-action="Upsert" asp-route-id="@Model.BicicletaId" class="btn btn-outline-secondary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                    <i class="bi bi-pencil-square"></i>&nbsp; &nbsp;<span>Editar detalhes</span>
+                                </a>
+                            }
                         </div>
+
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-md-5 col-12 text-center mb-3 geeks">
+                    <div class="row mx-5">
+                        <div class="col-md-5 col-12 text-center mb-3 px-0">
+                            <div class="mb-3 d-flex justify-content-evenly align-items-center">
+                                    <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" width="20%" />
+                                    <a href="#userRatingsSummary">
+                                        <span style="text-align:right" href="">
+
+                                            @{
+                                                var media = Model.Bicicleta.Avaliacoes.Count > 0 ? AvaliacaoService.GetMediaAvaliacoes(Model.BicicletaId) : 0;
+                                                for (int i = 0; i < media; i++)
+                                                {
+                                                    <i class="bi bi-star-fill" style="color: gold;"></i>
+                                                }
+                                                var dif = (5 - media);
+                                                for (int i = 0; i < dif; i++)
+                                                {
+                                                    <i class="bi bi-star" style="color: gold;"></i>
+                                                }
+                                            }
+                                            <span class="text-muted">(@(Model.Bicicleta.Avaliacoes.Count))</span>
+                                        </span>
+                                    </a>
+
+                            </div>
                             @if (Model.Bicicleta.ImagensProduto != null && Model.Bicicleta.ImagensProduto.Count > 0)
                             {
-                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="50000" style="object-fit:contain;width: 60%;display: flex; margin: 0 auto;">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="50000" style="object-fit:contain;width: 100%;display: flex; margin: 0 auto;">
 
                                     <div class="carousel-inner" style="border:1px black solid">
                                         <div class="carousel-indicators" style="height:0.5rem">
@@ -68,29 +102,29 @@
                             }
 
                         </div>
-                        <div class="col-md-7 col-12">
-                            <div class="ps-2">
-                                @*
-                                <h6 class="text-dark text-opacity-50 ">Marca: @Model.Bicicleta.Marca.Nome</h6> *@
-                                <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" width="20%" />
+                        <div class="col-md-7 col-12 pl-2">
+                           
+                            <div class="row ps-2">
+                                <h2 class="text-dark">@Model.Bicicleta.Nome</h2>
                             </div>
                             <div class="row ps-2">
-                                <h2 class="text-dark text-opacity-50 ">@Model.Bicicleta.Nome</h2>
+                                <h6 class="text-dark text-opacity-50">@Model.Bicicleta.Categoria.Nome</h6>
                             </div>
-                            <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50 ">@Model.Bicicleta.Categoria.Nome</h6>
-                            </div>
+                            @if (Model.Bicicleta.Estoque < 10)
+                            {
+                                <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque RESTANTES!</span>
+                            }
                             @* <div class="col-12 col-md-6 pb-4">
                             <span class="badge"></span>
                             </div>
                             <div class="col-12 col-md-6 pb-4">
                             <span class="badge">@Model.Bicicleta.Nome</span>
-                            </div>
-                            <div class="col-12 col-md-6 pb-4">
-                            <span class="badge">@Model.Bicicleta.Categoria.Nome</span>
-                            </div> *@
+                            </div>*@
                             <div class="row ps-2">
                                 <h6 class="text-dark text-opacity-50 ">Estoque: @Model.Bicicleta.Estoque</h6>
+                            </div>
+                            <div class="row ps-2">
+                                <h6 class="text-dark text-opacity-50 ">Tamanhos: @Model.Bicicleta.Tamanhos.Replace(",",", ")</h6>
                             </div>
                             <div class="row ps-2">
                                 <h6 class="text-dark text-opacity-50  pb-2">
@@ -111,7 +145,7 @@
 
                                 </h6>
                             </div>
-                            @* <div class="row text-center ps-2">
+                             @* <div class="row text-center ps-2">
                             <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
                             <div class="text-dark text-opacity-50 fw-semibold">Quantidade</div>
                             </div>
@@ -130,18 +164,16 @@
                             <div>Preço</div>
                             </div>
                             <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>@Model.Product.Price.ToString("c")</div>
+                            <div>dasdasdas</div>
                             </div>
                             <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>@Model.Product.Price50.ToString("c")</div>
+                            <div>dasdasdas</div>
                             </div>
                             <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>@Model.Product.Price100.ToString("c")</div>
+                            <div>dasdasdas</div>
                             </div>
-                            </div> *@
-                            <div class="row pl-2 my-3">
-                                <p class="text-secondary lh-sm">@Html.Raw(Model.Bicicleta.Descricao)</p>
-                            </div>
+                            </div *@
+                            
                             <div class="row pl-2 mb-3">
                                 <div class="col-md-12">
                                     <div class="input-group mb-3" style="width: 30% !important;min-width: fit-content;">
@@ -167,6 +199,76 @@
                         </div>
 
                     </div>
+
+                    <div class="mx-5 pt-5">
+                        <div class="pb-1">
+                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: darkgoldenrod;"></i> Descrição do produto</h3>
+                        </div>
+                        <div class="row pl-2 my-1">
+                            @Html.Raw(Model.Bicicleta.Descricao)
+                        </div>
+                    </div>
+
+                    @if (Model.Bicicleta.Componentes.Count > 0)
+                    {
+                        <div class="mx-5 pt-3">
+                            <div class="pb-1">
+                                <h3><i class="bi bi-gear-wide fs-4" style="color: darkgoldenrod;"></i> Ficha técnica</h3>
+                            </div>
+                            <div class="row pl-2 my-1">
+                                @foreach (var componente in Model.Bicicleta.Componentes)
+                                {
+                                    var item = compList.FirstOrDefault(c => c.Id == componente.TipoComponenteId);
+                                    <div class="col-md-6 mb-1">
+                                        <div class="mb-1"> <img class="imgIcon" src="~/images/componentes/@item.Icone" /> <strong>@item.Nome</strong></div>
+                                        <h6 style="margin-left: 50px">@componente.Valor</h6>
+                                        <hr style="color: #666; " />
+                                    </div>
+                                    
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if(Model.Bicicleta.Avaliacoes.Count > 0)
+                    {
+                        <div class="mx-5 pt-3 my-2" id="userRatingsSummary">
+                            <div class="pb-1">
+                                <h3 class="mb-3"><i class="bi bi-star-fill fs-4" style="color: darkgoldenrod;"></i> Avaliações dos Usuários</h3>
+                                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;margin-left: auto;">
+                                    @foreach (var item in Model.Bicicleta.Avaliacoes.OrderBy(e => e.DataAvaliacao))
+                                    {
+
+                                        <div class="card p-0" style="">
+                                            <div class="card-header">
+                                                @for (int i = 0; i < item.AvaliacaoCompra; i++)
+                                                {
+                                                    <i class="bi bi-star-fill" style="color: gold;"></i>
+                                                }
+                                                @{
+                                                    var dife = (5 - item.AvaliacaoCompra);
+                                                    for (int i = 0; i < dife; i++)
+                                                    {
+                                                        <i class="bi bi-star" style="color: gold;"></i>
+                                                    }
+                                                }
+                                                <h6 class="text-muted fs-6 text">Avaliado em @item.DataAvaliacao.ToShortDateString()</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0">
+                                                    <p>@item.ComentarioCompra</p>
+                                                    <footer class="blockquote-footer">Anônimo</footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                    
                 </div>
             </div>
         </div>
@@ -195,25 +297,21 @@
 }
 
 <style>
+    .imgIcon {
+        width: 40px;
+        height: 40px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-right: 5px;
+        object-fit: contain;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+
     .carousel-inner .item img {
         width: 640px;
         height:360px;
     }
-
-     /* .geeks {
-        width: 300px;
-        height: 300px;
-        overflow: hidden;
-        margin: 0 auto;
-    }
-
-    .geeks img {
-        width: 100%;
-        transition: 0.5s all ease-in-out;
-    }
-
-    .geeks:hover img {
-        transform: scale(1.25);
-    } */ 
 </style>
 
