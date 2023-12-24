@@ -1,6 +1,6 @@
 ﻿@model CarrinhoComprasVm
 
-<form method="post">
+<form method="post" onsubmit="mostrarAviso()">
 	<br />
 	<div class="container">
 		<div class="card shadow border-0">
@@ -128,3 +128,10 @@
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
 }
+
+<script>
+
+	function mostrarAviso() {
+		alert("ATENÇÃO! A tela seguinte exigirá dados de cartão de crédito para simular o processamento de pagamento. Embora não seja realmente cobrado, favor NÃO informar seus dados pessoais! Utilize um e-mail fictício e preencha os campos do cartão com números aleatórios como '424242...'");
+	}
+</script>

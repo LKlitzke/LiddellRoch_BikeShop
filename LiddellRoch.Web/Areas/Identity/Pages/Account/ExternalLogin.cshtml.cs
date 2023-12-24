@@ -150,7 +150,7 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
@@ -171,6 +171,7 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
                 user.Estado = Input.Estado;
                 user.Nome = Input.Nome;
                 user.PhoneNumber = Input.Telefone;
+                user.CriadoEm = DateTime.Now;
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

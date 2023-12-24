@@ -174,6 +174,7 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
                 user.CodigoPostal = Input.CodigoPostal;
                 user.PhoneNumber = Input.Telefone;
                 user.EmailConfirmed = true;
+                user.CriadoEm = DateTime.Now;
 
                 if (Input.Role == SD.Role_Empresa)
                 {

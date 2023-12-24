@@ -35,7 +35,7 @@
     <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-    
+    <link rel="stylesheet" href="~/css/apexcharts.css">
 
     <!-- Template Main CSS File -->
     <link href="~/css/defaultLayout.css" rel="stylesheet">
@@ -104,6 +104,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Pedido" asp-action="Index"><i class="bi bi-truck"></i> Pedidos</a>
                                         </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="bi bi-graph-up"></i> Dashboard</a>
+                                    </li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li class="nav-item">
                                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-fill-add"></i> Criar usuário</a>
@@ -379,6 +382,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
+
+    <!-- ApexCharts -->
+    <script type="text/javascript" src="~/js/dashboard/apexcharts.js"></script>
 
     <!-- Template Main JS File -->
     <script src="~/js/main.js"></script>

@@ -24,7 +24,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
         
         public IActionResult Index()
         {
-            IEnumerable<Bicicleta> bikeList = _unitOfWork.Bicicleta.GetAll(includeProperties: "Categoria,Marca,ImagensProduto"); //,ProductImage
+            IEnumerable<Bicicleta> bikeList = _unitOfWork.Bicicleta.GetAll(includeProperties: "Categoria,Marca,ImagensProduto,Avaliacoes"); //,ProductImage
             return View(bikeList);
         }
 
@@ -32,7 +32,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
         {
             CarrinhoCompras cart = new()
             {
-                Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == bikeId, includeProperties: "Categoria,Marca,ImagensProduto"),
+                Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == bikeId, includeProperties: "Categoria,Marca,ImagensProduto,Avaliacoes,Componentes"),
                 Quantidade = 1,
                 BicicletaId = bikeId
             };
@@ -53,7 +53,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
                 TempData["error"] = "Unidades selecionadas acima do estoque!";
                 CarrinhoCompras cart = new()
                 {
-                    Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == item.Id, includeProperties: "Categoria,Marca,ImagensProduto"),
+                    Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == item.Id, includeProperties: "Categoria,Marca,ImagensProduto,Avaliacoes"),
                     Quantidade = 1,
                     BicicletaId = item.Id
                 };

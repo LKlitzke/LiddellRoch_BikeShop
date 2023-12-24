@@ -31,7 +31,7 @@ namespace LiddellRoch.Application.DTOs
                 new TipoComponente() { Id = 10, Nome = "Corrente", Icone = "corrente.png" },
                 new TipoComponente() { Id = 11, Nome = "Guidão", Icone = "guidao.png" },
                 new TipoComponente() { Id = 12, Nome = "Suporte do Guidão", Icone = "suporte_guidao.png" },
-                new TipoComponente() { Id = 13, Nome = "Caixa de Direção", Icone = "caixa.png" },
+                new TipoComponente() { Id = 13, Nome = "Caixa de Direção", Icone = "caixa_dir.png" },
                 new TipoComponente() { Id = 14, Nome = "Conjunto de Freios", Icone = "conjunto_freio.png" },
                 new TipoComponente() { Id = 15, Nome = "Pedal", Icone = "pedal.png" },
                 new TipoComponente() { Id = 16, Nome = "Selim", Icone = "selim.png" },

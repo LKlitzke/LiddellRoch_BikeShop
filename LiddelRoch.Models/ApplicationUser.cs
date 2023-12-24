@@ -18,6 +18,7 @@ namespace LiddellRoch.Models
         public string? Cidade { get; set; }
         public string? Estado { get; set; }
         public string? CodigoPostal { get; set; }
+        public DateTime CriadoEm {  get; set; }
         public int? EmpresaId { get; set; }
         [ForeignKey("EmpresaId")]
         [ValidateNever]

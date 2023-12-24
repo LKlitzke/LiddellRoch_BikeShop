@@ -59,6 +59,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                     Estado = "ES",
                     EmailConfirmed = true,
                     CodigoPostal = "29260-000",
+                    CriadoEm = DateTime.Now,
                     Cidade = "Sundays Martins",
                 }, "Admin123*").GetAwaiter().GetResult();
 
@@ -78,6 +79,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                     Estado = "ES",
                     EmailConfirmed = true,
                     CodigoPostal = "29255-000",
+                    CriadoEm = DateTime.Now,
                     Cidade = "Victory"
                 }, "Empresa123*").GetAwaiter().GetResult();
 
@@ -95,6 +97,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                     Estado = "ES",
                     EmailConfirmed = true,
                     CodigoPostal = "67890-000",
+                    CriadoEm = DateTime.Now,
                     Cidade = "Old Village"
                 }, "Empregado123*").GetAwaiter().GetResult();
 
@@ -112,6 +115,7 @@ namespace LiddellRoch.DataAccess.DbInitializer
                     Estado = "FL",
                     EmailConfirmed = true,
                     CodigoPostal = "09876",
+                    CriadoEm = DateTime.Now,
                     Cidade = "Saw"
                 }, "Cliente123*").GetAwaiter().GetResult();
 

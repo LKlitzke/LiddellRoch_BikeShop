@@ -13,6 +13,7 @@
                 <input asp-for="Bicicleta.Id" hidden />
                 <input asp-for="Bicicleta.Tamanhos" hidden />
                 <input asp-for="Bicicleta.Cores" hidden />
+                <input asp-for="Bicicleta.CriadoEm" hidden />
                 <div class="row">
                     <div class="col-sm-12 col-md-10">
                         <div class="border p-3">
@@ -77,25 +78,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @for(int i = 0; i < Model.Bicicleta.Componentes.Count; i++)
+                                            @if (Model.Bicicleta.Componentes != null && Model.Bicicleta.Componentes.Count > 0)
                                             {
-                                                <tr>
-                                                    <td>
-                                                        <select asp-for="Bicicleta.Componentes[i].TipoComponenteId" asp-items="@Model.ComponentesList" class="form-select col-2" id="componente-select">
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input asp-for="Bicicleta.Componentes[i].Valor" class="form-control" placeholder="Valor" />
-                                                    </td>
-                                                    <td>
-                                                        <button id="btnremove-@i" type="button" class="btn btn-md btn-danger visible"
-                                                        onclick="DeleteItem(@i)">
-                                                            <span class="text-md-center"><i class="bi bi-trash-fill"></i> Excluir</span>
-                                                       
-                                                    </button>
-                                                    </td>
-                                                </tr>
+                                                for (int i = 0; i < Model.Bicicleta.Componentes.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <select asp-for="Bicicleta.Componentes[i].TipoComponenteId" asp-items="@Model.ComponentesList" class="form-select col-2" id="componente-select">
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input asp-for="Bicicleta.Componentes[i].Valor" class="form-control" placeholder="Valor" />
+
+                                                            <span asp-validation-for="Bicicleta.Componentes[i].Valor" class=" text-danger"></span>
+                                                        </td>
+                                                        <td>
+                                                            <button id="btnremove-@i" type="button" class="btn btn-md btn-danger visible"
+                                                                    onclick="DeleteItem(@i)">
+                                                                <span class="text-md-center"><i class="bi bi-trash-fill"></i> Excluir</span>
+
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                }
                                             }
+                                            
                                         </tbody>
                                     </table>
                                 </div>

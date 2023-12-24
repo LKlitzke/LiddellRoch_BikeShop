@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Bicicleta>
+@using LiddellRoch.Application.Services.Interfaces
+@inject IAvaliacaoService AvaliacaoService
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -80,8 +83,32 @@
                             {
                                 <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque RESTANTES!</span>
                             }
-                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
+                            {
+                                if(product.Avaliacoes.Count > 0)
+                                {
+                                    <span style="text-align:right">
+                                        
+                                    @{
+                                        var media = AvaliacaoService.GetMediaAvaliacoes(product.Id);
+                                        for(int i=0; i < media; i++)
+                                        {
+                                            <i class="bi bi-star-fill" style="color: gold;"></i>
+                                        }
+                                        var dif = (5 - media);
+                                        for (int i = 0; i < dif; i++)
+                                        {
+                                            <i class="bi bi-star" style="color: gold;"></i>
+                                        }
+                                    }
+                                    <span class="text-muted">(@product.Avaliacoes.Count)</span>
+                                    </span>
+                                    
+                                    @* <span><i class="bi bi-star-fill"></i>@media</span><i class="bi bi-star"></i> *@
+                                }
+                                
+                            }
                             
+                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
                            }
                         else
                         {

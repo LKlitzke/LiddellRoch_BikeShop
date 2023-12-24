@@ -36,6 +36,8 @@ namespace LiddellRoch.Models
 
         [ValidateNever]
         public string Cores { get; set; }
+
+        [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         [Range(5,50, ErrorMessage = "Selecione um estoque entre 5 a 50")]
         public int DescontoPromocao { get; set; }
 
@@ -64,5 +66,8 @@ namespace LiddellRoch.Models
 
         [ValidateNever]
         public List<Componente> Componentes { get; set; }
+
+        [ValidateNever]
+        public List<Avaliacao> Avaliacoes { get; set; }
     }
 }
