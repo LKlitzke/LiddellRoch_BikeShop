@@ -107,32 +107,47 @@
                             <div class="row ps-2">
                                 <h2 class="text-dark">@Model.Bicicleta.Nome</h2>
                             </div>
+                            <br>
                             <div class="row ps-2">
                                 <h6 class="text-dark text-opacity-50">@Model.Bicicleta.Categoria.Nome</h6>
                             </div>
-                            @if (Model.Bicicleta.Estoque < 10)
-                            {
-                                <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque RESTANTES!</span>
-                            }
-                            @* <div class="col-12 col-md-6 pb-4">
-                            <span class="badge"></span>
-                            </div>
-                            <div class="col-12 col-md-6 pb-4">
-                            <span class="badge">@Model.Bicicleta.Nome</span>
-                            </div>*@
+
+                           
                             <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50 ">Estoque: @Model.Bicicleta.Estoque</h6>
+                                <h6 class="text-dark text-opacity-50 ">Estoque: @Model.Bicicleta.Estoque unidades</h6>
+                                @if (Model.Bicicleta.Estoque < 10)
+                                {
+                                    <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque RESTANTES!</span>
+                                }
                             </div>
                             <div class="row ps-2">
                                 <h6 class="text-dark text-opacity-50 ">Tamanhos: @Model.Bicicleta.Tamanhos.Replace(",",", ")</h6>
                             </div>
+
+                            <br>
                             <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50  pb-2">
-                                    Preço:
-                                    <span>
-                                        @Model.Bicicleta.Preco.ToString("c")
-                                    </span>
-                                </h6>
+                                <div class="pl-1">
+                                    <p class="text-dark text-opacity-75 mb-1">
+                                        De:
+                                        <span style="text-decoration: line-through;">
+                                            @((Model.Bicicleta.Preco * 1.2m).ToString("c"))
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-dark text-opacity-75 mb-3">
+                                        Por:
+                                        <span class="text-dark" style="font-weight:bold; font-size:large">
+                                            @((Model.Bicicleta.Preco * 1.1m).ToString("c"))
+                                        </span>
+                                        <br><span style="font-size:small">em 12 vezes sem juros ou</span>
+                                        <br>
+                                        <span class="text-success" style="font-weight:bolder; font-size:xx-large">
+                                            @Model.Bicicleta.Preco.ToString("c")
+                                        </span>
+                                        (PIX ou boleto)
+                                    </p>
+                                </div>
                             </div>
                             <div class="row ps-2">
                                 <h6 class="text-dark text-opacity-50  pb-2">
@@ -145,6 +160,8 @@
 
                                 </h6>
                             </div>
+                            
+
                              @* <div class="row text-center ps-2">
                             <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
                             <div class="text-dark text-opacity-50 fw-semibold">Quantidade</div>
