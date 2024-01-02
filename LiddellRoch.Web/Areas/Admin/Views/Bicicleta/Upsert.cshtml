@@ -19,12 +19,12 @@
                         <div class="border p-3">
                             <div class="row">
                                 <div class="form-group py-2 col-sm-12 col-md-8">
-                                    <label asp-for="Bicicleta.Nome" type="text" class="mb-1"></label>
+                                    <label asp-for="Bicicleta.Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
                                     <input asp-for="Bicicleta.Nome" class="form-control" />
                                     <span asp-validation-for="Bicicleta.Nome" class="text-danger"></span>
                                 </div>
                                 <div class="form-group py-2 col-sm-12  col-md-4">
-                                    <label asp-for="Bicicleta.MarcaId" type="text" class="mb-1">Marca</label>
+                                    <label asp-for="Bicicleta.MarcaId" type="text" class="mb-1">Marca: <span class="required-mark">*</span></label>
                                     <select asp-for="@Model.Bicicleta.MarcaId" asp-items="@Model.MarcaList" class="form-select">
                                         <option disabled selected>Selecione a marca...</option>
                                     </select>
@@ -33,7 +33,7 @@
                             </div>
                             
                             <div class="form-group py-2 col-12">
-                                <label asp-for="Bicicleta.Descricao" type="text">Descrição</label>
+                                <label asp-for="Bicicleta.Descricao" type="text" class="mb-1">Descrição: <span class="required-mark">*</span></label>
                                 <textarea asp-for="Bicicleta.Descricao" class="form-control"></textarea>
                             </div>
                             
@@ -62,15 +62,15 @@
                             </div>*@
 
                             <div class="form-group py-2 col-12">
-                                <label asp-for="Bicicleta.Componentes" type="text">Componentes</label>
+                                <label asp-for="Bicicleta.Componentes" type="text" class="mb-1">Componentes: <span class="required-mark">*</span></label>
                                 <div class="form-control col-md-12 p-0 m-0 bg-light">
                                     <table id="CompTable" class="table table-md mb-0">
                                         <thead>
                                             <tr>
-                                                <th style="width: 40%">Tipo</th>
-                                                <th style="width: 40%">Valor</th>
-                                                <th style="width: 20%">
-                                                    <button id="btnAddComponent" type="button" class="btn btn-md btn-info visible" style="float: right;"
+                                                <th style="width: 20%">Tipo</th>
+                                                <th style="width: 62%">Descrição</th>
+                                                <th style="width: 13%">
+                                                    <button id="btnAddComponent" type="button" class="btn btn-md btn-outline-primary visible" style="float: right; width: 100%"
                                                         onclick="AddItem(this)">
                                                         <span class="text-md-center"><i class="bi bi-plus-circle"></i> Adicionar</span>
                                                     </button>
@@ -88,13 +88,13 @@
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <input asp-for="Bicicleta.Componentes[i].Valor" class="form-control" placeholder="Valor" />
+                                                            <input asp-for="Bicicleta.Componentes[i].Valor" class="form-control" placeholder="[Adicione uma descrição]" />
 
                                                             <span asp-validation-for="Bicicleta.Componentes[i].Valor" class=" text-danger"></span>
                                                         </td>
                                                         <td>
-                                                            <button id="btnremove-@i" type="button" class="btn btn-md btn-danger visible"
-                                                                    onclick="DeleteItem(@i)">
+                                                            <button id="btnremove-@i" type="button" class="btn btn-md btn-outline-danger visible" style="float: right; width: 100%"
+                                                                    onclick="DeleteItem(this)">
                                                                 <span class="text-md-center"><i class="bi bi-trash-fill"></i> Excluir</span>
 
                                                             </button>
@@ -102,7 +102,6 @@
                                                     </tr>
                                                 }
                                             }
-                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -110,26 +109,32 @@
                             
 
                             <div class="row">
-                                <div class="form-group py-2 col-sm-12 col-md-5">
-                                    <label asp-for="Bicicleta.Estoque" type="text" class="mb-1">Estoque (Unidades)</label>
-                                    <input asp-for="Bicicleta.Estoque" class="form-control" />
-                                    <span asp-validation-for="Bicicleta.Estoque" class="text-danger"></span>
-                                </div>
-                                <div class="form-group py-2 col-sm-12 col-md-3">
-                                    <label asp-for="Bicicleta.Peso" class="mb-1">Peso (kg)</label>
-                                    <input asp-for="Bicicleta.Peso" class="form-control" />
-                                    <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
-                                </div>
-                                <div class="form-group py-2 col-sm-12 col-md-4">
-                                    <label asp-for="Bicicleta.Preco" type="text" class="mb-1">Preço (R$)</label>
+                                <div class="form-group py-2 col-sm-6 col-md-3">
+                                    <label asp-for="Bicicleta.Preco" type="text" class="mb-1">Preço (R$): <span class="required-mark">*</span></label>
                                     <input asp-for="Bicicleta.Preco" class="form-control" />
                                     <span asp-validation-for="Bicicleta.Preco" class="text-danger"></span>
                                 </div>
+                                <div class="form-group py-2 col-sm-6 col-md-3">
+                                    <label asp-for="Bicicleta.Estoque" type="text" class="mb-1">Estoque (Unidades): <span class="required-mark">*</span></label>
+                                    <input asp-for="Bicicleta.Estoque" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.Estoque" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-6 col-md-3">
+                                    <label asp-for="Bicicleta.Peso" class="mb-1">Peso (kg): <span class="required-mark">*</span></label>
+                                    <input asp-for="Bicicleta.Peso" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.Peso" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-6 col-md-3">
+                                    <label asp-for="Bicicleta.DescontoPromocao" class="mb-1">Desconto em Promoção (%): <span class="required-mark">*</span></label>
+                                    <input asp-for="Bicicleta.DescontoPromocao" type="number" class="form-control" />
+                                    <span asp-validation-for="Bicicleta.DescontoPromocao" class="text-danger"></span>
+                                </div>
+                                
                             </div>
                             
                             <div class="row">
                                 <div class="py-2 col-sm-12 col-md-6">
-                                    <label asp-for="@Model.CoresListSplit" type="text" class="mb-1">Cores</label>
+                                    <label asp-for="@Model.CoresListSplit" type="text" class="mb-1">Cores: <span class="required-mark">*</span></label>
                                     <select asp-for="@Model.CoresListSplit" asp-items="@Model.CoresListEnum" class="form-select" multiple id="cores-select">
                                         @* <option disabled selected>Select Tamanhos</option> *@
                                     </select>
@@ -137,7 +142,7 @@
                                 </div>
 
                                 <div class="py-2 col-sm-12 col-md-6">
-                                    <label asp-for="@Model.TamanhosListSplit" type="text" class="mb-1">Tamanhos</label>
+                                    <label asp-for="@Model.TamanhosListSplit" type="text" class="mb-1">Tamanhos: <span class="required-mark">*</span></label>
                                     <select asp-for="@Model.TamanhosListSplit" asp-items="@Model.TamanhosListEnum" class="form-select" multiple id="tamanhos-select">
                                         @* <option disabled selected>Select Tamanhos</option> *@
                                     </select>
@@ -147,17 +152,13 @@
                             
                             <div class="row">
                                 <div class="form-group py-2 col-8">
-                                    <label asp-for="Bicicleta.CategoriaId" type="text" class="mb-1">Categoria</label>
+                                    <label asp-for="Bicicleta.CategoriaId" type="text" class="mb-1">Categoria: <span class="required-mark">*</span></label>
                                     <select asp-for="@Model.Bicicleta.CategoriaId" asp-items="@Model.CategoriaList" class="form-select">
                                         <option disabled selected>Selecione a Categoria</option>
                                     </select>
                                     <span asp-validation-for="Bicicleta.CategoriaId" class="text-danger"></span>
                                 </div>
-                                <div class="form-group py-2 col-4">
-                                    <label asp-for="Bicicleta.DescontoPromocao" class="mb-1">Desconto em Promoção</label>
-                                    <input asp-for="Bicicleta.DescontoPromocao" type="number" class="form-control" />
-                                    <span asp-validation-for="Bicicleta.DescontoPromocao" class="text-danger"></span>
-                                </div>
+                                
                             </div>
                             
                             <div class="form-group py-2 col-12">
@@ -185,6 +186,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-2">
+                        <span style="font-weight:600; text-align: center; width: 100% !important; display: block;">IMAGENS</span>
                         @if (Model.Bicicleta.ImagensProduto != null)
                         {
                             foreach (var image in Model.Bicicleta.ImagensProduto)
@@ -192,7 +194,7 @@
                                 <div class="border p-1 m-2 text-center">
                                     <img src="@image.ImagemUrl" width="100%"
                                          style="border-radius:5px; border:1px solid #bbb9b9" />
-                                    <a asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
+                                    <a asp-action="DeleteImage" class="btn btn-danger mt-1" asp-route-imageId="@image.Id">
                                         <i class="bi bi-trash-fill"></i> Excluir
                                     </a>
                                 </div>
@@ -233,6 +235,7 @@
         });
         tinymce.init({
             selector: 'textarea',
+            max_height: 500,
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         })
@@ -245,6 +248,7 @@
             console.log(lastRowIdx);
 
             if (lastRowIdx == 0) {
+                console.log("tESTE");
                 var newRowEmp = table.insertRow();
             }
             var rowOuterHtml = row[lastRowIdx].outerHTML;
@@ -263,19 +267,18 @@
 
         function DeleteItem(index) {
             var table = document.getElementById('CompTable');
-            var rows = table.getElementsByTagName('tr');
+            var rows = table.querySelectorAll('tbody tr');
 
-            console.log(rows);
-            console.log(index);
-            //btn.remove();
-
-            console.log(rows[index]);
-
-            rows[index + 1].remove();
-            //va
+            var row = document.getElementById(index.id).parentElement.parentElement;
+            if (rows.length > 1) {
+                row.remove();
+            }
+            else {
+                swal.fire("Remoção inválida!",'O produto deve conter pelo menos um componente cadastrado.','error');
+            }
         }
     </script>
     @{
-    <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial" />
     }
 }

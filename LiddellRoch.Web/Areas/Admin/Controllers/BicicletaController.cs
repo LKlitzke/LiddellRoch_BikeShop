@@ -70,25 +70,20 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             // Acertar isso aqui. Quando cria um novo registro, PRECISA ter uma row vazia para componente
             //bicicletaVm.Bicicleta.Componentes.Add(new Componente());
 
-            if (bicicletaVm.Bicicleta.Componentes == null)
+            
+
+            // Create OR Update
+            if (id != null && id != 0) {
+                bicicletaVm.Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == id, includeProperties: "ImagensProduto,Componentes");
+                bicicletaVm.TamanhosListSplit = bicicletaVm.Bicicleta.Tamanhos.Split(',').ToList();
+                bicicletaVm.CoresListSplit = bicicletaVm.Bicicleta.Cores.Split(',').ToList();
+            }
+
+            if (bicicletaVm.Bicicleta.Componentes == null || bicicletaVm.Bicicleta.Componentes.Count == 0)
             {
                 bicicletaVm.Bicicleta.Componentes = new List<Componente> { new Componente() { TipoComponenteId = 1, Valor = "", CriadoEm = DateTime.Now } };
             }
-
-            // Create OR Update
-            if (id == null || id == 0)
-                return View(bicicletaVm);
-            else
-            {
-                bicicletaVm.Bicicleta = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == id, includeProperties: "ImagensProduto,Componentes");
-
-                
-
-                bicicletaVm.TamanhosListSplit = bicicletaVm.Bicicleta.Tamanhos.Split(',').ToList();
-                bicicletaVm.CoresListSplit = bicicletaVm.Bicicleta.Cores.Split(',').ToList();
-
-                return View(bicicletaVm);
-            }
+            return View(bicicletaVm);
         }
 
         [HttpPost]
@@ -99,6 +94,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                 obj.Bicicleta.Tamanhos = string.Join(",", obj.TamanhosListSplit);
                 obj.Bicicleta.Cores = string.Join(",", obj.CoresListSplit);
                 obj.Bicicleta.Componentes.ForEach(e => e.CriadoEm = DateTime.Now);
+                obj.Bicicleta.Componentes.RemoveAll(e => e.Valor == null);
 
                 var componentes = _unitOfWork.Componente.GetAll(u => u.BicicletaId == obj.Bicicleta.Id);
                 _unitOfWork.Componente.RemoveRange(componentes);

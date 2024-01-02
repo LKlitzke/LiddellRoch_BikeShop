@@ -68,7 +68,7 @@
                             <form class="d-flex ms-auto" method="post" asp-area="Cliente" asp-controller="Home" asp-action="Pesquisa" style="padding: 0.5rem;">
                                     <div class="input-group">
                                         <input name="query" class="form-control" type="search" placeholder="Olá! O que você procura hoje?" aria-label="Buscar-modelo">
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                                        <button type="submit" class="btn btn-light"><i class="bi bi-search"></i></button>
                                     </div>
                                 </form>
                             </li>
@@ -359,7 +359,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.13.6/sorting/currency.js"></script>
+    
     <script src="https://cdn.tiny.cloud/1/yj6txdtf86mmmnnfmg6pq04eccldww78wtpayktexrx9j2s9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
@@ -382,7 +382,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.colVis.min.js"></script>
-
+    <script src="//cdn.datatables.net/plug-ins/1.13.6/sorting/currency.js"></script>
     <!-- ApexCharts -->
     <script type="text/javascript" src="~/js/dashboard/apexcharts.js"></script>
 
@@ -410,6 +410,18 @@
         FLEX-DIRECTION: COLUMN;
     }
 
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu .nav-item:hover {
+        background-color: #ddd;
+    }
     .navbar-brand:hover {
         /* filter: brightness(150%); */
         color: #ccc;
