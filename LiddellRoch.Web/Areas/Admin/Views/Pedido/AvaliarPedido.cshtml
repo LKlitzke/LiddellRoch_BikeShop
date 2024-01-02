@@ -3,8 +3,8 @@
 <div class="container">
     <div class="card shadow border-0 my-4">
         <div class="row pt-4">
-            <div class="col-12 text-center">
-                <h1 class="text-primary text-center">AVALIE SEU PEDIDO:</h1>
+            <div class="col-12">
+                <h2 class="text-primary mx-5">AVALIE SEU PEDIDO</h2>
                 @foreach (var pedido in Model.PedidoDetalhe)
                 {
                     <form method="post" enctype="multipart/form-data">
@@ -14,12 +14,14 @@
                                 <span style="float:left"><strong>Bicicleta: </strong> @pedido.Bicicleta.Nome</span>
 
                                 <br><hr>
-                                <div class="rating">
+                                <div class="rating align-items-center">
                                     <input type="radio" id="star5-@pedido.BicicletaId" name="rating" value="5" /><label for="star5-@pedido.BicicletaId"></label>
                                     <input type="radio" id="star4-@pedido.BicicletaId" name="rating" value="4" /><label for="star4-@pedido.BicicletaId"></label>
                                     <input type="radio" id="star3-@pedido.BicicletaId" name="rating" value="3" /><label for="star3-@pedido.BicicletaId"></label>
                                     <input type="radio" id="star2-@pedido.BicicletaId" name="rating" value="2" /><label for="star2-@pedido.BicicletaId"></label>
                                     <input type="radio" id="star1-@pedido.BicicletaId" name="rating" value="1" /><label for="star1-@pedido.BicicletaId"></label>
+
+                                    <span>Sua avaliação: &nbsp;</span>
                                 </div>
 
                                 <!-- Caixa de comentários -->
@@ -32,9 +34,7 @@
                     </form>
                 }
             </div>
-            <div class="col-12 text-center" style="color:maroon">
-                <br />
-                Payment has been applied successfully!<br /><br />
+            <div class="col-12 my-3 text-center">
                 <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-primary">
                     Voltar à listagem
                 </a>

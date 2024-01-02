@@ -81,7 +81,8 @@
                         {
                             @if(product.Estoque < 10)
                             {
-                                <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque RESTANTES!</span>
+                                var estoqueText = product.Estoque == 1 ? "RESTANTE" : "RESTANTES";
+                                <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque @estoqueText!</span>
                             }
                             {
                                 if(product.Avaliacoes.Count > 0)

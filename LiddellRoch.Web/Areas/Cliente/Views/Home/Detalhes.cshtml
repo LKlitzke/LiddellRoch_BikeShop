@@ -22,13 +22,13 @@
             <div class="card-body">
                 <div class="py-3">
                     <div class="row">
-                        <div class="col-6 mx-5 pb-1">
-                            <a asp-action="Index" class="btn btn-outline-primary mb-1 bg-gradient fw-semibold btn-sm text-uppercase">
+                        <div class="col-6 mx-5 pb-1 mb-4">
+                            <a asp-action="Index" class="btn btn-outline-primary bg-gradient fw-semibold btn-sm text-uppercase">
                                 <i class="fa-solid fa-circle-chevron-left"></i>&nbsp; &nbsp;<span>Voltar</span>
                             </a>
                             @if(User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
                             {
-                                <a asp-area="Admin" asp-controller="Bicicleta" asp-action="Upsert" asp-route-id="@Model.BicicletaId" class="btn btn-outline-secondary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <a asp-area="Admin" asp-controller="Bicicleta" asp-action="Upsert" asp-route-id="@Model.BicicletaId" class="btn btn-outline-secondary bg-gradient fw-semibold btn-sm text-uppercase">
                                     <i class="bi bi-pencil-square"></i>&nbsp; &nbsp;<span>Editar detalhes</span>
                                 </a>
                             }
@@ -114,10 +114,11 @@
 
                            
                             <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50 ">Estoque: @Model.Bicicleta.Estoque unidades</h6>
+                                <h6 class="text-dark text-opacity-50">Estoque: @Model.Bicicleta.Estoque unidades</h6>
                                 @if (Model.Bicicleta.Estoque < 10)
                                 {
-                                    <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque RESTANTES!</span>
+                                    var estoqueText = Model.Bicicleta.Estoque == 1 ? "RESTANTE" : "RESTANTES";
+                                    <span class="bikeBadge badge bg-danger w-25 "><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque @estoqueText!</span>
                                 }
                             </div>
                             <div class="row ps-2">
@@ -236,10 +237,12 @@
                                 @foreach (var componente in Model.Bicicleta.Componentes)
                                 {
                                     var item = compList.FirstOrDefault(c => c.Id == componente.TipoComponenteId);
-                                    <div class="col-md-6 mb-1">
+                                    <div class="col-md-6 mb-3">
                                         <div class="mb-1"> <img class="imgIcon" src="~/images/componentes/@item.Icone" /> <strong>@item.Nome</strong></div>
-                                        <h6 style="margin-left: 50px">@componente.Valor</h6>
-                                        <hr style="color: #666; " />
+                                        <h6 style="margin-left: 50px;min-height: 2rem;">
+                                            @componente.Valor
+                                        </h6>
+                                        
                                     </div>
                                     
                                 }
