@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using LiddellRoch.Application.Services.Interfaces;
+using LiddellRoch.DataAccess.Repository.Interfaces;
 using LiddellRoch.Models;
 using LiddellRoch.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiddellRoch.Web.Areas.Admin.Controllers
@@ -12,10 +14,12 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
     public class CategoriaController : Controller
     {
         private readonly ICategoriaService _categoriaService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriaController(ICategoriaService categoriaService)
+        public CategoriaController(ICategoriaService categoriaService, IUnitOfWork unitOfWork)
         {
             _categoriaService = categoriaService;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -94,5 +98,29 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Categoria> categorias = _unitOfWork.Categoria.GetAll().ToList();
+            return Json(new { data = categorias });
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            var categoria = _unitOfWork.Categoria.GetFirstOrDefault(u => u.Id == id);
+            if (categoria == null)
+            {
+                return Json(new { success = false, message = "Erro ao excluir" });
+            }
+
+            _unitOfWork.Categoria.Remove(categoria);
+            _unitOfWork.Save();
+
+            List<Categoria> categorias = _unitOfWork.Categoria.GetAll().ToList();
+            return Json(new { success = true, message = "Exclusão com sucesso" });
+        }
+        #endregion
     }
 }

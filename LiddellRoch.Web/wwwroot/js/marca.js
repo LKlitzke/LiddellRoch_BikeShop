@@ -24,24 +24,24 @@ function loadDataTable() {
             },
             {
                 extend: 'excelHtml5',
-                title: 'LiddellRoch - Lista de Empresas',
+                title: 'LiddellRoch - Lista de Marcas',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4]
                 }
             },
             {
                 extend: 'csvHtml5',
-                title: 'LiddellRoch - Lista de Empresas',
+                title: 'LiddellRoch - Lista de Marcas',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4]
                 },
-                title: 'LiddellRoch - Lista de Empresas',
+                title: 'LiddellRoch - Lista de Marcas',
                 messageTop: 'Gerado em ' + new Date().toLocaleDateString('pt-br') + ' às ' + new Date().toLocaleTimeString('pt-br'),
 
                 // Customização do pdfmake
@@ -64,10 +64,11 @@ function loadDataTable() {
                     doc.styles.tableHeader.alignment = 'left';
                     doc.styles.tableHeader.fontSize = '12';
 
-                    var columnWidths = ['auto', '*', '*', 'auto', 'auto', 'auto'];
+                    var columnWidths = ['auto', '*', '*', 'auto', 'auto'];
                     columnWidths[0] = 30; // ID
-                    columnWidths[1] = 120; // Nome
-                    columnWidths[2] = 150; // Endereço
+                    columnWidths[1] = 100; // Nome
+                    columnWidths[3] = 120; // Site
+                    columnWidths[4] = 120; // Criacao
 
                     doc.content[3].table.widths = Array(doc.content[3].table.body[0].length + 1).join('*').split('');
                     doc.content[3].table.widths = columnWidths;
@@ -88,20 +89,24 @@ function loadDataTable() {
                 }
             }
         ],
-        "ajax": { url: '/admin/empresa/getall' },
+        "ajax": { url: '/admin/marca/getall' },
         "columns": [
             { "data": 'id', "width": "5%" },
             { "data": "nome", "width": "15%" },
-            { "data": "endereco", "width": "20%" },
-            { "data": "cidade", "width": "15%" },
-            { "data": "estado", "width": "5%" },
-            { "data": "telefone", "width": "10%" },
+            { "data": "paisOrigem", "width": "20%" },
+            { "data": "siteOficial", "width": "15%" },
+            {
+                data: 'criadoEm', "width": "15%",
+                render: function (data, type, row) {
+                    return `<div style="text-align:center;">${new Date(data).toLocaleString('pt-br')}</div>`;
+                }
+            },
             {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="text-center d-flex justify-content-center" role="group">
-                     <a href="/Admin/Empresa/Upsert?id=${data}" class="btn btn-primary px-4 mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
-                     <a onClick=Delete('/Admin/Empresa/Excluir/${data}') class="btn btn-danger px-4 mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
+                     <a href="/Admin/Marca/Upsert?id=${data}" class="btn btn-primary px-4 mx-2"> <i class="bi bi-pencil-square"></i> Editar</a>               
+                     <a onClick=Delete('/Admin/Marca/Excluir/${data}') class="btn btn-danger px-4 mx-2"> <i class="bi bi-trash-fill"></i> Excluir</a>
                     </div>`
                 },
                 "width": "25%"

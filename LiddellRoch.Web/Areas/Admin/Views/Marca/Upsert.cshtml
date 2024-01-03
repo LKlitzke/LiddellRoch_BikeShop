@@ -8,55 +8,62 @@
                 </div>
             </div>
         </div>
-        <div class="card-body py-4">
-            <form method="post" class="row" enctype="multipart/form-data">
-                <div class="border p-3 mt-4">
-                    <div asp-validation-summary="All"></div>
-                    <!--div asp-validation-summary="ModelOnly"></!--div!-->
-                    <input asp-for="CriadoEm" hidden />
-                    <div class="form-floating py-2 col-12">
-                        <input asp-for="Nome" class="form-control border-0 shadow" />
-                        <label asp-for="Nome" type="text" class="ms-2"></label>
-                        <span asp-validation-for="Nome" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating py-2 col-12">
-                        <input asp-for="PaisOrigem" class="form-control border-0 shadow" />
-                        <label asp-for="PaisOrigem" type="text" class="ms-2">País de Origem</label>
-                        <span asp-validation-for="PaisOrigem" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating py-2 col-12">
-                        <input asp-for="SiteOficial" class="form-control border-0 shadow" />
-                        <label asp-for="SiteOficial" type="text" class="ms-2">Site Oficial (URL)</label>
-                        <span asp-validation-for="SiteOficial" class="text-danger"></span>
-                    </div>
-                    <div class="form-floating py-2 col-12">
-                        <input asp-for="IconUrl" class="form-control border-0 shadow" />
-                        <label asp-for="IconUrl" type="text" class="ms-2">Diretório do Ícone</label>
-                        <span asp-validation-for="IconUrl" class="text-danger"></span>
-                    </div>
-                    @* <div class="form-floating py-2 col-12">
-                    <input type="file" name="arquivo" class="form-control border-0 shadow" />
-                    <label asp-for="IconUrl" class="ms-2"></label>
-                    </div> *@
-                    <div class="row mt-3">
-                        <div class="col-6 col-md-3">
-                            @if (Model.Id != 0)
-                            {
-                                <button type="submit" class="btn btn-primary form-control">Atualizar</button>
-                            }
-                            else
-                            {
-                                <button type="submit" class="btn btn-primary form-control">Criar</button>
-                            }
+        <div class="card-body p-4">
+            <form method="post" class="row" enctype="multipart/form-data" style="place-content: center;">
+                <input asp-for="CriadoEm" hidden />
+                @* <div asp-validation-summary="All"></div> *@
+                <!--div asp-validation-summary="ModelOnly"></!--div!-->
+                <div class="row">
+                    <div class="-col-12 border p-3">
+                        <div class="row">
+                            <div class="form-group py-2 col-sm-12 col-md-6">
+                                <label asp-for="Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
+                                <input asp-for="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                            <div class="form-group py-2 col-sm-12 col-md-6">
+                                <label asp-for="PaisOrigem" type="text" class="mb-1">País de Origem: <span class="required-mark">*</span></label>
+                                <input asp-for="PaisOrigem" class="form-control" />
+                                <span asp-validation-for="PaisOrigem" class="text-danger"></span>
+                            </div>
                         </div>
-                        <div class="col-6 col-md-3">
-                            <a asp-controller="Marca" asp-action="Index" class="btn btn-secondary border form-control">
-                                Voltar à listagem
-                            </a>
+                        <div class="row">
+                            <div class="form-group py-2 col-sm-12 col-md-6">
+                                <label asp-for="SiteOficial" type="text" class="mb-1">Site Oficial (URL): <span class="required-mark">*</span></label>
+                                <input asp-for="SiteOficial" class="form-control" />
+                                <span asp-validation-for="SiteOficial" class="text-danger"></span>
+                            </div>
+                            <div class="form-group py-2 col-sm-12 col-md-6">
+                                <label asp-for="IconUrl" type="text" class="mb-1">Diretório do Ícone: <i class="bi bi-question-circle" style="cursor: help;" title="O formato deve seguir o exemplo: '\images\marcas\[nome].[extensao]'"></i> <span class="required-mark">*</span></label>
+                                <input asp-for="IconUrl" class="form-control" />
+                                <span asp-validation-for="IconUrl" class="text-danger"></span>
+                            </div>
                         </div>
+                        @* <div class="form-floating py-2 col-12">
+                        <input type="file" name="arquivo" class="form-control border-0 shadow" />
+                        <label asp-for="IconUrl" class="ms-2"></label>
+                        </div> *@
+                        <div class="row mt-3">
+                            <div class="col-6 col-md-3">
+                                @if (Model.Id != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Atualizar</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary form-control">Criar</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Marca" asp-action="Index" class="btn btn-outline-secondary border form-control">
+                                    Voltar à listagem
+                                </a>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
+                
             </form>
         </div>
     </div>

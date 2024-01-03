@@ -70,100 +70,121 @@
     </div>
 </section><!-- End Hero -->
 
+
+<div class="row pb-3 container mt-4" style="margin: 0 auto;">
+    <h3>BIKES MAIS VENDIDAS</h3>
+    @*codigo aqui*@
+</div>
+
+<div class="row pb-3 container mt-4" style="margin: 0 auto;">
+    <h3>BIKES EM PROMOÇÃO</h3>
+    @*codigo aqui*@
+</div>
+
+<div class="row pb-3 container mt-4" style="margin: 0 auto;">
+    <h3>BIKES COM ESTOQUE LIMITADO</h3>
+    @*codigo aqui*@
+</div>
+
 <div class="row pb-3 container" style="margin: 0 auto;">
     @foreach (var product in Model)
     {
-        <div class="col-lg-4 col-md-6 col-xl-3">
-            <div class="row p-2 h-100">
-                <div class="col-12 p-1">
-                    <div class="bikeDiv card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
-                        @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
-                        {
-                            @if(product.Estoque < 10)
+        @if(product.Estoque > 0)
+        {
+            <div class="col-lg-4 col-md-6 col-xl-3">
+                <div class="row p-2 h-100">
+                    <div class="col-12 p-1">
+                        <div class="bikeDiv card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
+                            @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
                             {
-                                var estoqueText = product.Estoque == 1 ? "RESTANTE" : "RESTANTES";
-                                <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque @estoqueText!</span>
-                            }
-                            {
-                                if(product.Avaliacoes.Count > 0)
+                                @if (product.Estoque < 10)
                                 {
-                                    <span style="text-align:right">
-                                        
-                                    @{
-                                        var media = AvaliacaoService.GetMediaAvaliacoes(product.Id);
-                                        for(int i=0; i < media; i++)
-                                        {
-                                            <i class="bi bi-star-fill" style="color: gold;"></i>
-                                        }
-                                        var dif = (5 - media);
-                                        for (int i = 0; i < dif; i++)
-                                        {
-                                            <i class="bi bi-star" style="color: gold;"></i>
-                                        }
-                                    }
-                                    <span class="text-muted">(@product.Avaliacoes.Count)</span>
-                                    </span>
-                                    
-                                    @* <span><i class="bi bi-star-fill"></i>@media</span><i class="bi bi-star"></i> *@
+                                    var estoqueText = product.Estoque == 1 ? "RESTANTE" : "RESTANTES";
+                                    <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque @estoqueText!</span>
                                 }
-                                
-                            }
-                            
-                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
-                           }
-                        else
-                        {
-                            <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
-                        }
+                                {
+                                    if (product.Avaliacoes.Count > 0)
+                                    {
+                                        <span style="text-align:right">
 
-                        <div class="card-body pb-0 pt-3">
-                            <div class="pl-1">@* 
-                                <p class="card-title text-warning text-center"><b></b></p> *@
-                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center" style="height: 2.5rem;">
-                                    <span>
-                                        @product.Marca.Nome @product.Nome
-                                    </span>
-                                </p>
+                                            @{
+                                                var media = AvaliacaoService.GetMediaAvaliacoes(product.Id);
+                                                for (int i = 0; i < media; i++)
+                                                {
+                                                    <i class="bi bi-star-fill" style="color: gold;"></i>
+                                                }
+                                                var dif = (5 - media);
+                                                for (int i = 0; i < dif; i++)
+                                                {
+                                                    <i class="bi bi-star" style="color: gold;"></i>
+                                                }
+                                            }
+                                            <span class="text-muted">(@product.Avaliacoes.Count)</span>
+                                        </span>
+
+                                        @* <span><i class="bi bi-star-fill"></i>@media</span><i class="bi bi-star"></i> *@
+                                    }
+
+                                }
+
+                                <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
+                            }
+                            else
+                            {
+                                <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
+                            }
+
+                            <div class="card-body pb-0 pt-3">
+                                <div class="pl-1">
+                                    @*
+                            <p class="card-title text-warning text-center"><b></b></p> *@
+                                    <p class="card-title h5 text-dark opacity-75 text-uppercase text-center" style="height: 2.5rem;">
+                                        <span>
+                                            @product.Marca.Nome @product.Nome
+                                        </span>
+                                    </p>
+                                </div>
+                                <hr>
+                                <div class="pl-1">
+                                    <p class="text-dark text-opacity-75 text-center mb-1">
+                                        De:
+                                        <span style="text-decoration: line-through;">
+                                            @((product.Preco * 1.2m).ToString("c"))
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-dark text-opacity-75 text-center mb-3">
+                                        Por:
+                                        <span class="text-dark" style="font-weight:bold; font-size:large">
+                                            @((product.Preco * 1.1m).ToString("c"))
+                                        </span>
+                                        <br><span style="font-size:small">em 12 vezes sem juros</span>
+                                        <br>
+                                        ou
+                                        <br>
+                                        <span class="text-success" style="font-weight:bolder; font-size:x-large">
+                                            @product.Preco.ToString("c")
+                                        </span>
+                                        <br>(PIX ou boleto)
+                                    </p>
+                                </div>
+
                             </div>
-                            <hr>
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center mb-1">
-                                    De: 
-                                    <span style="text-decoration: line-through;">
-                                        @((product.Preco*1.2m).ToString("c"))
-                                    </span>
-                                </p>
+                            <div>
+                                @* productId DEVE ter o mesmo nome na assinatura do método Details *@
+                                <a asp-action="Detalhes"
+                                   asp-route-bikeId="@product.Id"
+                                   class="btn btn-success bg-gradient border-0 form-control">
+                                    <i class="bi bi-cart-plus-fill"></i> &nbsp;COMPRAR
+                                </a>
                             </div>
-                            <div class="pl-1">
-                                <p class="text-dark text-opacity-75 text-center mb-3">
-                                    Por:
-                                    <span class="text-dark" style="font-weight:bold; font-size:large">
-                                        @((product.Preco*1.1m).ToString("c"))
-                                    </span>
-                                    <br><span style="font-size:small">em 12 vezes sem juros</span>
-                                    <br>
-                                    ou
-                                    <br>
-                                    <span class="text-success" style="font-weight:bolder; font-size:x-large">
-                                        @product.Preco.ToString("c")
-                                    </span>
-                                    <br>(PIX ou boleto)
-                                </p>
-                            </div>
-                            
-                        </div>
-                        <div>
-                            @* productId DEVE ter o mesmo nome na assinatura do método Details *@
-                            <a asp-action="Detalhes"
-                               asp-route-bikeId="@product.Id"
-                               class="btn btn-success bg-gradient border-0 form-control">
-                                <i class="bi bi-cart-plus-fill"></i> &nbsp;COMPRAR
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        
     }
 </div>
 <style>

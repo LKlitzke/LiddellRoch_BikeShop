@@ -1,7 +1,7 @@
 ﻿@model List<Categoria>
 
 <div class="container">
-    <div class="card shadow border-0 mt-4">
+    <div class="card shadow border-0 my-4">
         <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
             <div class="row">
                 <div class="col-12 text-center">
@@ -18,17 +18,18 @@
                 </div>
 
             </div>
-            <table id="categoryTable" class="table table-bordered table-striped">
+            <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome</th>
-                        <th class="text-center">Ordem</th>
+                        <th class="text-center">Ordem de Exibição</th>
                         <th class="text-center">Data de Criação</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var obj in Model /*.OrderBy(o => o.DisplayOrder)*/)
+                    @* @foreach (var obj in Model /*.OrderBy(o => o.DisplayOrder)*/)
                     {
                         <tr>
                             <td>@obj.Nome</td>
@@ -45,7 +46,7 @@
                                 </div>
                             </td>
                         </tr>
-                    }
+                    } *@
 
                 </tbody>
             </table>
@@ -53,8 +54,10 @@
     </div>
 </div>
 
-
-
+@section Scripts {
+    <script type="text/javascript" src="~/js/categoria.js"></script>
+}
+@* 
 <script>
     // $(document).ready(function () {
     //     $('#example').DataTable({
@@ -64,4 +67,4 @@
     //         ]
     //     });
     // });
-</script>
+</script> *@
