@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiddellRoch.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240111191048_RestartingDb")]
-    partial class RestartingDb
+    [Migration("20240111203936_StartingDbv2")]
+    partial class StartingDbv2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,158 +113,6 @@ namespace LiddellRoch.DataAccess.Migrations
                     b.HasIndex("MarcaId");
 
                     b.ToTable("Bicicletas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoriaId = 1,
-                            Cores = "Black,DarkGray,Red",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8746),
-                            DescontoPromocao = 0,
-                            Descricao = "A nova Big Wheel 7.4 2022 faz parte da linha de bicicletas de alta performance em alumínio da Oggi.\r\nO novo quadro com a geometria mais agressiva e moderna é ideal para quem deseja encarar desafios técnicos maiores, sem perder o rendimento em outras condições do cross-country. Além disso ela conta com cabeamento interno e padrão Boost, seguindo as tendências das grandes marcas importadas. Esse novo padrão possibilita ao ciclista fazer upgrades com componentes de alto padrão disponíveis no mercado.\r\nOs componentes que equipam essa nova versão foram especialmente selecionados, afim de entregar máxima performance em qualquer ocasião além de um visual moderno e agressivo. Conta com sistema de transmissão Shimano SLX de 12 velocidades, suspensão Manitou Machete com trava no guidão e 100 milímetros de curso e cockpit com componentes ITM NH1.",
-                            Estoque = 50,
-                            MarcaId = 1,
-                            Nome = "Big Wheel 7.4 2022",
-                            Peso = 12.5,
-                            Preco = 10590.00m,
-                            Tamanhos = "S,M,L"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoriaId = 1,
-                            Cores = "Gold",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8753),
-                            DescontoPromocao = 0,
-                            Descricao = "A Agile Squadra XX1 AXS é uma bicicleta hardtail super leve, com desempenho suficiente para correr etapas da Copa do Mundo de MTB. Para isso, ela aposta no quadro e nas rodas de fibra de carbono, nas suspensão Fox 32 Factory Step Cast Kashima, no grupo eletrônico topo de linha e na geometria mais avançada jamais criada pela engenharia da Oggi.\r\n\r\nPeso total de 9.3Kg com novo quadro em carbono Super Light Oggi, rodas DT Swiss XRC 1501 de 1600g em carbono, cubos DT 250 e roda livre Ratchet EXP 36;\r\nGrupo eletrônico SRAM Eagle XX1 AXS 12V, um dos mais leves e modernos do mundo;\r\nSuspensão Fox 32 Factory Step-Cast Kashima 10mm, câmara de ar Float Evol e cartucho FIT 4 com trava no guidão, com excelente leitura de terreno e suporte nas trilhas inclinadas;\r\nCanote retrátil eletrônico SRAM Reverb AXS, pneus Kenda Booster Pro 2.4 e freios Level Ultimate para total controle.",
-                            Estoque = 20,
-                            MarcaId = 1,
-                            Nome = "Agile Squadra XX1 AXS",
-                            Peso = 9.3000000000000007,
-                            Preco = 44900.00m,
-                            Tamanhos = "M,L"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoriaId = 2,
-                            Cores = "DarkGray,DarkRed",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8761),
-                            DescontoPromocao = 0,
-                            Descricao = "A combinação entre esportividade, rigidez, baixo peso e conforto faz com que a nova Oggi Velloce Disc 2022 tenha um grande desempenho em diversos lugares, graças ao seu novo quadro, proporcionando mais agressividade e aerodinâmica ao ciclista.",
-                            Estoque = 30,
-                            MarcaId = 1,
-                            Nome = "Velloce Disc 2022",
-                            Peso = 11.699999999999999,
-                            Preco = 3949.00m,
-                            Tamanhos = "S,M,L,XL"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoriaId = 1,
-                            Cores = "Black",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8767),
-                            DescontoPromocao = 0,
-                            Descricao = "Uma pura mountain bike de XC Repleta de atributos de performance que asseguram a vitória e pesando quase nada. Quadro em carbono Hi-MOD BallisTec / Garfo Lefty Ocho Carbon 100mm / conectividade com App Cannondale integrado\r\nCâmbios Shimano XTR 12 velocidades / pedivela HollowGram\r\nJogo de rodas de carbono HollowGram 25 / guidão de carbono Cannondale 1 / canote ENVE.",
-                            Estoque = 10,
-                            MarcaId = 2,
-                            Nome = "F-Si Hi-MOD 1",
-                            Peso = 8.9000000000000004,
-                            Preco = 75899.00m,
-                            Tamanhos = "S,M,L"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoriaId = 3,
-                            Cores = "MediumVioletRed",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8773),
-                            DescontoPromocao = 0,
-                            Descricao = "Uma pura mountain bike de XC Repleta de atributos de performance que asseguram a vitória e pesando quase nada. Quadro em carbono Hi-MOD BallisTec / Garfo Lefty Ocho Carbon 100mm / conectividade com App Cannondale integrado\r\nCâmbios Shimano XTR 12 velocidades / pedivela HollowGram\r\nJogo de rodas de carbono HollowGram 25 / guidão de carbono Cannondale 1 / canote ENVE.",
-                            Estoque = 50,
-                            MarcaId = 2,
-                            Nome = "Topstone 2",
-                            Peso = 13.1,
-                            Preco = 14999.00m,
-                            Tamanhos = "S,M,L"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoriaId = 5,
-                            Cores = "Beige,DarkSeaGreen",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8782),
-                            DescontoPromocao = 0,
-                            Descricao = "Para você, que valoriza a mobilidade urbana e ainda quer aproveitar sua bike para a prática esportiva, a Activ é a bike ideal. Uma bicicleta versátil, prática, segura e de fácil manutenção, que lhe permite ir além dos centros urbanos e descobrir novas sensações.\r\n\r\nA Activ é oferecida em duas cores e vem montada com seu quadro em alumínio leve, transmissão Shimano Altus 27 velocidades, freios a disco hidráulico, pneus 700X38 e uma linda bolsa, especialmente desenvolvida pela Draisiana.",
-                            Estoque = 100,
-                            MarcaId = 6,
-                            Nome = "Active 2023",
-                            Peso = 12.0,
-                            Preco = 3890.00m,
-                            Tamanhos = "XS,S,M,L,XL,XXL"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoriaId = 7,
-                            Cores = "Black",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8824),
-                            DescontoPromocao = 0,
-                            Descricao = "Penny-farthing, high wheel e ordinary são termos utilizados para descrever um tipo de bicicleta com a roda dianteira de grande dimensão e a traseira pequena. O modelo tornou-se popular depois do boneshaker e antes do desenvolvimento da \"bicicleta segura\", na década de 1880. Foram os primeiros veículos a serem chamados bicicletas.",
-                            Estoque = 5,
-                            MarcaId = 1,
-                            Nome = "Penny-Farthing",
-                            Peso = 18.0,
-                            Preco = 8000.00m,
-                            Tamanhos = "M"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoriaId = 1,
-                            Cores = "DarkGray",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8829),
-                            DescontoPromocao = 0,
-                            Descricao = "A Spark RC World Cup é construída com um quadro de carbono HMX de alta qualidade, que combina rigidez e leveza para uma transferência de potência eficiente e ágil nas trilhas. A fibra de carbono HMX da Scott é conhecida por sua natureza leve e excelente rigidez, o que permite a construção de bicicletas com maior transferência de potência e características de manuseio responsivas. Ao utilizar a fibra de carbono HMX, a Scott produz quadros e componentes leves, mas incrivelmente fortes, permitindo que os ciclistas maximizem seu desempenho na estrada ou na trilha.",
-                            Estoque = 3,
-                            MarcaId = 7,
-                            Nome = "Spark RC World Cup Evo",
-                            Peso = 10.4,
-                            Preco = 114999.00m,
-                            Tamanhos = "S,M,L"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoriaId = 5,
-                            Cores = "Black,Green,Yellow",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8839),
-                            DescontoPromocao = 0,
-                            Descricao = "Passear de bike é algo extremamente prazeroso, seja em um fim de tarde na praça, ciclovia, e a Caloi desenvolveu a bike perfeita para você fazer esses passeios. A Caloi 400 conta com geometria confort, propiciando uma posição de pilotagem ereta e juntamente ao guidão com uma ergonomia mais elevada oferecendo maior conforto ao pedalar. Além do mais o pedivela ficou levemente posicionado mais a frente, garantindo que a pedalada seja mais fácil e agradável. E para movimenta-la a Caloi selecionou um sistema de transmissão Shimano, sinônimo de confiabilidade e resistência com 21 velocidades, para você poder usufruir de sua bike com a total tranquilidade para relaxar.",
-                            Estoque = 30,
-                            MarcaId = 3,
-                            Nome = "400 Comfort",
-                            Peso = 13.0,
-                            Preco = 1300.00m,
-                            Tamanhos = "S,M,L"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoriaId = 1,
-                            Cores = "Yellow,DarkGray",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8845),
-                            DescontoPromocao = 0,
-                            Descricao = "A Cattura Pro apresenta um design moderno e robusto, além de trazer tudo o que um praticante mountain bike busca e espera de uma bike dessa categoria. Apresentando uma geometria race, a Cattura é uma bike muito ágil e tem uma resposta excelente nos mais diversos terrenos com seu quadro projetado em full carbon, possuindo ainda excelente rigidez e baixo peso.",
-                            Estoque = 20,
-                            MarcaId = 1,
-                            Nome = "Cattura Pro Carbon GX 2022",
-                            Peso = 12.1,
-                            Preco = 24799.00m,
-                            Tamanhos = "S,M,L"
-                        });
                 });
 
             modelBuilder.Entity("LiddellRoch.Models.CarrinhoCompras", b =>
@@ -319,57 +167,6 @@ namespace LiddellRoch.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorias");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8476),
-                            Nome = "Mountain Bike",
-                            OrdemExibicao = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8489),
-                            Nome = "Estrada",
-                            OrdemExibicao = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8490),
-                            Nome = "Gravel",
-                            OrdemExibicao = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8491),
-                            Nome = "Elétrica",
-                            OrdemExibicao = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8492),
-                            Nome = "Urbano e Lazer",
-                            OrdemExibicao = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8493),
-                            Nome = "BMX",
-                            OrdemExibicao = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8494),
-                            Nome = "Clássico",
-                            OrdemExibicao = 7
-                        });
                 });
 
             modelBuilder.Entity("LiddellRoch.Models.Componente", b =>
@@ -438,52 +235,6 @@ namespace LiddellRoch.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Empresas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Cidade = "Marechal Floriano",
-                            CodigoPostal = "29255-000",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8653),
-                            Endereco = "Av Arthur Haese",
-                            Estado = "ES",
-                            Nome = "Uprise Eventos",
-                            Telefone = "1234567890"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Cidade = "Domingos Martins",
-                            CodigoPostal = "29260-000",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8654),
-                            Endereco = "Tv. Augusto Schwambach",
-                            Estado = "ES",
-                            Nome = "Agência AJM",
-                            Telefone = "0987654321"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Cidade = "Serra",
-                            CodigoPostal = "29160-904",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8655),
-                            Endereco = "Av. Brg. Eduardo Gomes",
-                            Estado = "ES",
-                            Nome = "EryZ FuturAI",
-                            Telefone = "1029384756"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Cidade = "São Paulo",
-                            CodigoPostal = "01153-000",
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8656),
-                            Endereco = "Av. Violet Hill",
-                            Estado = "SP",
-                            Nome = "Dani Floricultura",
-                            Telefone = "9925266237"
-                        });
                 });
 
             modelBuilder.Entity("LiddellRoch.Models.ImagemProduto", b =>
@@ -541,71 +292,6 @@ namespace LiddellRoch.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Marcas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8624),
-                            IconUrl = "\\images\\marcas\\oggi_logo.svg",
-                            Nome = "Oggi",
-                            PaisOrigem = "Brasil",
-                            SiteOficial = "https://oggibikes.com.br/"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8625),
-                            IconUrl = "\\images\\marcas\\cannondale_logo.svg",
-                            Nome = "Cannondale",
-                            PaisOrigem = "Estados Unidos da América",
-                            SiteOficial = "https://www.cannondale.com/pt-br"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8626),
-                            IconUrl = "\\images\\marcas\\caloi_logo.png",
-                            Nome = "Caloi",
-                            PaisOrigem = "Brasil",
-                            SiteOficial = "https://caloi.com/"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8627),
-                            IconUrl = "\\images\\marcas\\specialized_logo.svg",
-                            Nome = "Specialized",
-                            PaisOrigem = "Estados Unidos da América",
-                            SiteOficial = "https://www.specialized.com/br/pt"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8628),
-                            IconUrl = "\\images\\marcas\\tsw_logo.svg",
-                            Nome = "TSW",
-                            PaisOrigem = "África do Sul",
-                            SiteOficial = "https://www.tsw.com/"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8629),
-                            IconUrl = "\\images\\marcas\\sense_logo.png",
-                            Nome = "Sense",
-                            PaisOrigem = "Brasil",
-                            SiteOficial = "https://sensebike.com.br/"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CriadoEm = new DateTime(2024, 1, 11, 16, 10, 48, 866, DateTimeKind.Local).AddTicks(8630),
-                            IconUrl = "\\images\\marcas\\scott_logo.svg",
-                            Nome = "Scott",
-                            PaisOrigem = "Suiça",
-                            SiteOficial = "https://www.scott-sports.com/br/pt/"
-                        });
                 });
 
             modelBuilder.Entity("LiddellRoch.Models.PedidoDetalhe", b =>
