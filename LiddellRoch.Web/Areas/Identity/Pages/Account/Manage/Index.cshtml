@@ -13,21 +13,21 @@
 }
 <div class="d-md-flex half">
     <partial name="_StatusMessage" for="StatusMessage" />
-    <div class="contents">
-        <div class="">
-            <div class="row mt-5 justify-content-center">
-                <div class="row mb-5">
+    <div class="container">
+            <div class="row mt-4 justify-content-center">
+                <div class="row mb-3 card">
                     <div class="col-md-12">
-                        <div class="form-block mx-auto" style="display: flex; align-items: center;">              @* justify-content-center align-content-center*@
-                            <div style="margin-right:10px">
+                    <div class="form-block mx-auto w-100" style="display: inline-flex; align-items: center;justify-content: space-between">
+                        @* justify-content-center align-content-center*@
+                            <div style="display:inline-flex">
                                 <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
-
+                                <div style="margin-left:10px;align-self: center;">
+                                    <span>Bem-vindo, @appUser.Nome!</span>
+                                    <br />
+                                    <p class="text-muted mb-0">@appUser.Email</p>
+                                </div>
                             </div>
-                            <div style="width: 50dvw;">
-                                <span>Bem-vindo, @appUser.Nome!</span>
-                                <br />
-                                <p class="text-muted mb-0">@appUser.Email</p>
-                            </div>
+                            
                             <div style="text-align:end">
                                 <span>Confirmação de E-mail: 
                                     @if(appUser.EmailConfirmed)
@@ -59,10 +59,10 @@
                        
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row p-0 mb-5">
+                    <div class="col-md-6" style="">
                         <div class="form-block" style="margin-right: 0;margin-left: auto;">
-                            <div class="text-center mb-5">
+                            <div class="text-center mb-3">
                                 <h3 class="text-uppercase">Alterar dados do perfil</h3>
                             </div>
 
@@ -111,48 +111,61 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-block">
+                    <div class="col-md-6" style="">
+                    <div class="form-block" style="max-height: 30rem;">
                             <div class="text-center mb-5">
                                 <h3 class="text-uppercase">PEDIDOS RECENTES</h3>
                             </div>
-                            <div class="row">
+                        <div class="row" style="overflow: auto;max-height: 25rem;">
                                 @if (userPedidos.Count > 0)
                                 {
                                     @foreach(var pedido in userPedidos)
                                     {
-                                        <div class="col-md-7 mb-2" style="border:1px #000 solid">
+                                    <div class="col-md-9 mb-2" style="border:1px #CCC solid">
                                             <span><strong>Data do Pedido:</strong> @pedido.DataPedido</span>
                                             <br>
                                             <span><strong>Valor Total:</strong> @pedido.TotalPedido.ToString("c")</span>
                                             <br>
                                             <span><strong>Status:</strong> @pedido.StatusPedido</span>
+                                            <br>
+                                            <span><strong>Endereço de Entrega:</strong> @pedido.Endereco</span>
+                                            <br>
+                                            <span><strong>Transportadora:</strong> @pedido.Transportadora</span>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary w-100 mb-2">
+                                            <a asp-area="Admin" asp-controller="Pedido" asp-action="Detalhes" asp-route-pedidoId="@pedido.Id" class="text-light"><i class="bi bi-eye-fill"></i>&nbsp;DETALHES</a>
+                                            </button>
                                             @{
                                                 var hasAvaliacao = AvaliacaoService.AvaliacaoExists(pedido.Id);
                                                 if (!hasAvaliacao && pedido.StatusPedido == SD.StatusShipped)
                                                 {
-                                                    <a asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-info">
-                                                        AVALIAR COMPRA
-                                                    </a>
+                                                <button class="btn btn-info w-100">
+                                                    <a asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="text-light">
+                                                        <i class="bi bi-star-half"></i>&nbsp;AVALIAR
+                                                        </a>
+                                                    </button>
                                                 }
-                                            }
+                                                else
+                                                {
+                                                    <button class="w-100" disabled asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-outline-info">
+                                                    <i class="bi bi-star-half"></i>&nbsp;JÁ AVALIADO!
+                                                    </button>
+                                                }
+                                        }
                                         </div>
                                     }
                                     
                                 }
                                 else
                                 {
-                                    <span class="text-center">Não existem pedidos registrados em sua conta. Que tal adicionar?</span>
+                                    <span class="text-center">Não existem pedidos registrados em sua conta... ainda. Que tal adicionar? 😅</span>
                                 }
                                 
                             </div>
                         </div>
                     </div>
                 </div>
-                
-            </div>
         </div>
     </div>
 </div>
@@ -184,93 +197,6 @@
 
     h2 {
         font-size: 20px;
-    }
-
-    @@media (min-width: 767.98px) {
-        .half, .half .container > .row {
-            height: 100vh;
-            min-height: 700px;
-        }
-
-        .half .contents {
-            background: #f6f7fc;
-        }
-
-        .half .bg {
-            width: 25%;
-        }
-
-        @@media (max-width: 767.98px) {
-            .half .bg {
-                width: 100%;
-                height: 200px;
-            }
-        }
-
-        .half .contents {
-            width: 100%;
-        }
-
-        @@media (max-width: 767.98px) {
-            .half .contents {
-                width: 100%;
-            }
-        }
-
-        @@media (max-width: 767.98px) {
-            .form-block {
-                padding: 25px;
-            }
-        }
-
-        .half .contents .form-control, .half .bg .form-control {
-            border: none;
-            border-radius: 4px;
-            height: 54px;
-            background: #efefef;
-        }
-
-        .half .contents .form-control:active, .half .contents .form-control:focus, .half .bg .form-control:active, .half .bg .form-control:focus {
-            outline: none;
-            -webkit-box-shadow: none;
-            box-shadow: none;
-        }
-
-        .half .bg {
-            background-size: cover;
-            background-position: center;
-        }
-
-        .half .btn {
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-
-        .half .forgot-pass {
-            position: relative;
-            top: 2px;
-            font-size: 14px;
-        }
-
-        .form-block {
-            background: #fff;
-            padding: 40px;
-            max-width: 80%;
-            -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
-            box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        .btn {
-            text-decoration: none !important;
-        }
-
-        #fbBtn:hover {
-            background-color: #4f74c2 !important;
-        }
-
-        #msBtn:hover {
-            background-color: #5c5c5c !important;
-        }
     }
 </style>
 

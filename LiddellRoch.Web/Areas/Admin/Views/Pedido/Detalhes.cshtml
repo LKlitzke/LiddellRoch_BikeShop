@@ -24,7 +24,7 @@
                         <div class="col-12 col-lg-6 pb-4">
                             <div class="row">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">Detalhes:</span>
+                                    <span class="text-primary">Detalhes</span>
                                 </h4>
                             </div>
                             <div class="row my-1">
@@ -206,13 +206,13 @@
                             <ul class="list-group mb-3">
                                 @foreach (var item in Model.PedidoDetalhe)
                                 {
-                                    <li class="list-group-item d-flex justify-content-between p-2">
-                                        <div class="row container">
+                                    <li class="list-group-item p-2">
+                                        <div class="row">
                                             <div class="col-8">
 
                                                 <h6 class="my-0 text-primary">@item.Bicicleta.Nome</h6>
                                                 <small class="text-muted">Preço: @item.Bicicleta.Preco.ToString("c")</small><br />
-                                                <small class="text-muted">Unidades: @item.Quantidade</small>
+                                                <small class="text-muted">Unidade (s): @item.Quantidade</small>
                                             </div>
                                             <div class="col-4 text-end">
                                                 <p class="text-success">@((item.Quantidade * item.Bicicleta.Preco).ToString("c"))</p>
@@ -223,12 +223,12 @@
 
 
                                 <li class="list-group-item bg-primary">
-                                    <div class="row container">
+                                    <div class="row">
                                         <div class="col-6">
                                             <h5 class="text-white">TOTAL </h5>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <h5 class="text-white">@Model.PedidoHeader.TotalPedido.ToString("c")</h5>
+                                            <h5 class="text-white fw-semibold">@Model.PedidoHeader.TotalPedido.ToString("c")</h5>
                                         </div>
                                     </div>
                                 </li>

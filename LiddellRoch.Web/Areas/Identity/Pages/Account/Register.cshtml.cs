@@ -145,12 +145,12 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
-                }),
+                }).OrderBy(e=> e.Text),
                 EmpresaList = _unitOfWork.Empresa.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Nome,
                     Value = i.Id.ToString()
-                })
+                }).OrderBy(e => e.Text)
             };
 
             ReturnUrl = returnUrl;

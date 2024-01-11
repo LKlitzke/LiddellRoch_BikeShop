@@ -7,7 +7,7 @@
         <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h2 class="text-white py-2">Bicicleta List</h2>
+                    <h2 class="text-white py-2">Lista de Bicicletas</h2>
                 </div>
             </div>
         </div>
@@ -23,11 +23,12 @@
             <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome</th>
-                        <th>Estoque</th>
-                        <th>Preço</th>
                         <th>Marca</th>
                         <th>Categoria</th>
+                        <th>Estoque</th>
+                        <th class="text-right">Preço</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -60,8 +61,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/bike.js"></script>
-
+    <script type="text/javascript" src="~/js/bike.js"></script>
 
     @* <script>
         $(document).ready(function () {

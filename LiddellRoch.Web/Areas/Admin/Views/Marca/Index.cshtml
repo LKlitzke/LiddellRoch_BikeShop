@@ -1,7 +1,7 @@
 ﻿@model List<Marca>
 
 <div class="container">
-    <div class="card shadow border-0 mt-4">
+    <div class="card shadow border-0 my-4">
         <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
             <div class="row">
                 <div class="col-12 text-center">
@@ -13,23 +13,24 @@
             <div class="row pb-3">
                 <div class="col-12 text-end">
                     <a asp-controller="Marca" asp-action="Upsert" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Criar nova marca
+                        <i class="bi bi-plus-circle"></i> Criar marca
                     </a>
                 </div>
 
             </div>
-            <table class="table table-bordered table-striped">
+            <table id="tblData" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome</th>
                         <th>País de Origem</th>
                         <th>Site Oficial</th>
-                        <th class="text-center">Criado em</th>
+                        <th class="text-center">Data de Criação</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var obj in Model /*.OrderBy(o => o.DisplayOrder)*/)
+                    @* @foreach (var obj in Model /*.OrderBy(o => o.DisplayOrder)*/)
                     {
                         <tr>
                             <td>@obj.Nome</td>
@@ -47,10 +48,14 @@
                                 </div>
                             </td>
                         </tr>
-                    }
+                    } *@
 
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/marca.js"></script>
+}

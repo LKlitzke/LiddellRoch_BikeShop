@@ -86,6 +86,12 @@ h6 {
   opacity: 1;
 }
 
+span.required-mark {
+    color: red;
+    font-size: small;
+    vertical-align: text-top;
+}
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -488,7 +494,7 @@ h6 {
 
 #hero .carousel-indicators li.active {
     opacity: 1;
-    background: #157347;
+    background: rgb(55,90,127);
 }
 
 #hero .btn-get-started {
@@ -2004,7 +2010,7 @@ section {
 
 #footer .footer-top {
   background: #515d6a;
-  padding: 60px 0 30px 0;
+  padding: 45px 0 15px 0;
 }
 
 #footer .footer-top .footer-info {
@@ -2023,7 +2029,6 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
   color: #fff;
 }
 
@@ -2043,7 +2048,7 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #d9232d;
+  background: var(--bs-primary);
   color: #fff;
   text-decoration: none;
 }
@@ -2105,7 +2110,7 @@ section {
 #footer .footer-top .footer-newsletter form input[type=email] {
   border: 0;
   padding: 4px;
-  width: calc(100% - 110px);
+  width: 100%;
 }
 
 #footer .footer-top .footer-newsletter form input[type=submit] {
@@ -2117,14 +2122,14 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px 2px 20px;
-  background: #d9232d;
+  background: var(--bs-primary);
   color: #fff;
   transition: 0.3s;
   border-radius: 0 4px 4px 0;
 }
 
 #footer .footer-top .footer-newsletter form input[type=submit]:hover {
-  background: #df3740;
+    background: var(--bs-primary);
 }
 
 #footer .copyright {

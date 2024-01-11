@@ -43,9 +43,9 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                obj.CriadoEm = DateTime.Now;
                 if (obj.Id == 0)
                 {
+                    obj.CriadoEm = DateTime.Now;
                     _unitOfWork.Empresa.Add(obj);
                 }
                 else
@@ -53,7 +53,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                     _unitOfWork.Empresa.Update(obj);
                 }
                 _unitOfWork.Save();
-                TempData["success"] = "Empresa excluída com sucesso!";
+                TempData["success"] = "Empresa atualizada com sucesso!";
                 return RedirectToAction("Index");
             }
             else

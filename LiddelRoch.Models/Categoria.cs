@@ -10,11 +10,12 @@ namespace LiddellRoch.Models
 {
     public class Categoria : BaseModel
     {
-        [Required]
+        [Required(ErrorMessage = "O campo é de preenchimento obrigatório")]
         [MaxLength(30)]
         [DisplayName("Nome da Categoria")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "O campo é de preenchimento obrigatório")]
         [DisplayName("Ordem de Exibição")]
         [Range(1, 100, ErrorMessage = "O valor deve estar entre 1 a 100")]
         public int OrdemExibicao {  get; set; }

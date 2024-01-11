@@ -246,12 +246,12 @@ bg-success {
     border-color: #445f5e;
 }
 
-.btn-check:focus + .btn-primary, .btn-primary:focus {
+/*.btn-check:focus + .btn-primary, .btn-primary:focus {
     color: #fff;
     background-color: #445f5e;
     border-color: #445f5e;
     box-shadow: 0 0 0 0.25rem rgba(60, 60, 60, 0.5);
-}
+}*/
 
 .btn-check:checked + .btn-primary,
 .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active,

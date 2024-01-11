@@ -10,46 +10,48 @@
             </div>
         </div>
         <div class="card-body p-4">
-            <form method="post" class="row" enctype="multipart/form-data">
+            <form method="post" class="row" enctype="multipart/form-data" style="place-content: center;">
                 <input asp-for="Id" hidden />
                 <div class="row">
-                    <div class="col-12">
-                        <div class="border p-3">
+                    <div class="col-12 border p-3">
                             @*<div asp-validation-summary="ModelOnly"></div>*@
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Nome" class="form-control border-0 shadow" />
-                                <label asp-for="Nome" class="ms-2"></label>
-                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            <input asp-for="CriadoEm" hidden />
+                            <div class="row">
+                                <div class="form-group py-2 col-sm-12 col-md-6">
+                                    <label asp-for="Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
+                                    <input asp-for="Nome" class="form-control" />
+                                    <span asp-validation-for="Nome" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-12 col-md-6">
+                                    <label asp-for="Endereco" type="text" class="mb-1">Endereço: <span class="required-mark">*</span></label>
+                                    <input asp-for="Endereco" class="form-control" />
+                                    <span asp-validation-for="Endereco" class="text-danger"></span>
+                                </div>
                             </div>
-
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Telefone" class="form-control border-0 shadow" />
-                                <label asp-for="Telefone" class="ms-2"></label>
-                                <span asp-validation-for="Telefone" class="text-danger"></span>
+                            <div class="row">
+                                <div class="form-group py-2 col-sm-12 col-md-6">
+                                    <label asp-for="Cidade" type="text" class="mb-1">Cidade: <span class="required-mark">*</span></label>
+                                    <input asp-for="Cidade" class="form-control" />
+                                    <span asp-validation-for="Cidade" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-12 col-md-6">
+                                    <label asp-for="Estado" type="text" class="mb-1">Estado: <span class="required-mark">*</span></label>
+                                    <input asp-for="Estado" class="form-control" />
+                                    <span asp-validation-for="Estado" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Endereco" class="form-control border-0 shadow" />
-                                <label asp-for="Endereco" class="ms-2">Endereço</label>
-                                <span asp-validation-for="Endereco" class="text-danger"></span>
+                            <div class="row">
+                                <div class="form-group py-2 col-sm-12 col-md-6">
+                                    <label asp-for="CodigoPostal" type="text" class="mb-1">Código Postal (CEP): <span class="required-mark">*</span></label>
+                                    <input asp-for="CodigoPostal" id="cepInput" class="form-control" />
+                                    <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                                </div>
+                                <div class="form-group py-2 col-sm-12 col-md-6">
+                                    <label asp-for="Telefone" type="text" class="mb-1">Telefone: <span class="required-mark">*</span></label>
+                                    <input asp-for="Telefone" id="phoneInput" class="form-control" />
+                                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                                </div>
                             </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Cidade" class="form-control border-0 shadow" />
-                                <label asp-for="Cidade" class="ms-2"></label>
-                                <span asp-validation-for="Cidade" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Estado" class="form-control border-0 shadow" />
-                                <label asp-for="Estado" class="ms-2"></label>
-                                <span asp-validation-for="Estado" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="CodigoPostal" class="form-control border-0 shadow" />
-                                <label asp-for="CodigoPostal" class="ms-2">Código Postal (CEP)</label>
-                                <span asp-validation-for="CodigoPostal" class="text-danger"></span>
-                            </div>
-
-
                             <div class="row pt-2">
                                 <div class="col-6 col-md-3">
                                     @if (Model.Id != 0)
@@ -62,12 +64,11 @@
                                     }
                                 </div>
                                 <div class="col-6 col-md-3">
-                                    <a asp-controller="Empresa" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                                    <a asp-controller="Empresa" asp-action="Index" class="btn btn-outline-secondary border form-control">
                                         Voltar à listagem
                                     </a>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -77,14 +78,21 @@
 </div>
 
 @section Scripts{
+    <partial name="_ValidationScriptsPartial" />
     <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        $(document).ready(function () {
+            $('#phoneInput').inputmask({
+                mask: ['99 99999-9999'],
+                greedy: false,
+                removeMaskOnSubmit: true
+            });
+
+            $('#cepInput').inputmask({
+                mask: ['99999-999'],
+                greedy: false,
+                removeMaskOnSubmit: true
+            });
+
         })
     </script>
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
 }

@@ -11,17 +11,18 @@
         </div>
         <div class="card-body py-4">
             <form method="post">
-                <div class="border p-3 mt-4">
-                    <div asp-validation-summary="All"></div>
+                <div class="row border p-3 mt-4">
+                    @* @* <div asp-validation-summary="All"></div> *@
                     <!--div asp-validation-summary="ModelOnly"></!--div!-->
-                    <div class="form-floating py-2 col-12">
-                        <input asp-for="Nome" class="form-control border-0 shadow" />
-                        <label asp-for="Nome" type="text" class="ms-2"></label>
+                    <input asp-for="CriadoEm" hidden />
+                    <div class="form-group py-2 col-sm-12 col-md-8">
+                        <label asp-for="Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
+                        <input asp-for="Nome" class="form-control" />
                         <span asp-validation-for="Nome" class="text-danger"></span>
                     </div>
-                    <div class="form-floating py-2 col-12">
-                        <input asp-for="OrdemExibicao" class="form-control border-0 shadow" />
-                        <label asp-for="OrdemExibicao" type="text" class="ms-2"></label>
+                    <div class="form-group py-2 col-sm-12 col-md-4">
+                        <label asp-for="OrdemExibicao" type="text" class="mb-1">Ordem de Exibição: <span class="required-mark">*</span></label>
+                        <input asp-for="OrdemExibicao" type="number" class="form-control" />
                         <span asp-validation-for="OrdemExibicao" class="text-danger"></span>
                     </div>
 
@@ -37,7 +38,7 @@
                             }
                         </div>
                         <div class="col-6 col-md-3">
-                            <a asp-controller="Categoria" asp-action="Index" class="btn btn-secondary border form-control">
+                            <a asp-controller="Categoria" asp-action="Index" class="btn btn-outline-secondary border form-control">
                                 Voltar à listagem
                             </a>
                         </div>

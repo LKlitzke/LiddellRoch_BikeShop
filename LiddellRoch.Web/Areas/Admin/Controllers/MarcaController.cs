@@ -50,41 +50,10 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // setar imagem
-                /*string wwwRootPath = _webHostEnvironment.WebRootPath;
-
-                if (arquivo != null)
-                {
-                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(arquivo.FileName);
-                    string productPath = @"images\marcas\marca-" + obj.Id;
-                    string finalPath = Path.Combine(wwwRootPath, productPath);
-
-                    if (!Directory.Exists(finalPath))
-                        Directory.CreateDirectory(finalPath);
-
-                    using (var fileStream = new FileStream(Path.Combine(finalPath, filename), FileMode.Create))
-                    {
-                        arquivo.CopyTo(fileStream);
-                    }
-                    obj.IconUrl = @"\" + productPath + @"\" + filename;
-
-                    //ImagemProduto productImage = new()
-                    //{
-                    //    ImagemUrl = @"\" + productPath + @"\" + filename,
-                    //    BicicletaId = obj.Id,
-                    //};
-
-                    //if (obj.Bicicleta.ImagensProduto == null)
-                    //{
-                    //    obj.Bicicleta.ImagensProduto = new List<ImagemProduto>();
-                    //}
-
-                    //obj.Bicicleta.ImagensProduto.Add(productImage);
-                }*/
-                obj.CriadoEm = DateTime.Now;
 
                 if (obj.Id == 0)
                 {
+                    obj.CriadoEm = DateTime.Now;
                     _marcaService.CreateMarca(obj);
                     TempData["success"] = "Marca criada com sucesso!";
                 }
@@ -99,33 +68,55 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Excluir(int? id)
+        //public IActionResult Excluir(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    Marca category = _marcaService.GetMarcaById(id.Value);
+        //    if (category == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(category);
+        //}
+
+        //[HttpPost, ActionName("Excluir")]
+        //public IActionResult ExcluirPost(int? id)
+        //{
+        //    bool deleted = _marcaService.DeleteMarca(id.Value);
+        //    if (deleted)
+        //    {
+        //        TempData["success"] = "Marca excluída com sucesso!";
+        //    }
+        //    else
+        //    {
+        //        TempData["error"] = "Erro ao excluir marca!";
+        //    }
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Marca category = _marcaService.GetMarcaById(id.Value);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
+            List<Marca> marcas = _marcaService.GetAll().ToList();
+            return Json(new { data = marcas });
         }
 
-        [HttpPost, ActionName("Excluir")]
-        public IActionResult ExcluirPost(int? id)
+        public IActionResult Excluir(int id)
         {
-            bool deleted = _marcaService.DeleteMarca(id.Value);
-            if (deleted)
+            var marca = _marcaService.GetMarcaById(id);
+            if (marca == null)
             {
-                TempData["success"] = "Marca excluída com sucesso!";
+                return Json(new { success = false, message = "Error ao excluir" });
             }
-            else
-            {
-                TempData["error"] = "Erro ao excluir marca!";
-            }
-            return RedirectToAction(nameof(Index));
+
+            _marcaService.DeleteMarca(id);
+
+            return Json(new { success = true, message = "Exclusão com sucesso" });
         }
+        #endregion
     }
 }
