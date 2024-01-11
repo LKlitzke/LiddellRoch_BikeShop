@@ -1,14 +1,16 @@
 ﻿@model IEnumerable<Bicicleta>
 @using LiddellRoch.Application.Services.Interfaces
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @inject IAvaliacaoService AvaliacaoService
 
 @{
+    var marcasList = ViewData["MarcasList"] as IEnumerable<Marca>;
     ViewData["Title"] = "Home Page";
 }
 
 <!-- ======= Hero Section ======= -->
  <section id="hero" style="height:650px">
-    <div id="heroCarousel" data-bs-interval="50000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div id="heroCarousel" data-bs-interval="10000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
@@ -20,7 +22,7 @@
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">Nova Spark RC World Cup Evo disponível!</h2>
                         <p class="animate__animated animate__fadeInUp">Desafiando os limites da imaginação, a nova Scott Spark RC, inspirada na copa do mundo de ciclismo, chegou para elevar os quesitos de qualidade e performance. Leveza, rigidez, suavidade, segurança, potência e performance. Quer saber mais? </p>
-                        <a asp-action="Detalhes" asp-route-bikeId="8" class="btn-get-started btn-success animate__animated animate__fadeInUp scrollto">Veja os detalhes</a>
+                        <a asp-action="Detalhes" asp-route-bikeId="8" class="btn-get-started btn-success animate__animated animate__fadeInUp scrollto">VER DETALHES</a>
                     </div>
                 </div>
             </div>
@@ -40,9 +42,9 @@
             <div class="carousel-item" style="background-image: url(images/slide/slide_1.jpeg); background-position: top; background-position-y: 25%; ">
                 <div class="carousel-container">
                     <div class="container">
-                        <h2 class="animate__animated animate__fadeInDown">Para todos os gostos</h2>
-                        <p class="animate__animated animate__fadeInUp">De bicicletas clássicas até as mais modernas Mountain Bikes lançadas. Escolha a sua agora!</p>@* 
-                        <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a> *@
+                        <h2 class="animate__animated animate__fadeInDown">Para todos os gostos e ritmos!</h2>
+                        <p class="animate__animated animate__fadeInUp">De bicicletas clássicas até as mais modernas MTBs já lançadas. Escolha a sua agora!</p>
+                        <a asp-action="ListaBikes" class="btn-get-started btn-warning animate__animated animate__fadeInUp scrollto">VEJA TODAS AS BIKES AQUI!</a>
                     </div>
                 </div>
             </div>
@@ -52,7 +54,7 @@
                 <div class="carousel-container">
                     <div class="container">
                         <h2 class="animate__animated animate__fadeInDown">LiddellRoch</h2>
-                        <p class="animate__animated animate__fadeInUp">Sua próxima conquista começa com uma escolha certa.</p>
+                        <p class="animate__animated animate__fadeInUp">Sua próxima conquista no esporte começa com uma escolha certa.</p>
                     </div>
                 </div>
             </div>
@@ -73,145 +75,63 @@
 
 <div class="row pb-3 container mt-4" style="margin: 0 auto;">
     <h3>BIKES MAIS VENDIDAS</h3>
-    @*codigo aqui*@
+    <partial name="_BikeListPartial" model="Model.OrderByDescending(b => b.Avaliacoes.Count).Take(4).ToList() as IEnumerable<Bicicleta>"/>
 </div>
 
 <div class="row pb-3 container mt-4" style="margin: 0 auto;">
     <h3>BIKES EM PROMOÇÃO</h3>
-    @*codigo aqui*@
+    <partial name="_BikeListPartial" model="Model.OrderByDescending(b => b.DescontoPromocao).Take(4).ToList() as IEnumerable<Bicicleta>" />
 </div>
 
 <div class="row pb-3 container mt-4" style="margin: 0 auto;">
-    <h3>BIKES COM ESTOQUE LIMITADO</h3>
-    @*codigo aqui*@
-</div>
-
-<div class="row pb-3 container" style="margin: 0 auto;">
-    @foreach (var product in Model)
+    <h3>MARCAS PARCEIRAS</h3>
+    @for(int i = 1; i <= 4; i++)
     {
-        @if(product.Estoque > 0)
-        {
-            <div class="col-lg-4 col-md-6 col-xl-3">
-                <div class="row p-2 h-100">
-                    <div class="col-12 p-1">
-                        <div class="bikeDiv card border-0 p-3 shadow  border-top border-5 rounded" style="height:100%">
-                            @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
-                            {
-                                @if (product.Estoque < 10)
-                                {
-                                    var estoqueText = product.Estoque == 1 ? "RESTANTE" : "RESTANTES";
-                                    <span class="bikeBadge badge bg-danger"><i class="bi bi-fire" style="color:orange"></i> @product.Estoque @estoqueText!</span>
-                                }
-                                {
-                                    if (product.Avaliacoes.Count > 0)
-                                    {
-                                        <span style="text-align:right">
-
-                                            @{
-                                                var media = AvaliacaoService.GetMediaAvaliacoes(product.Id);
-                                                for (int i = 0; i < media; i++)
-                                                {
-                                                    <i class="bi bi-star-fill" style="color: gold;"></i>
-                                                }
-                                                var dif = (5 - media);
-                                                for (int i = 0; i < dif; i++)
-                                                {
-                                                    <i class="bi bi-star" style="color: gold;"></i>
-                                                }
-                                            }
-                                            <span class="text-muted">(@product.Avaliacoes.Count)</span>
-                                        </span>
-
-                                        @* <span><i class="bi bi-star-fill"></i>@media</span><i class="bi bi-star"></i> *@
-                                    }
-
-                                }
-
-                                <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
-                            }
-                            else
-                            {
-                                <img src="@("https://source.unsplash.com/random/500x600?sig=" + product.Id)" class="card-img-top rounded" />
-                            }
-
-                            <div class="card-body pb-0 pt-3">
-                                <div class="pl-1">
-                                    @*
-                            <p class="card-title text-warning text-center"><b></b></p> *@
-                                    <p class="card-title h5 text-dark opacity-75 text-uppercase text-center" style="height: 2.5rem;">
-                                        <span>
-                                            @product.Marca.Nome @product.Nome
-                                        </span>
-                                    </p>
-                                </div>
-                                <hr>
-                                <div class="pl-1">
-                                    <p class="text-dark text-opacity-75 text-center mb-1">
-                                        De:
-                                        <span style="text-decoration: line-through;">
-                                            @((product.Preco * 1.2m).ToString("c"))
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="pl-1">
-                                    <p class="text-dark text-opacity-75 text-center mb-3">
-                                        Por:
-                                        <span class="text-dark" style="font-weight:bold; font-size:large">
-                                            @((product.Preco * 1.1m).ToString("c"))
-                                        </span>
-                                        <br><span style="font-size:small">em 12 vezes sem juros</span>
-                                        <br>
-                                        ou
-                                        <br>
-                                        <span class="text-success" style="font-weight:bolder; font-size:x-large">
-                                            @product.Preco.ToString("c")
-                                        </span>
-                                        <br>(PIX ou boleto)
-                                    </p>
-                                </div>
-
-                            </div>
-                            <div>
-                                @* productId DEVE ter o mesmo nome na assinatura do método Details *@
-                                <a asp-action="Detalhes"
-                                   asp-route-bikeId="@product.Id"
-                                   class="btn btn-success bg-gradient border-0 form-control">
-                                    <i class="bi bi-cart-plus-fill"></i> &nbsp;COMPRAR
-                                </a>
-                            </div>
-                        </div>
+        <div class="col-lg-4 col-md-6 col-xl-3">
+            <div class="row p-2 h-100">
+                <div class="card-content col-12 p-1">
+                    <div class="card-highlight bikeDiv card border-0 p-3 shadow border-top border-5 rounded justify-content-center" style="height:100%">
+                        @{
+                            var item = marcasList.FirstOrDefault(e => e.Id == i);
+                            <a href="@item.SiteOficial" target="_blank"><img src="@item.IconUrl" width="100%" alt="@item.Nome" /></a>
+                            // <span class="text-center">@item.Nome.ToUpper()</span>
+                        }
                     </div>
                 </div>
             </div>
-        }
-        
+        </div>
     }
 </div>
-<style>
-    span.badge {
-       /*  width: 50%;
-        height: 3rem;
-        display: flex;
-        justify-content: center;
-        align-items: center; */
-    }
 
-    .bikeDiv {
-        /* position: relative;
-        padding-top: 20px;
-        display: inline-block; */
+<div class="row pb-3 container my-4 text-center" style="margin: 0 auto;">
+    <h4>CHEGOU ATÉ O FINAL E NÃO ENCONTROU A SUA? VEJA TODO NOSSO ESTOQUE <a asp-action="ListaBikes" style="color: var(--bs-success)">CLICANDO AQUI</a>.</h4>
+</div>
+
+<style>
+    .card-highlight {
+        pointer-events: auto;
+        transform: scale(1);
+        transition: all 0.4s;
+    }
+    .card-highlight:hover {
+      opacity: 1;
+      transform: scale(1.10);
     }
 
     .bikeBadge {
-        position: absolute;
         left: 30px;
         top: 25px;
         text-align: center;
-        border-radius: 30px 30px 30px 30px;
         font-size:medium;
     }
+
+    .discount-line {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: auto;
+    }
+    div.row h3 {
+        font-weight: 600 !important;
+    }
 </style>
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div> *@

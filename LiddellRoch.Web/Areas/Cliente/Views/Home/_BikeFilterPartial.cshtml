@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Bicicleta>
+@using LiddellRoch.Application.Services.Interfaces
+@inject IAvaliacaoService AvaliacaoService
+
+<header class="border-bottom mb-4 p-2">
+    <div class="form-inline justify-content-between">
+        @if (Model.Count() == 1){
+            <span class="mr-md-auto float-start fw-bold">@Model.Count() item encontrado</span>
+        } 
+        else {
+            <span class="mr-md-auto float-start fw-bold">@Model.Count() itens encontrados</span>
+        }
+        <select disabled class="mr-2 form-select float-end" style="max-width:20%">
+            <option disabled selected>Ordernar por...</option>
+            <option value="1">Mais recentes</option>
+            <option value="2">Mais populares</option>
+            <option value="3">Preço crescente</option>
+            <option value="4">Preço decrescente</option>
+        </select>
+    </div>
+</header>
+
+<div class="row px-0 container" style="margin: 0 auto;max-width: 100%;">
+    @{
+        if (Model.Count() > 0)
+        {
+            <partial name="_BikeListPartial" model="Model" />
+        }
+        else
+        {
+            <span>Nenhum resultado para a pesquisa informada.</span>
+        }
+    }
+
+</div>
+

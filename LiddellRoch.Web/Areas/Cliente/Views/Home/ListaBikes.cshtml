@@ -1,0 +1,213 @@
+﻿@model ListaBikesVm
+
+@{
+	var nomeBusca = ViewData["nomeBusca"] as string ?? null;
+}
+<div class="container">
+	<div class="card shadow border-0 my-4">
+		<div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+			<div class="row">
+				<div class="col-12 text-center">
+					<h2 class="text-white py-2">Lista de Bicicletas</h2>
+				</div>
+			</div>
+		</div>
+		<div class="card-body py-4">
+			<div class="row">
+				<aside class="col-md-12 col-lg-3 col-xl-2">
+					
+					<div class="accordion accordion-flush" id="accordionFlush">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
+									Categoria
+								</button>
+							</h2>
+							<div id="flush-collapseOne" class="accordion-collapse collapse show">
+								<div class="accordion-body">
+									@foreach (var cat in Model.CategoriasList)
+									{
+										<span style="display: block"><input type="checkbox" checked="" value="@cat.Value" />&nbsp; @cat.Text</span>
+									}
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="true" aria-controls="flush-collapseTwo">
+									Marcas
+								</button>
+							</h2>
+							<div id="flush-collapseTwo" class="accordion-collapse collapse show">
+								<div class="accordion-body">
+									@foreach (var marca in Model.MarcasList)
+									{
+										<span style="display: block"><input type="checkbox" checked="" name="brands" value="@marca.Value" />&nbsp; @marca.Text</span>
+									}
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="true" aria-controls="flush-collapseThree">
+									Preço
+								</button>
+							</h2>
+							<div id="flush-collapseThree" class="accordion-collapse collapse show">
+								<div class="accordion-body">
+									<div class="row">
+										<div class="form-group col-md-6 px-0 mr-1">
+											<label>Mínimo</label>
+											<input class="form-control" placeholder="R$ 0,00" type="number">
+										</div>
+										<div class="form-group text-right col-md-6 px-0">
+											<label>Máximo</label>
+											<input class="form-control" placeholder="R$ 1000,00" type="number">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="true" aria-controls="flush-collapseFour">
+									Nome
+								</button>
+							</h2>
+							<div id="flush-collapseFour" class="accordion-collapse collapse show">
+								<div class="accordion-body">
+									<div class="row">
+										<input name="nome" class="form-control" type="search" placeholder="Digite aqui..." aria-label="Buscar-modelo" value="@nomeBusca">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<br />
+						<button onclick="filtrarLista()" class="btn btn-block btn-primary w-100">Filtrar</button>
+					</div>
+				</aside>
+				<main class="col-md-12 col-lg-9 col-xl-10" id="listaBicicletas">
+
+					<partial name="_BikeFilterPartial" model="Model.BicicletasList" />
+
+					@* <nav class="mt-4" aria-label="Page navigation sample">
+						<ul class="pagination">
+							<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						</ul>
+					</nav> *@
+
+				</main>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.bikeBadge {
+		left: 30px;
+		top: 25px;
+		text-align: center;
+		font-size: medium;
+	}
+
+	.discount-line {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: auto;
+	}
+
+	.form-inline {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-flow: row wrap;
+		flex-flow: row wrap;
+		-ms-flex-align: center;
+		align-items: center;
+	}
+
+	/* .accordion-button {
+		border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+	} */
+
+	.accordion-button {
+		background-color: whitesmoke !important;
+	}
+
+	.accordion-body {
+		background-color: #fafbfc !important;
+	}
+	.accordion-item {
+		border-right: 0;
+		border-left: 0;
+	}
+
+	.list-menu {
+		margin-bottom: 0;
+	}
+
+	 .list-menu a {
+		color: var(--bs-primary);
+	}
+</style>
+
+<script>
+	function filtrarLista() {
+		var precoMinimo = document.querySelector('#flush-collapseThree input[placeholder="R$ 0,00"]').value;
+		var precoMaximo = document.querySelector('#flush-collapseThree input[placeholder="R$ 1000,00"]').value;
+		var nomeBusca = document.querySelector('#flush-collapseFour input[name="nome"]').value;
+
+		// Construindo objeto com valores de filtragem
+		var selectedMarcas = $('#flush-collapseTwo input[type="checkbox"]:checked').map(function () {
+			return $(this).val();
+		}).get();
+
+		var selectedCategorias = $('#flush-collapseOne input[type="checkbox"]:checked').map(function () {
+			return $(this).val();
+		}).get();
+
+		console.log(selectedMarcas);
+		console.log(selectedCategorias);
+		
+		console.log(precoMinimo);
+		
+		console.log(precoMaximo);
+		console.log(nomeBusca);
+		// Enviar solicitação POST
+		$.ajax({
+			url: '@Url.Action("GetListaBikesFiltro", "Home")',
+			type: 'POST',
+			dataType: 'html',
+			data: {
+				marcasIdFilter: selectedMarcas,
+				categoriasIdFilter: selectedCategorias,
+				precoMinimo: precoMinimo,
+				precoMaximo: precoMaximo,
+				nomeBusca: nomeBusca
+			},
+			success: function (result) {
+				$("#listaBicicletas").html(result);
+
+				//alert("ok");
+			},
+			error: function () {
+				console.log(exception);
+			}
+		})
+	}
+
+		function obterValoresSelecionados(selector) {
+			var valoresSelecionados = [];
+			$(selector + ':checked').each(function () {
+				valoresSelecionados.push(this.value);
+			});
+		
+		return valoresSelecionados;
+	}
+</script>

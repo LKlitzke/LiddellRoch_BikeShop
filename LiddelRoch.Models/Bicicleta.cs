@@ -69,5 +69,8 @@ namespace LiddellRoch.Models
 
         [ValidateNever]
         public List<Avaliacao> Avaliacoes { get; set; }
+
+        [ValidateNever]
+        public decimal ValorComDesconto => Preco - (Preco * DescontoPromocao / 100.0m);
     }
 }

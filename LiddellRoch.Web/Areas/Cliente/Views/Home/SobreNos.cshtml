@@ -1,8 +1,8 @@
 ﻿
 <div class="container my-4">
-    <h3>SOBRE ESTA DEMONSTRAÇÃO</h3>
+    <h3>SOBRE ESTE PROJETO</h3>
 
-    <h6>Para você, tester, meu grandíssimo agradecimento pelo suporte direto e indireto na conclusão deste projeto tão significativo para o criador!</h6>
+    <h6>Para você, tester, meu grandíssimo agradecimento pelo suporte direto e indireto na conclusão deste projeto tão significante!</h6>
 
     <br />
     <h3>FAQ</h3>
@@ -62,6 +62,19 @@
                 </div>
             </div>
         </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                    Qual a motivação ao longo do desenvolvimento do projeto?
+                </button>
+            </h2>
+            <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body text-center">
+                    <img src="/images/bellinha.jpg" width="45%" alt="imgBellinha1"/>
+                    <img src="/images/bellinha2.jpg" width="45%" alt="imgBellinha2" />
+                </div>
+            </div>
+        </div>
     </div>
 
     <br />
@@ -77,8 +90,13 @@
     .accordion-button {
         border: 1px #dee2e6 solid;
     }
-
+    .accordion-item {
+        border-bottom: 0;
+    }
+    
     .accordion-body {
         text-align: justify;
+        padding-bottom: 20px;
+        border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
     }
 </style>
