@@ -21,21 +21,11 @@ namespace LiddellRoch.DataAccess.Repository
             //_db.Products.Include(u => u.Category);
         }
 
-        /// <summary>
-        /// Adiciona T item ao DbSet
-        /// </summary>
-        /// <param name="item"></param>
         public void Add(T item)
         {
             dbSet.Add(item);
         }
 
-        /// <summary>
-        /// Retorna T itens considerando o filtro.
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="includeProperties"></param>
-        /// <returns></returns>
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
