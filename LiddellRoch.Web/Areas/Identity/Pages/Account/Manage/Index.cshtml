@@ -17,16 +17,17 @@
             <div class="row mt-4 justify-content-center">
                 <div class="row mb-3 card">
                     <div class="col-md-12">
-                        <div class="form-block mx-auto" style="display: flex; align-items: center;">              @* justify-content-center align-content-center*@
-                            <div style="margin-right:10px">
+                    <div class="form-block mx-auto w-100" style="display: inline-flex; align-items: center;justify-content: space-between">
+                        @* justify-content-center align-content-center*@
+                            <div style="display:inline-flex">
                                 <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
-
+                                <div style="margin-left:10px;align-self: center;">
+                                    <span>Bem-vindo, @appUser.Nome!</span>
+                                    <br />
+                                    <p class="text-muted mb-0">@appUser.Email</p>
+                                </div>
                             </div>
-                            <div style="width: 50dvw;">
-                                <span>Bem-vindo, @appUser.Nome!</span>
-                                <br />
-                                <p class="text-muted mb-0">@appUser.Email</p>
-                            </div>
+                            
                             <div style="text-align:end">
                                 <span>Confirmação de E-mail: 
                                     @if(appUser.EmailConfirmed)
@@ -58,7 +59,7 @@
                        
                     </div>
                 </div>
-                <div class="row p-0">
+                <div class="row p-0 mb-5">
                     <div class="col-md-6" style="">
                         <div class="form-block" style="margin-right: 0;margin-left: auto;">
                             <div class="text-center mb-3">
@@ -120,7 +121,7 @@
                                 {
                                     @foreach(var pedido in userPedidos)
                                     {
-                                        <div class="col-md-9 mb-2" style="border:1px #000 solid">
+                                    <div class="col-md-9 mb-2" style="border:1px #CCC solid">
                                             <span><strong>Data do Pedido:</strong> @pedido.DataPedido</span>
                                             <br>
                                             <span><strong>Valor Total:</strong> @pedido.TotalPedido.ToString("c")</span>
@@ -132,18 +133,23 @@
                                             <span><strong>Transportadora:</strong> @pedido.Transportadora</span>
                                         </div>
                                         <div class="col-md-3">
+                                            <button class="btn btn-primary w-100 mb-2">
+                                            <a asp-area="Admin" asp-controller="Pedido" asp-action="Detalhes" asp-route-pedidoId="@pedido.Id" class="text-light"><i class="bi bi-eye-fill"></i>&nbsp;DETALHES</a>
+                                            </button>
                                             @{
                                                 var hasAvaliacao = AvaliacaoService.AvaliacaoExists(pedido.Id);
                                                 if (!hasAvaliacao && pedido.StatusPedido == SD.StatusShipped)
                                                 {
-                                                    <button class="btn btn-info">
-                                                        <a asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="text-light">AVALIAR COMPRA</a>
+                                                <button class="btn btn-info w-100">
+                                                    <a asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="text-light">
+                                                        <i class="bi bi-star-half"></i>&nbsp;AVALIAR
+                                                        </a>
                                                     </button>
                                                 }
                                                 else
                                                 {
-                                                    <button disabled asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-outline-info">
-                                                        AVALIAR COMPRA
+                                                    <button class="w-100" disabled asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-outline-info">
+                                                    <i class="bi bi-star-half"></i>&nbsp;JÁ AVALIADO!
                                                     </button>
                                                 }
                                         }
@@ -153,7 +159,7 @@
                                 }
                                 else
                                 {
-                                    <span class="text-center">Não existem pedidos registrados em sua conta. Que tal adicionar?</span>
+                                    <span class="text-center">Não existem pedidos registrados em sua conta... ainda. Que tal adicionar? 😅</span>
                                 }
                                 
                             </div>
