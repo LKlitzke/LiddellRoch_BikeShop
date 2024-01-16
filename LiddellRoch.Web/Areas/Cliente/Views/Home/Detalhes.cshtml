@@ -131,7 +131,7 @@
                                     <p class="text-dark text-opacity-75 mb-1">
                                         De:
                                         <span style="text-decoration: line-through;">
-                                            @((Model.Bicicleta.Preco * 1.2m).ToString("c"))
+                                            @((Model.Bicicleta.Preco * 1.1m).ToString("c"))
                                         </span>
                                     </p>
                                 </div>
@@ -139,12 +139,12 @@
                                     <p class="text-dark text-opacity-75 mb-3">
                                         Por:
                                         <span class="text-dark" style="font-weight:bold; font-size:large">
-                                            @((Model.Bicicleta.Preco * 1.1m).ToString("c"))
+                                            @((Model.Bicicleta.Preco).ToString("c"))
                                         </span>
                                         <br><span style="font-size:small">em 12 vezes sem juros ou</span>
                                         <br>
                                         <span class="text-success" style="font-weight:bolder; font-size:xx-large">
-                                            @Model.Bicicleta.Preco.ToString("c")
+                                            @Model.Bicicleta.ValorComDesconto.ToString("c")
                                         </span>
                                         (PIX ou boleto)
                                     </p>
