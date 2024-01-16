@@ -1,26 +1,27 @@
 ﻿@model Categoria
 
 <div class="container">
-    <div class="card shadow border-0 mt-4">
-        <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+    <div class="border-0 mt-4">
+        <div class="m-lg-0 pt-3">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="text-white py-2">@(Model.Id != 0 ? "Atualizar" : "Criar") Categoria</h2>
+                <div class="col-12">
+                    <h2 class="py-2">@(Model.Id != 0 ? "Atualizar" : "Criar") Categoria</h2>
+                    <hr />
                 </div>
             </div>
         </div>
-        <div class="card-body py-4">
+        <div class="pb-4">
             <form method="post">
-                <div class="row border p-3 mt-4">
+                <div class="row">
                     @* @* <div asp-validation-summary="All"></div> *@
                     <!--div asp-validation-summary="ModelOnly"></!--div!-->
                     <input asp-for="CriadoEm" hidden />
-                    <div class="form-group py-2 col-sm-12 col-md-8">
+                    <div class="form-group py-2 col-sm-12 col-md-5">
                         <label asp-for="Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
                         <input asp-for="Nome" class="form-control" />
                         <span asp-validation-for="Nome" class="text-danger"></span>
                     </div>
-                    <div class="form-group py-2 col-sm-12 col-md-4">
+                    <div class="form-group py-2 col-sm-12 col-md-2">
                         <label asp-for="OrdemExibicao" type="text" class="mb-1">Ordem de Exibição: <span class="required-mark">*</span></label>
                         <input asp-for="OrdemExibicao" type="number" class="form-control" />
                         <span asp-validation-for="OrdemExibicao" class="text-danger"></span>

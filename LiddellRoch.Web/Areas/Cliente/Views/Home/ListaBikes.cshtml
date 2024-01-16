@@ -89,19 +89,7 @@
 					</div>
 				</aside>
 				<main class="col-md-12 col-lg-9 col-xl-10" id="listaBicicletas">
-
 					<partial name="_BikeFilterPartial" model="Model.BicicletasList" />
-
-					@* <nav class="mt-4" aria-label="Page navigation sample">
-						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
-						</ul>
-					</nav> *@
-
 				</main>
 			</div>
 		</div>
@@ -172,13 +160,13 @@
 			return $(this).val();
 		}).get();
 
-		console.log(selectedMarcas);
-		console.log(selectedCategorias);
+		// console.log(selectedMarcas);
+		// console.log(selectedCategorias);
 		
-		console.log(precoMinimo);
+		// console.log(precoMinimo);
 		
-		console.log(precoMaximo);
-		console.log(nomeBusca);
+		// console.log(precoMaximo);
+		// console.log(nomeBusca);
 		// Enviar solicitação POST
 		$.ajax({
 			url: '@Url.Action("GetListaBikesFiltro", "Home")',

@@ -38,7 +38,7 @@
                         </form>
                         <div class="col-md-12">
                             <section class="pt-2 pb-2">
-                                <p class="divider-text d-flex pt-3 text-center fw-bold">OU</p>
+                                <p class="divider-text d-flex pt-3 text-center">OU</p>
                                 @{
                                     if ((Model.ExternalLogins?.Count ?? 0) == 0)
                                     {
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="text-center mb-2">
-                                <span class="text-uppercase text-muted">Não possui cadastro?  <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Registre-se</a></span>
+                                <span class="text-muted">Não possui cadastro ainda? <a id="register" asp-area="Identity" asp-page="/Account/Register">Registre-se</a>!</span>
                             </div>
                         </div>
                     </div>
