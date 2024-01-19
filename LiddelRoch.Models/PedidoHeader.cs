@@ -29,18 +29,27 @@ namespace LiddellRoch.Models
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }
 
-        [Required]
-        public string Telefone { get; set; }
-        [Required]
-        public string Endereco { get; set; }
-        [Required]
-        public string Cidade { get; set; }
-        [Required]
-        public string Estado { get; set; }
-        [Required]
-        public string CodigoPostal { get; set; }
-        [Required]
-        public string Nome { get; set; }
+		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
+		[MinLength(11, ErrorMessage = "O campo deve possuir 11 dígitos")]
+		public string Telefone { get; set; }
+
+		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
+		[MinLength(15, ErrorMessage = "Insira um endereço com ao menos 15 dígitos")]
+		public string Endereco { get; set; }
+
+		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
+		public string Cidade { get; set; }
+
+		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
+		public string Estado { get; set; }
+
+		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
+		[MinLength(8, ErrorMessage = "Insira um CEP válido")]
+		public string CodigoPostal { get; set; }
+
+		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
+		[MinLength(10, ErrorMessage = "Insira um nome com ao menos 10 dígitos")]
+		public string Nome { get; set; }
 
         public string TotalPedidoStr => TotalPedido.ToString("c");
     }

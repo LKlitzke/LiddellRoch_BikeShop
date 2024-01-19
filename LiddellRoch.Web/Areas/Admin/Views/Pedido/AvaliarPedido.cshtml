@@ -2,49 +2,73 @@
 
 <div class="container">
     <div class="card shadow border-0 my-4">
+        <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">AVALIE SEU PEDIDO</h2>
+                </div>
+            </div>
+        </div>
         <div class="row pt-4">
             <div class="col-12">
-                <h2 class="text-primary mx-5">AVALIE SEU PEDIDO</h2>
-                @foreach (var pedido in Model.PedidoDetalhe)
-                {
-                    <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
+                    @foreach (var pedido in Model.PedidoDetalhe)
+                    {
                         <input asp-for="@pedido.Id" hidden name="pedidoDetalheId" />
-                   
-                            <div class="mx-5 mb-1" style="border: black 1px solid ">
-                                <span style="float:left"><strong>Bicicleta: </strong> @pedido.Bicicleta.Nome</span>
+                        <input asp-for="@pedido.BicicletaId" hidden name="bicicletaIds[]" />
+                        <div class="mx-5 mb-1 p-3" style="border: #ccc 1px solid">
+                            <h4 style="float:left"><strong>Bicicleta: </strong> @pedido.Bicicleta.Nome</h4>
+                            <br><hr>
+                            <div class="rating flex d-inline-flex align-items-center mx-0">
+                                <label for="rating" style="text-wrap: nowrap;">Sua avaliação: &nbsp;</label>
+                                <select id="rating-@pedido.BicicletaId" name="rating" class="form-select" title="Selecione uma avaliação">
+                                    <option value="5">⭐⭐⭐⭐⭐</option>
+                                    <option value="4">⭐⭐⭐⭐</option>
+                                    <option value="3">⭐⭐⭐</option>
+                                    <option value="2">⭐⭐</option>
+                                    <option value="1">⭐</option>
+                                </select>
+                                <br />
+                                @* <input type="number" id="star5-@pedido.BicicletaId" name="rating"/><label for="star5-@pedido.BicicletaId"></label>
+                                <input type="radio" id="star4-@pedido.BicicletaId" name="rating[]" value="4" /><label for="star4-@pedido.BicicletaId"></label>
+                                <input type="radio" id="star3-@pedido.BicicletaId" name="rating[]" value="3" /><label for="star3-@pedido.BicicletaId"></label>
+                                <input type="radio" id="star2-@pedido.BicicletaId" name="rating[]" value="2" /><label for="star2-@pedido.BicicletaId"></label>
+                                <input type="radio" id="star1-@pedido.BicicletaId" name="rating[]" value="1" /><label for="star1-@pedido.BicicletaId"></label>*@
 
-                                <br><hr>
-                                <div class="rating align-items-center">
-                                    <input type="radio" id="star5-@pedido.BicicletaId" name="rating" value="5" /><label for="star5-@pedido.BicicletaId"></label>
-                                    <input type="radio" id="star4-@pedido.BicicletaId" name="rating" value="4" /><label for="star4-@pedido.BicicletaId"></label>
-                                    <input type="radio" id="star3-@pedido.BicicletaId" name="rating" value="3" /><label for="star3-@pedido.BicicletaId"></label>
-                                    <input type="radio" id="star2-@pedido.BicicletaId" name="rating" value="2" /><label for="star2-@pedido.BicicletaId"></label>
-                                    <input type="radio" id="star1-@pedido.BicicletaId" name="rating" value="1" /><label for="star1-@pedido.BicicletaId"></label>
-
-                                    <span>Sua avaliação: &nbsp;</span>
-                                </div>
-
-                                <!-- Caixa de comentários -->
-                                <div class="comment-box mx-3" style="text-align: justify; margin-bottom: 1rem;">
-                                    <label for="comment">Comentários adicionais:</label><br>
-                                    <textarea id="comment" name="comment" rows="4" cols="50" style="width:100%"></textarea>
-                                </div>
-                            <button type="submit" class="btn btn-primary form-control w-25 flex">Confirmar avaliação</button>
+                               
                             </div>
-                    </form>
-                }
+
+                            <!-- Caixa de comentários -->
+                            <div class="comment-box mx-0 mt-3" style="text-align: justify; margin-bottom: 1rem;">
+                                <label for="comment">Comentários adicionais: <span class="required-mark">*</span></label><br>
+                                <textarea class="form-control" id="comment-@pedido.BicicletaId" name="comment" rows="4" required cols="50" style="width:100%"></textarea>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-12 my-3 text-center">
+                        <button type="submit" class="btn btn-primary form-control w-25 flex">Confirmar avaliação</button>
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-outline-secondary">
+                            Voltar à listagem
+                        </a>
+                    </div>
+                    
+                </form>
+                
             </div>
-            <div class="col-12 my-3 text-center">
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-primary">
-                    Voltar à listagem
-                </a>
-            </div>
+            
 
         </div>
     </div>
 </div>
 
 <style>
+    @* select option {
+        color: gold;
+    } 
+
+    select option {
+        color: gold;
+    }
     .rating {
         display: flex;
         flex-direction: row-reverse;
@@ -93,10 +117,10 @@
     .rating:not(:checked) > label:hover,
     .rating:not(:checked) > label:hover ~ label {
         color: #deb217;
-    }
+    }*@
 </style>
 <script>
-    document.querySelectorAll('.rating input').forEach((input) => {
+    @* document.querySelectorAll('.rating input').forEach((input) => {
         input.addEventListener('change', () => {
             console.log('Avaliação:', input.value);
         });
@@ -104,6 +128,6 @@
 
     document.getElementById('comment').addEventListener('input', (event) => {
         console.log('Comentário:', event.target.value);
-    });
+    }); *@
 
 </script>

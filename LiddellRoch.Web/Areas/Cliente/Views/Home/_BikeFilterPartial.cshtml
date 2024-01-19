@@ -10,8 +10,8 @@
         else {
             <span class="mr-md-auto float-start fw-bold">@Model.Count() itens encontrados</span>
         }
-        <select disabled class="mr-2 form-select float-end" style="max-width:20%">
-            <option disabled selected>Ordernar por...</option>
+        <select id="select2Order" class="mr-2 form-select float-end" style="max-width:20%">
+            <option value="0" selected disabled>Ordernar por...</option>
             <option value="1">Mais recentes</option>
             <option value="2">Mais populares</option>
             <option value="3">Preço crescente</option>
@@ -33,4 +33,3 @@
     }
 
 </div>
-

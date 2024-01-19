@@ -63,7 +63,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult GetListaBikesFiltro(int[] marcasIdFilter, int[] categoriasIdFilter, string? precoMinimo, string? precoMaximo, string? nomeBusca)
+		public IActionResult GetListaBikesFiltro(int[] marcasIdFilter, int[] categoriasIdFilter, string? precoMinimo, string? precoMaximo, string? nomeBusca, string? ordenar)
 		{
 			var tamEnumList = Enum.GetValues(typeof(Tamanhos)).Cast<Tamanhos>();
 			var formValues = new List<string>();
@@ -85,28 +85,29 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 			if (!string.IsNullOrEmpty(nomeBusca))
 				bikeList = bikeList.Where(b => b.Nome.ToLower().Contains(nomeBusca.ToLower())).ToList();
 
-			//var categoriaFiltro = new List<string>();
-			//var marcaFiltro = new List<string>();
-			//var precoMinFiltro = "";
-			//var precoMaxFiltro = "";
+			if(!string.IsNullOrEmpty(ordenar) && int.Parse(ordenar) > 0)
+			{
+				switch (ordenar)
+				{
+					case "1":
+						bikeList = bikeList.OrderByDescending(e => e.CriadoEm).ToList();
+						break;
 
+					case "2":
+						bikeList = bikeList.OrderBy(e => e.Avaliacoes.Count).ToList();
+						break;
 
-			//if (form != null)
-			//         {
-			//	categoriaFiltro = form["categorias[]"].ToString().Split(',',StringSplitOptions.RemoveEmptyEntries).ToList();
-			//	marcaFiltro = form["marcas[]"].ToString().Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
-			//             precoMinFiltro = form["precoMinimo"];
-			//	precoMaxFiltro = form["precoMaximo"];
+					case "3":
+						bikeList = bikeList.OrderBy(e => e.ValorComDesconto).ToList();
+						break;
 
-			//             if (!categoriaFiltro.IsNullOrEmpty())
-			//                 bikeList = bikeList.Where(b => categoriaFiltro.Contains(b.CategoriaId.ToString()));
+					case "4":
+						bikeList = bikeList.OrderByDescending(e => e.ValorComDesconto).ToList();
+						break;
 
-			//             if (!query.IsNullOrEmpty())
-			//             {
-			//                 bikeList = bikeList.Where(b => b.Nome.ToLower().Contains(query.ToLower()));
-			//             }
-			//}
-
+					default: break;
+				}
+			}
 
 			return PartialView("_BikeFilterPartial", bikeList);
 		}

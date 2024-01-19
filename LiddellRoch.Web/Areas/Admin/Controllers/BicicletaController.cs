@@ -101,7 +101,8 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
                 
                 if (obj.Bicicleta.Id == 0)
                 {
-                    _unitOfWork.Bicicleta.Add(obj.Bicicleta);
+                    obj.Bicicleta.CriadoEm = DateTime.Now;
+					_unitOfWork.Bicicleta.Add(obj.Bicicleta);
                 }
                 else
                 {

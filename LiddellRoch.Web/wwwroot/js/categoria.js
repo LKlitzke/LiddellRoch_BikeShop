@@ -67,6 +67,7 @@ function loadDataTable() {
                     var columnWidths = ['auto', '*', '*', 'auto'];
                     columnWidths[0] = 30; // ID
                     columnWidths[1] = 150; // Nome
+                    columnWidths[2] = 60; // Ordem
                     columnWidths[3] = 250; // Data Criação
 
                     doc.content[3].table.widths = Array(doc.content[3].table.body[0].length + 1).join('*').split('');
@@ -91,8 +92,8 @@ function loadDataTable() {
         "ajax": { url: '/admin/categoria/getall' },
         "columns": [
             { data: 'id', "width": "5%" },
-            { data: 'nome', "width": "25%" },
-            { data: 'ordemExibicao', "width": "5%" },
+            { data: 'nome', "width": "20%" },
+            { data: 'ordemExibicao', "width": "10%" },
             {
                 data: 'criadoEm', "width": "15%",
                 render: function (data, type, row) {

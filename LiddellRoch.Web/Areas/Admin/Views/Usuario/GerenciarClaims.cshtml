@@ -1,42 +1,43 @@
 ﻿@model UserClaimsVm
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Gerenciar claims do usuário</h2>
+<div class="container">
+    <div class="border-0 my-4">
+        <div class="ml-lg-0 pt-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="py-2">Gerenciar Claims</h2>
+                    <hr />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body p-4">
-        <form method="post" class="row">
-            <input asp-for="UserId" hidden />
-            @for (int i = 0; i < Model.Claims.Count; i++)
-            {
-                <div class="m-2 form-check">
-                    <input asp-for="Claims[i].ClaimType" hidden />
-                    <input asp-for="Claims[i].IsSelected" class="form-check-input" />
-                    <label class="form-check-label" asp-for="Claims[i].IsSelected" ´>
-                        @Model.Claims[i].ClaimType
-                    </label>
-                </div>
+        <div class="">
+            <form method="post" class="row">
+                <input asp-for="UserId" hidden />
+                @for (int i = 0; i < Model.Claims.Count; i++)
+                {
+                    <div class="m-2 form-check">
+                        <input asp-for="Claims[i].ClaimType" hidden />
+                        <input asp-for="Claims[i].IsSelected" class="form-check-input" />
+                        <label class="form-check-label" asp-for="Claims[i].IsSelected" ´>
+                            @Model.Claims[i].ClaimType
+                        </label>
+                    </div>
 
-            }
-            <div class="row pt-2">
-                <div class="col-6 col-md-3">
-                    <button type="submit" class="btn btn-primary form-control">Atualizar Claims</button>
+                }
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Atualizar Claims</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-action="Index" class="btn btn-outline-secondary border form-control">
+                            Voltar
+                        </a>
+                    </div>
                 </div>
-                <div class="col-6 col-md-3">
-                    <a asp-action="Index" class="btn btn-outline-primary border form-control">
-                        Voltar
-                    </a>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
-
-
 
 
 @section Scripts{

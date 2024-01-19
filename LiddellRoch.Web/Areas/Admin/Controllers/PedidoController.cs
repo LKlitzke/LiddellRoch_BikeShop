@@ -56,7 +56,7 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(PedidoVm.PedidoHeader.NumeroRastreio))
             {
-                pedidoHeaderDb.Transportadora = PedidoVm.PedidoHeader.NumeroRastreio;
+                pedidoHeaderDb.NumeroRastreio = PedidoVm.PedidoHeader.NumeroRastreio;
             }
             _unitOfWork.PedidoHeader.Update(pedidoHeaderDb);
             _unitOfWork.Save();
@@ -202,31 +202,29 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AvaliarPedido(int rating, string comment, int pedidoDetalheId)
+        public IActionResult AvaliarPedido(int pedidoDetalheId, List<int> rating, List<string> comment, List<int> bicicletaIds)
         {
             var pedidoDetalhe = _unitOfWork.PedidoDetalhes.GetFirstOrDefault(e => e.Id == pedidoDetalheId);
 
-
-            Avaliacao avaliacao = new ()
+            for(int i = 0; i < bicicletaIds.Count;i++)
             {
-                PedidoHeaderId = pedidoDetalhe.PedidoHeaderId,
-                AvaliacaoCompra = rating,
-                ComentarioCompra = comment,
-                BicicletaId = pedidoDetalhe.BicicletaId,
-                DataAvaliacao = DateTime.Now,
-                CriadoEm = DateTime.Now
+                Avaliacao avaliacao = new()
+                {
+                    PedidoHeaderId = pedidoDetalhe.PedidoHeaderId,
+                    AvaliacaoCompra = rating[i],
+                    ComentarioCompra = comment[i] ?? "",
+                    BicicletaId = bicicletaIds[i],
+                    DataAvaliacao = DateTime.Now,
+                    CriadoEm = DateTime.Now
+                };
+                _unitOfWork.Avaliacao.Add(avaliacao);
+            }
+            
 
-            };
-
-            _unitOfWork.Avaliacao.Add(avaliacao);
             _unitOfWork.Save();
-            return RedirectToAction(nameof(AvaliarPedido),1);
-            //PedidoVm = new()
-            //{
-            //    PedidoHeader = _unitOfWork.PedidoHeader.GetFirstOrDefault(u => u.Id == pedidoId, includeProperties: "ApplicationUser"),
-            //    PedidoDetalhe = _unitOfWork.PedidoDetalhes.GetAll(u => u.PedidoHeaderId == pedidoId, includeProperties: "Bicicleta")
-            //};
-            //return View(PedidoVm);
+
+            TempData["Success"] = "Avaliação realizada com sucesso!";
+            return RedirectToAction("Manage", "Account", new { area = "Identity" });
         }
 
         #region API CALLS

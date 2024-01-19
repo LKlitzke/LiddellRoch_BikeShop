@@ -43,7 +43,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
             foreach (var cart in CarrinhoComprasVm.CarrinhoComprasList)
             {
                 cart.Bicicleta.ImagensProduto = imagensProduto.Where(u => u.BicicletaId == cart.Bicicleta.Id).ToList();
-                cart.Preco = cart.Bicicleta.Preco;
+                cart.Preco = cart.Bicicleta.ValorComDesconto;
                 //cart.Preco = GetPriceBasedOnQuantity(cart);
                 CarrinhoComprasVm.PedidoHeader.TotalPedido += (cart.Preco * cart.Quantidade);
             }
@@ -73,7 +73,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
             foreach (var cart in CarrinhoComprasVm.CarrinhoComprasList)
             {
                 //cart.Product.ProductImages = productImages.Where(u => u.ProductId == cart.Product.Id).ToList();
-                cart.Preco = cart.Bicicleta.Preco;
+                cart.Preco = cart.Bicicleta.ValorComDesconto;
                 //cart.Price = GetPriceBasedOnQuantity(cart);
                 CarrinhoComprasVm.PedidoHeader.TotalPedido += (cart.Preco * cart.Quantidade);
             }
@@ -98,7 +98,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
             foreach (var item in CarrinhoComprasVm.CarrinhoComprasList)
             {
                 //item.Price = GetPriceBasedOnQuantity(item);
-                item.Preco = item.Bicicleta.Preco;
+                item.Preco = item.Bicicleta.ValorComDesconto;
                 CarrinhoComprasVm.PedidoHeader.TotalPedido += (item.Preco * item.Quantidade);
 
                 // Atualiza estoque do item
@@ -146,6 +146,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
                     CancelUrl = domain + "cliente/cart/index",
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
+                    CustomerEmail = applicationUser.Email
                 };
 
                 foreach (var item in CarrinhoComprasVm.CarrinhoComprasList)
@@ -213,10 +214,18 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
         // Operação de adicionar no carrinho
         public IActionResult Mais(int cartId)
         {
-            var cartFromDb = _unitOfWork.CarrinhoCompras.GetFirstOrDefault(u => u.Id == cartId);
-            cartFromDb.Quantidade += 1;
-            _unitOfWork.CarrinhoCompras.Update(cartFromDb);
-            _unitOfWork.Save();
+            var cartFromDb = _unitOfWork.CarrinhoCompras.GetFirstOrDefault(u => u.Id == cartId, includeProperties: "Bicicleta");
+
+            if(cartFromDb.Quantidade < cartFromDb.Bicicleta.Estoque)
+            {
+                cartFromDb.Quantidade += 1;
+                _unitOfWork.CarrinhoCompras.Update(cartFromDb);
+                _unitOfWork.Save();
+                TempData["success"] = "Unidade adicionada com sucesso!";
+            }
+            else
+                TempData["error"] = "Não é possível adicionar mais unidades!";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -230,11 +239,13 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
                    .GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
 
                 _unitOfWork.CarrinhoCompras.Remove(cartFromDb);
+                TempData["success"] = "Item removido do carrinho com sucesso!";
             }
             else
             {
                 cartFromDb.Quantidade -= 1;
                 _unitOfWork.CarrinhoCompras.Update(cartFromDb);
+                TempData["success"] = "Unidade retirada com sucesso!";
             }
 
             _unitOfWork.Save();

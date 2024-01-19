@@ -82,25 +82,25 @@
                                             </div>
                                             <div class="form-group mb-3 col-md-4">
                                                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                                                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                                                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Digite um telefone" />
                                                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group mb-3">
                                             <label asp-for="Input.Endereco" class="form-label">Endereço</label>
-                                            <input asp-for="Input.Endereco" class="form-control" placeholder="Please enter your phone number." />
+                                            <input asp-for="Input.Endereco" class="form-control" placeholder="Digite um endereço" />
                                             <span asp-validation-for="Input.Endereco" class="text-danger"></span>
                                         </div>
                                         <div class="row">
                                             <div class="form-group mb-3 col-md-8">
                                                 <label asp-for="Input.Cidade" class="form-label"></label>
-                                                <input asp-for="Input.Cidade" class="form-control" placeholder="Please enter your phone number." />
+                                                <input asp-for="Input.Cidade" class="form-control" placeholder="Digite uma cidade" />
                                                 <span asp-validation-for="Input.Cidade" class="text-danger"></span>
                                             </div>
                                             <div class="col-md-form-group mb-3 col-md-4">
                                                 <label asp-for="Input.Estado" class="form-label"></label>
-                                                <input asp-for="Input.Estado" class="form-control" placeholder="Please enter your phone number." />
+                                                <input asp-for="Input.Estado" class="form-control" placeholder="Digite um estado" />
                                                 <span asp-validation-for="Input.Estado" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -146,11 +146,13 @@
                                                         </a>
                                                     </button>
                                                 }
-                                                else
+                                                else if(hasAvaliacao && pedido.StatusPedido == SD.StatusShipped)
                                                 {
                                                     <button class="w-100" disabled asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-outline-info">
                                                     <i class="bi bi-star-half"></i>&nbsp;JÁ AVALIADO!
                                                     </button>
+                                                }
+                                                else {
                                                 }
                                         }
                                         </div>

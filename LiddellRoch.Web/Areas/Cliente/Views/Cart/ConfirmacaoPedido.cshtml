@@ -1,15 +1,23 @@
 ﻿@model int
 
 <div class="container row pt-4" style="margin: 0 auto;">
-    <div class="card shadow border-0 mt-4 mb-4 text-center ">
-        <h1 class="text-primary text-center">Pedido concluído com sucesso!</h1>
-        <span>Número de pedido: <strong>#@Model</strong> </span><br />
+    <div class="card shadow border-0 mt-4 mb-4 text-center px-0">
         
-        <span class="mb-2">Seu pedido foi confirmado e em breve será processado para envio.</span>
+        <h1 class="card-header text-primary text-center mb-4">
+            <br />Pedido concluído com sucesso!
+        </h1>
+        <span>Seu número de pedido: <strong>#@Model</strong> </span><br />
+        
+        <h4>Parabéns pela sua aquisição!</h4>
+        <span class="mb-3">
+            Seu pedido foi confirmado e em breve será processado para envio.
+            Você pode acompanhar os detalhes clicando <a asp-area="Admin" asp-controller="Pedido" asp-action="Detalhes" asp-route-pedidoId="@Model">AQUI</a>.
+            <br />Divirta-se! - <cite>LiddellRoch</cite>
+        </span>
         @* Para mais detalhes, acesse:
         <a asp-area="Admin" asp-controller="Pedido" asp-action="Index"> Gerenciar pedidos</a> *@
         <br />
-        <div style="display:inline-flex; align-self: center;">
+        <div style="display:inline-flex; align-self: center;" class="mb-2">
             <div class="envioLine">
                 <i class="fa-solid fa-truck fa-xl text-primary"></i>
                 <span>LiddellRoch</span>
@@ -30,10 +38,9 @@
                 <span>@ViewData["endereco"]</span>
             </div>
         </div>
-        <span>Estimativa de entrega: <strong>@DateTime.Now.AddDays(7).ToShortDateString() a @DateTime.Now.AddDays(14).ToShortDateString()</strong></span>
+        <span>Estimativa de entrega: <strong>@DateTime.Now.AddDays(7).ToShortDateString() a @DateTime.Now.AddDays(14).ToShortDateString()</strong>.</span>
 
-        <br />
-        <img src="~/images/bg_2.jpg" style="align-self: center;" class="my-4" width="65%" />
+        <img src="~/images/bg_2.jpg" style="align-self: center;" class="my-3" width="65%" />
     </div>
     
 

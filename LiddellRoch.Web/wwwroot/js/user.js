@@ -46,7 +46,7 @@ function loadDataTable() {
                                 <a href="/Admin/Usuario/GerenciarRoles?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
                                      <i class="bi bi-pencil-square"></i>
                                 </a>
-                                 <a href="/Admin/Usuario/GerenciarClaims?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar papel" style="cursor:pointer;">
+                                 <a href="/Admin/Usuario/GerenciarClaims?userId=${data.id}" class="btn btn-secondary text-white" title="Alterar claims" style="cursor:pointer;">
                                      <i class="bi-check-square"></i>
                                 </a>
                                 <a onclick=Delete('/Admin/Usuario/Delete?userId=${data.id}') class="btn btn-danger text-white" title="Excluir" style="cursor:pointer;">
