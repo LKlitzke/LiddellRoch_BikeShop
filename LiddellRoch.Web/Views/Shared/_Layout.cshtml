@@ -86,6 +86,12 @@
     .navbar-nav > .nav-item:not(:last-child) {
         margin: 0.5rem 0.5rem;
     }
+
+    .nav-link-icon {
+        text-align: center;
+        width: 1.5em;
+        color: var(--bs-primary);
+    }
 </style>
 
 <html lang="en" data-bs-theme="light">
@@ -134,7 +140,7 @@
             <div class="container">
                 <img class="pr-3" src="/images/liddellroch_logo.png" alt="logo" style="width: 10vw; max-width:6rem" />
                 <a class="logo me-auto navbar-brand d-none d-md-inline fs-3" style="margin-left:1rem;display: flex !important; flex-direction: column" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="head1" style="margin-left: 5px; margin-right:2vw; font-family: 'Shadows Into Light', cursive; text-shadow: 2px 2px #111">LIDDELLROCH</span>
+                    <span class="head1" style="margin-left: 5px; margin-right:1.5vw; font-family: 'Shadows Into Light', cursive; text-shadow: 2px 2px #111">LIDDELLROCH</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -151,7 +157,7 @@
                             </form>
                         </li>
 
-                        <li class="nav-item" style="margin-left:2vw">
+                        <li class="nav-item" style="margin-left:1.5vw">
                             @await Component.InvokeAsync("ShoppingCart")
                         </li>
 
@@ -162,30 +168,30 @@
                                     <i class="fa-solid fa-gear"></i> <span id="manageGear">Gerenciamento</span>
                                 </a>
                                 <ul class="dropdown-menu p-2">
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Bicicleta" asp-action="Index"><i class="fas fa-bicycle fa-md"></i> Bicicletas</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Bicicleta" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-bicycle fa-md"></i></div> Bicicletas</a>
                                     </li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categoria" asp-action="Index"><i class="fas fa-list fa-md"></i> Categorias</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Categoria" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-list fa-md"></i></div> Categorias</a>
                                     </li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Empresa" asp-action="Index"><i class="fas fa-building fa-md"></i> Empresas</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Empresa" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-building fa-md"></i></div> Empresas</a>
                                     </li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Marca" asp-action="Index"><i class="fas fa-tags fa-md"></i> Marcas</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Marca" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-tags fa-md"></i></div> Marcas</a>
                                     </li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Pedido" asp-action="Index"><i class="fas fa-truck fa-md"></i> Pedidos</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Pedido" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-truck fa-md"></i></div> Pedidos</a>
                                     </li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-chart-bar fa-md"></i> Dashboard</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Usuario" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-users fa-md"></i></div> Usuários</a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-fill-add fa-md"></i> Criar usuário</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><div class="mx-1"><i class="nav-link-icon fas fa-chart-bar fa-md"></i></div> Dashboard</a>
                                     </li>
-                                    <li class="dropdown-item p-2">
-                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Usuario" asp-action="Index"><i class="bi bi-people-fill fa-md"></i> Usuários</a>
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Identity" asp-page="/Account/Register"><div class="mx-1"><i class="nav-link-icon fas fa-user-plus fa-md"></i></div> Criar usuário</a>
                                     </li>
                                 </ul>
                             </li>

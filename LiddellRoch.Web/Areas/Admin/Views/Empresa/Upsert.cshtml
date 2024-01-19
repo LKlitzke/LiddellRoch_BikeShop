@@ -1,76 +1,71 @@
 ﻿@model Empresa
 
 <div class="container">
-    <div class="card shadow border-0 my-4">
-        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+    <div class="border-0 mt-4">
+        <div class="ml-0 pt-3">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="text-white py-2"> @(Model.Id != 0 ? "Atualizar" : "Criar") Empresa</h2>
+                <div class="col-12">
+                    <h2 class="py-2"> @(Model.Id != 0 ? "Atualizar" : "Criar") Empresa</h2>
+                    <hr />
                 </div>
             </div>
         </div>
-        <div class="card-body p-4">
-            <form method="post" class="row" enctype="multipart/form-data" style="place-content: center;">
+        <div class="pb-4">
+            <form method="post" enctype="multipart/form-data" style="place-content: center;">
                 <input asp-for="Id" hidden />
-                <div class="row">
-                    <div class="col-12 border p-3">
-                            @*<div asp-validation-summary="ModelOnly"></div>*@
-                            <input asp-for="CriadoEm" hidden />
-                            <div class="row">
-                                <div class="form-group py-2 col-sm-12 col-md-6">
-                                    <label asp-for="Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
-                                    <input asp-for="Nome" class="form-control" />
-                                    <span asp-validation-for="Nome" class="text-danger"></span>
-                                </div>
-                                <div class="form-group py-2 col-sm-12 col-md-6">
-                                    <label asp-for="Endereco" type="text" class="mb-1">Endereço: <span class="required-mark">*</span></label>
-                                    <input asp-for="Endereco" class="form-control" />
-                                    <span asp-validation-for="Endereco" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group py-2 col-sm-12 col-md-6">
-                                    <label asp-for="Cidade" type="text" class="mb-1">Cidade: <span class="required-mark">*</span></label>
-                                    <input asp-for="Cidade" class="form-control" />
-                                    <span asp-validation-for="Cidade" class="text-danger"></span>
-                                </div>
-                                <div class="form-group py-2 col-sm-12 col-md-6">
-                                    <label asp-for="Estado" type="text" class="mb-1">Estado: <span class="required-mark">*</span></label>
-                                    <input asp-for="Estado" class="form-control" />
-                                    <span asp-validation-for="Estado" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group py-2 col-sm-12 col-md-6">
-                                    <label asp-for="CodigoPostal" type="text" class="mb-1">Código Postal (CEP): <span class="required-mark">*</span></label>
-                                    <input asp-for="CodigoPostal" id="cepInput" class="form-control" />
-                                    <span asp-validation-for="CodigoPostal" class="text-danger"></span>
-                                </div>
-                                <div class="form-group py-2 col-sm-12 col-md-6">
-                                    <label asp-for="Telefone" type="text" class="mb-1">Telefone: <span class="required-mark">*</span></label>
-                                    <input asp-for="Telefone" id="phoneInput" class="form-control" />
-                                    <span asp-validation-for="Telefone" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row pt-2">
-                                <div class="col-6 col-md-3">
-                                    @if (Model.Id != 0)
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control">Atualizar</button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control">Criar</button>
-                                    }
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <a asp-controller="Empresa" asp-action="Index" class="btn btn-outline-secondary border form-control">
-                                        Voltar à listagem
-                                    </a>
-                                </div>
-                            </div>
+                    @*<div asp-validation-summary="ModelOnly"></div>*@
+                    <input asp-for="CriadoEm" hidden />
+                    <div class="row">
+                        <div class="form-group py-2 col-sm-12 col-md-6">
+                            <label asp-for="Nome" type="text" class="mb-1">Nome: <span class="required-mark">*</span></label>
+                            <input asp-for="Nome" class="form-control" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2 col-sm-12 col-md-6">
+                            <label asp-for="Endereco" type="text" class="mb-1">Endereço: <span class="required-mark">*</span></label>
+                            <input asp-for="Endereco" class="form-control" />
+                            <span asp-validation-for="Endereco" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="form-group py-2 col-sm-12 col-md-3">
+                            <label asp-for="Cidade" type="text" class="mb-1">Cidade: <span class="required-mark">*</span></label>
+                            <input asp-for="Cidade" class="form-control" />
+                            <span asp-validation-for="Cidade" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2 col-sm-12 col-md-3">
+                            <label asp-for="Estado" type="text" class="mb-1">Estado: <span class="required-mark">*</span></label>
+                            <input asp-for="Estado" class="form-control" />
+                            <span asp-validation-for="Estado" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2 col-sm-12 col-md-3">
+                            <label asp-for="CodigoPostal" type="text" class="mb-1">Código Postal (CEP): <span class="required-mark">*</span></label>
+                            <input asp-for="CodigoPostal" id="cepInput" class="form-control" />
+                            <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group py-2 col-sm-12 col-md-3">
+                            <label asp-for="Telefone" type="text" class="mb-1">Telefone: <span class="required-mark">*</span></label>
+                            <input asp-for="Telefone" id="phoneInput" class="form-control" />
+                            <span asp-validation-for="Telefone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6 col-md-3">
+                            @if (Model.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary form-control">Atualizar</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary form-control">Criar</button>
+                            }
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-controller="Empresa" asp-action="Index" class="btn btn-outline-secondary border form-control">
+                                Voltar à listagem
+                            </a>
+                        </div>
+                    </div>
             </form>
         </div>
     </div>
@@ -92,7 +87,6 @@
                 greedy: false,
                 removeMaskOnSubmit: true
             });
-
         })
     </script>
 }

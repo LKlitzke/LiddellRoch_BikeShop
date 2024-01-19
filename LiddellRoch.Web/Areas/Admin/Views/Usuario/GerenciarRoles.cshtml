@@ -1,23 +1,23 @@
 ﻿@model RoleManagementVm
-
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Gerenciar roles do usuário</h2>
+<div class="container">
+    <div class="border-0 my-4">
+        <div class="ml-lg-0 py-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="py-2">Gerenciar Role</h2>
+                    <hr />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card-body p-4">
-        <form method="post" class="row">
-            <input asp-for="ApplicationUser.Id" hidden />
-            <div class="border p-3">
-                @*<div asp-validation-summary="ModelOnly"></div>*@
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="ApplicationUser.Nome" readonly class="form-control border-0 shadow" />
-                    <label asp-for="ApplicationUser.Nome" class="ms-2"></label>
+        <div>
+            <form method="post" class="row">
+                <input asp-for="ApplicationUser.Id" hidden />
+                <div class="form-group py-2 col-sm-12 col-md-3">
+                    <label asp-for="ApplicationUser.Nome" class="mb-1"></label>
+                    <input asp-for="ApplicationUser.Nome" readonly class="form-control" />
                 </div>
-                <div class="form-floating py-2 col-12">
+                <div class="form-group py-2 col-sm-12 col-md-3">
+                    <label asp-for="ApplicationUser.Role" class="mb-1">Role</label>
                     <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select"></select>
                 </div>
                 @{
@@ -27,7 +27,7 @@
                 {
                     empVisible = "display:block;";
                 }
-                <div class="form-floating py-2 col-12">
+                <div class="form-group py-2 col-12">
                     <select asp-for="ApplicationUser.EmpresaId" style="@empVisible" asp-items="@Model.EmpresaList" class="form-select">
                     </select>
                 </div>
@@ -37,18 +37,15 @@
                         <button type="submit" class="btn btn-primary form-control">Atualizar Role</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-action="Index" class="btn btn-outline-primary border form-control">
+                        <a asp-action="Index" class="btn btn-outline-secondary border form-control">
                             Voltar
                         </a>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
-
-
-
 
 @section Scripts{
     @{

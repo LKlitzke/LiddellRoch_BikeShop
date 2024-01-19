@@ -6,25 +6,22 @@
 <form method="post">
     <input asp-for="PedidoHeader.Id" hidden />
     <br />
-    <div class="container">
+    <div class="container my-4">
         <div class="card">
             <div class="card-header bg-dark text-light ml-0">
                 <div class="container row">
                     <div class="col-12 d-none d-md-block col-md-6">
-                        <h3 class="mt-1"><i class="fas fa-shopping-cart"></i> &nbsp; Detalhes do pedido</h3>
-                    </div>
-                    <div class="col-12 col-md-3 offset-md-3 text-right">
-                        <a asp-action="Index" class="btn btn-outline-info form-control btn-sm" style="font-size:medium">VOLTAR</a>
+                        <h3 class="mt-1"><i class="fas fa-shopping-cart"></i> &nbsp;Pedido #@Model.PedidoHeader.Id</h3>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="container rounded p-2">
+                <div class="rounded p-2">
                     <div class="row">
                         <div class="col-12 col-lg-6 pb-4">
                             <div class="row">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">Detalhes</span>
+                                    <span class="text-primary">Detalhes do pedido</span>
                                 </h4>
                             </div>
                             <div class="row my-1">
@@ -37,7 +34,7 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.Nome" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.Nome" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
@@ -51,7 +48,7 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.Telefone" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.Telefone" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
@@ -65,7 +62,7 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.Endereco" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.Endereco" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
@@ -79,7 +76,7 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.Cidade" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.Cidade" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
@@ -93,7 +90,7 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.Estado" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.Estado" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
@@ -107,20 +104,20 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.CodigoPostal" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.CodigoPostal" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">E-mail</div>
                                 <div class="col-9">
-                                    <input value="@Model.PedidoHeader.ApplicationUser.Email" readonly type="text" class="form-control" />
+                                    <input value="@Model.PedidoHeader.ApplicationUser.Email" readonly type="text" class="form-control readonly-field" />
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Data de encomenda</div>
                                 <div class="col-9">
-                                    <input value="@Model.PedidoHeader.DataPedido.ToShortDateString()" readonly type="text" class="form-control" />
+                                    <input value="@Model.PedidoHeader.DataPedido.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -132,7 +129,7 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.Transportadora" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.Transportadora" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
@@ -145,14 +142,14 @@
                                     }
                                     else
                                     {
-                                        <input asp-for="PedidoHeader.NumeroRastreio" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.NumeroRastreio" readonly type="text" class="form-control readonly-field" />
                                     }
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Data de envio</div>
                                 <div class="col-9">
-                                    <input value="@Model.PedidoHeader.DataEnvio.ToShortDateString()" readonly type="text" class="form-control" />
+                                    <input value="@Model.PedidoHeader.DataEnvio.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
                                 </div>
                             </div>
                             @if (User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
@@ -160,13 +157,13 @@
                                 <div class="row my-1">
                                     <div class="col-3">Session ID</div>
                                     <div class="col-9">
-                                        <input asp-for="PedidoHeader.SessionId" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.SessionId" readonly type="text" class="form-control readonly-field" />
                                     </div>
                                 </div>
                                 <div class="row my-1">
                                     <div class="col-3">Payment Intent ID</div>
                                     <div class="col-9">
-                                        <input asp-for="PedidoHeader.PaymentIntentId" readonly type="text" class="form-control" />
+                                        <input asp-for="PedidoHeader.PaymentIntentId" readonly type="text" class="form-control readonly-field" />
                                     </div>
                                 </div>
                             }
@@ -175,21 +172,21 @@
                                 {
                                     <div class="col-3">Data Limite de Pagamento</div>
                                     <div class="col-9">
-                                        <input value="@Model.PedidoHeader.DataVencimentoPagamento.ToShortDateString()" readonly type="text" class="form-control" />
+                                        <input value="@Model.PedidoHeader.DataVencimentoPagamento.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="col-3">Data de Pagamento</div>
                                     <div class="col-9">
-                                        <input value="@Model.PedidoHeader.DataVencimentoPagamento.ToShortDateString()" readonly type="text" class="form-control" />
+                                        <input value="@Model.PedidoHeader.DataVencimentoPagamento.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
                                     </div>
                                 }
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Status do Pagamento</div>
                                 <div class="col-9">
-                                    <input asp-for="PedidoHeader.StatusPagamento" readonly type="text" class="form-control" />
+                                    <input asp-for="PedidoHeader.StatusPagamento" readonly type="text" class="form-control readonly-field" />
                                 </div>
                             </div>
                             @if (User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
@@ -211,11 +208,11 @@
                                             <div class="col-8">
 
                                                 <h6 class="my-0 text-primary">@item.Bicicleta.Nome</h6>
-                                                <small class="text-muted">Preço: @item.Bicicleta.Preco.ToString("c")</small><br />
+                                                <small class="text-muted">Preço: @item.Bicicleta.ValorComDesconto.ToString("c")</small><br />
                                                 <small class="text-muted">Unidade (s): @item.Quantidade</small>
                                             </div>
                                             <div class="col-4 text-end">
-                                                <p class="text-success">@((item.Quantidade * item.Bicicleta.Preco).ToString("c"))</p>
+                                                <p class="text-success">@((item.Quantidade * item.Bicicleta.ValorComDesconto).ToString("c"))</p>
                                             </div>
                                         </div>
                                     </li>
@@ -263,6 +260,14 @@
     </div>
 </form>
 
+<style>
+    .readonly-field {
+        background-color: #f2f2f2; /* Cor de fundo cinza para indicar somente leitura */
+        color: #555; /* Cor do texto para melhor legibilidade */
+        cursor: not-allowed; /* Altera o cursor para indicar que o campo é somente leitura */
+    }
+</style>
+
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
     <script>
@@ -270,16 +275,16 @@
             if (document.getElementById("PedidoHeader_Transportadora").value == "") {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
-                    text: 'Insira um valor de transportadora!',
+                    title: 'Erro!',
+                    text: 'Insira um valor válido de transportadora!',
                 });
                 return false;
             }
             if (document.getElementById("PedidoHeader_NumeroRastreio").value == "") {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
-                    text: 'Insira um valor de rastreamento!',
+                    title: 'Erro!',
+                    text: 'Insira um valor válido de rastreamento!',
                 });
                 return false;
             }

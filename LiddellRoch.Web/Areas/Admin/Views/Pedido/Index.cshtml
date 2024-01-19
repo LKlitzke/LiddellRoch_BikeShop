@@ -29,16 +29,17 @@
 }
 
 <div class="container">
-    <div class="card shadow border-0 my-4">
-        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+    <div class="border-0 my-4">
+        <div class="ml-0 pt-3">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="text-white py-2">Lista de encomendas</h2>
+                <div class="col-12">
+                    <h2 class="py-2">Lista de Pedidos</h2>
+                    <hr />
                 </div>
             </div>
         </div>
-        <div class="card-body p-4">
-            <div class="d-flex justify-content-between pb-5 pt-2">
+        <div class="pb-4">
+            <div class="d-flex justify-content-between py-2">
                 <span></span>
                 <ul class="list-group list-group-horizontal-sm">
                     <a style="text-decoration:none;" asp-controller="Pedido" asp-action="Index" asp-route-status="processando">
@@ -73,10 +74,8 @@
                     </tr>
                 </thead>
             </table>
-
         </div>
     </div>
-
 </div>
 
 @section Scripts{

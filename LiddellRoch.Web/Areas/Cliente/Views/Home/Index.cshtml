@@ -75,12 +75,12 @@
 
 <div class="row pb-3 container mt-4" style="margin: 0 auto;">
     <h3>BIKES MAIS VENDIDAS</h3>
-    <partial name="_BikeListPartial" model="Model.OrderByDescending(b => b.Avaliacoes.Count).Take(4).ToList() as IEnumerable<Bicicleta>"/>
+    <partial name="_BikeListPartial" model="Model.Where(a => a.Estoque > 0).OrderByDescending(b => b.Avaliacoes.Count).Take(4).ToList() as IEnumerable<Bicicleta>" />
 </div>
 
 <div class="row pb-3 container mt-4" style="margin: 0 auto;">
     <h3>BIKES EM PROMOÇÃO</h3>
-    <partial name="_BikeListPartial" model="Model.OrderByDescending(b => b.DescontoPromocao).Take(4).ToList() as IEnumerable<Bicicleta>" />
+    <partial name="_BikeListPartial" model="Model.Where(a => a.Estoque > 0).OrderByDescending(b => b.DescontoPromocao).Take(4).ToList() as IEnumerable<Bicicleta>" />
 </div>
 
 <div class="row pb-3 container mt-4" style="margin: 0 auto;">

@@ -146,10 +146,19 @@
 </style>
 
 <script>
+	var orderElement = document.querySelector('#select2Order');
+	document.body.addEventListener('change', function (event) {
+		if (event.target.id === 'select2Order') {
+			filtrarLista();
+		}
+	}, false);
+	
 	function filtrarLista() {
 		var precoMinimo = document.querySelector('#flush-collapseThree input[placeholder="R$ 0,00"]').value;
 		var precoMaximo = document.querySelector('#flush-collapseThree input[placeholder="R$ 1000,00"]').value;
 		var nomeBusca = document.querySelector('#flush-collapseFour input[name="nome"]').value;
+		orderElement = document.querySelector('#select2Order');
+		//console.log(orderElement.value);
 
 		// Construindo objeto com valores de filtragem
 		var selectedMarcas = $('#flush-collapseTwo input[type="checkbox"]:checked').map(function () {
@@ -177,24 +186,33 @@
 				categoriasIdFilter: selectedCategorias,
 				precoMinimo: precoMinimo,
 				precoMaximo: precoMaximo,
-				nomeBusca: nomeBusca
+				nomeBusca: nomeBusca,
+				ordenar: orderElement.value
 			},
 			success: function (result) {
 				$("#listaBicicletas").html(result);
+				if (orderElement.value) {
+					var selector = Array.from(document.querySelector('#select2Order').children);
+					selector.forEach(elem => {
+						if (elem.value == orderElement.value) {
+							elem.setAttribute("selected", "");
+						}
+					});
+				}
 
 				//alert("ok");
 			},
-			error: function () {
-				console.log(exception);
+			error: function (error) {
+				console.log(error);
 			}
-		})
+		});
 	}
 
-		function obterValoresSelecionados(selector) {
-			var valoresSelecionados = [];
-			$(selector + ':checked').each(function () {
-				valoresSelecionados.push(this.value);
-			});
+	function obterValoresSelecionados(selector) {
+		var valoresSelecionados = [];
+		$(selector + ':checked').each(function () {
+			valoresSelecionados.push(this.value);
+		});
 		
 		return valoresSelecionados;
 	}

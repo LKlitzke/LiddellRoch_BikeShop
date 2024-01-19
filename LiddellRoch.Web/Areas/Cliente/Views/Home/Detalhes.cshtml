@@ -10,7 +10,7 @@
 <div class="row pb-3 container" style="margin: 0 auto;">
     <form method="post">
         <input hidden asp-for="BicicletaId" />
-        <div class="card shadow border-0 mt-4 mb-4">
+        <div class="border-0 mt-4 mb-4">
             @* <div class="card-header bg-secondary bg-gradient text-light py-4">
             <div class="row">
             <div class="col-12 text-center">
@@ -19,10 +19,10 @@
             </div>
             </div>
             </div> *@
-            <div class="card-body">
+            <div class="">
                 <div class="py-3">
                     <div class="row">
-                        <div class="col-6 mx-5 pb-1 mb-4">
+                        <div class="col-12 mx-5 pb-1 mb-4">
                             <a asp-action="Index" class="btn btn-outline-primary bg-gradient fw-semibold btn-sm text-uppercase">
                                 <i class="fa-solid fa-circle-chevron-left"></i>&nbsp; &nbsp;<span>Voltar</span>
                             </a>
@@ -104,29 +104,43 @@
                         </div>
                         <div class="col-md-7 col-12 pl-2">
                            
-                            <div class="row ps-2">
-                                <h2 class="text-dark">@Model.Bicicleta.Nome</h2>
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <h2 class="text-dark">@Model.Bicicleta.Marca.Nome @Model.Bicicleta.Nome</h2>
+                                </div>
+                                <div class="col-xl-4">
+                                    
+                                    @if (Model.Bicicleta.Estoque < 10)
+                                    {
+                                        var estoqueText = Model.Bicicleta.Estoque == 1 ? "RESTANTE" : "RESTANTES";
+                                        <span class="bikeBadge badge bg-danger w-100 h-100 fs-5 flex align-content-center"><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque @estoqueText!</span>
+                                    }
+                                </div>
                             </div>
-                            <br>
-                            <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50">@Model.Bicicleta.Categoria.Nome</h6>
+                            <hr>
+                            <div class="row">
+                                <h6 class="text-dark"><strong>Categoria:</strong> @Model.Bicicleta.Categoria.Nome</h6>
                             </div>
-
-                           
-                            <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50">Estoque: @Model.Bicicleta.Estoque unidades</h6>
-                                @if (Model.Bicicleta.Estoque < 10)
-                                {
-                                    var estoqueText = Model.Bicicleta.Estoque == 1 ? "RESTANTE" : "RESTANTES";
-                                    <span class="bikeBadge badge bg-danger w-25 "><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque @estoqueText!</span>
-                                }
+                            <div class="row">
+                                <h6 class="text-dark"><strong>Estoque:</strong> @Model.Bicicleta.Estoque unidades</h6>
                             </div>
-                            <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50 ">Tamanhos: @Model.Bicicleta.Tamanhos.Replace(",",", ")</h6>
+                            <div class="row">
+                                <h6 class="text-dark"><strong>Tamanhos:</strong> @Model.Bicicleta.Tamanhos.Replace(",", ", ")</h6>
                             </div>
-
-                            <br>
-                            <div class="row ps-2">
+                            <div class="row">
+                                <h6 class="text-dark"><strong>Peso aproximado:</strong> @Model.Bicicleta.Peso kg</h6>
+                            </div>
+                            <div class="row">
+                                <h6 class="text-dark pb-2 d-flex align-items-center">
+                                    <strong>Cores:</strong>&nbsp;
+                                    @foreach (var i in coresList)
+                                    {
+                                        var css = $"cursor: pointer; height: 20px;width: 20px;background-color:{i};border-radius: 50%; display: inline-block;";
+                                        <span class="dot" style="@css" title="@i"></span>
+                                    }
+                                </h6>
+                            </div>
+                            <div class="row mt-3">
                                 <div class="pl-1">
                                     <p class="text-dark text-opacity-75 mb-1">
                                         De:
@@ -141,7 +155,7 @@
                                         <span class="text-dark" style="font-weight:bold; font-size:large">
                                             @((Model.Bicicleta.Preco).ToString("c"))
                                         </span>
-                                        <br><span style="font-size:small">em 12 vezes sem juros ou</span>
+                                        <span style="font-size:small">em 12 vezes sem juros ou</span>
                                         <br>
                                         <span class="text-success" style="font-weight:bolder; font-size:xx-large">
                                             @Model.Bicicleta.ValorComDesconto.ToString("c")
@@ -150,51 +164,10 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="row ps-2">
-                                <h6 class="text-dark text-opacity-50  pb-2">
-                                    Cores:
-                                    @foreach (var i in coresList)
-                                    {
-                                        var css = "height: 25px;width: 25px;background-color:" + i + ";border-radius: 50%; display: inline-block;";
-                                        <span class="dot" style="@css"></span>
-                                    }
-
-                                </h6>
-                            </div>
-                            
-
-                             @* <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                            <div class="text-dark text-opacity-50 fw-semibold">Quantidade</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                            <div class="text-dark text-opacity-50 fw-semibold">1-50</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                            <div class="text-dark text-opacity-50 fw-semibold">51-100</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white border-bottom">
-                            <div class="text-dark text-opacity-50 fw-semibold">100+</div>
-                            </div>
-                            </div>
-                            <div class="row text-center ps-2">
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>Preço</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>dasdasdas</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>dasdasdas</div>
-                            </div>
-                            <div class="p-1 col-3 col-lg-2 bg-white text-warning fw-bold">
-                            <div>dasdasdas</div>
-                            </div>
-                            </div *@
                             
                             <div class="row pl-2 mb-3">
                                 <div class="col-md-12">
-                                    <div class="input-group mb-3" style="width: 30% !important;min-width: fit-content;">
+                                    <div class="input-group mb-3" style="width: 25% !important;min-width: fit-content;">
                                         <span class="input-group-text bg-primary text-white border-0 fw-semibold"
                                               id="inputGroup-sizing-default">
                                             Unidades
@@ -209,7 +182,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6 pb-1">
                                     <button type="submit" id="submit-btn"
-                                            class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                            class="btn btn-success bg-gradient w-100 py-2 text-uppercase fw-semibold">
                                         <i class="bi bi-cart-plus-fill"></i> Adicionar ao carrinho
                                     </button>
                                 </div>
@@ -220,7 +193,7 @@
 
                     <div class="mx-5 pt-5">
                         <div class="pb-1">
-                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> DESCRIÇÃO DO PRODUTO</h3>
+                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> DESCRIÇÃO</h3>
                         </div>
                         <div class="row pl-2 my-1">
                             @Html.Raw(Model.Bicicleta.Descricao)

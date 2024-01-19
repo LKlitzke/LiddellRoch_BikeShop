@@ -1,29 +1,26 @@
 ﻿@model CarrinhoComprasVm
 
-<form method="post" onsubmit="mostrarAviso()">
+<form id="formResumo" method="post">
 	<br />
 	<div class="container">
-		<div class="card shadow border-0 my-4">
+		<div class="card border my-4">
 
-			<div class="card-header bg-secondary bg-gradient text-light ml-0 py-4">
+			<div class="card-header bg-primary bg-gradient ml-0 pt-3">
 				<div class="row px-4">
-					<div class="col-6">
-						<h5 class="pt-2 text-white">
-							Carrinho de compras
-						</h5>
-					</div>
-					<div class="col-6 text-end">
-						<a asp-action="Index" class="btn btn-danger btn-md">Voltar</a>
+					<div class="col-12">
+						<h2 class="pt-2 text-white">
+							<i class="bi bi-cart-fill"></i> Meu Carrinho de Compras
+						</h2>
 					</div>
 				</div>
 			</div>
 			<div class="card-body">
-				<div class="container rounded p-2">
+				<div class="p-2">
 					<div class="row">
 						<div class="col-12 col-lg-6 pb-4">
 							<div class="row">
 								<h4 class="d-flex justify-content-between align-items-center mb-3">
-									<span class="text-primary">Detalhes de envio:</span>
+									<span class="text-dark">Detalhes de envio:</span>
 								</h4>
 							</div>
 							<div class="row my-1">
@@ -40,7 +37,7 @@
 									<label>Telefone</label>
 								</div>
 								<div class="col-9">
-									<input asp-for="PedidoHeader.Telefone" class="form-control" />
+									<input asp-for="PedidoHeader.Telefone" id="phoneInput" class="form-control" />
 									<span asp-validation-for="PedidoHeader.Telefone" class="text-danger"></span>
 								</div>
 							</div>
@@ -76,7 +73,7 @@
 									<label>CEP</label>
 								</div>
 								<div class="col-9">
-									<input asp-for="PedidoHeader.CodigoPostal" class="form-control" />
+									<input asp-for="PedidoHeader.CodigoPostal" id="cepInput" class="form-control" />
 									<span asp-validation-for="PedidoHeader.CodigoPostal" class="text-danger"></span>
 								</div>
 							</div>
@@ -118,7 +115,7 @@
 						</p>
 					</div>
 					<div class="col-12 col-md-4">
-						<button type="submit" value="" class="btn btn-success form-control"><i class="bi bi-check-lg"></i> Confirmar pedido</button>
+						<button id="submitBtn" type="submit" value="" class="btn btn-success form-control"><i class="bi bi-check-lg"></i> Confirmar pedido</button>
 					</div>
 				</div>
 			</div>
@@ -127,11 +124,37 @@
 </form>
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
+	<script>
+
+		$('#phoneInput').inputmask({
+			mask: ['99 99999-9999'],
+			greedy: false,
+			removeMaskOnSubmit: true
+		});
+
+		$('#cepInput').inputmask({
+			mask: ['99999-999'],
+			greedy: false,
+			removeMaskOnSubmit: true
+		});
+
+		$(document).ready(function () {
+			$('form').submit(function (event) {
+				if (!$('#phoneInput').inputmask('isComplete')) {
+					swal.fire("Dados inválidos!", "Verifique o preenchimento do campo de telefone!", "error");
+					event.preventDefault();
+					return false;
+				}
+
+				if (!$('#cepInput').inputmask('isComplete')) {
+					swal.fire("Dados inválidos!", "Verifique o preenchimento do campo de CEP!", "error");
+					event.preventDefault();
+					return false;
+				}
+
+				confirm("ATENÇÃO! A tela seguinte exigirá dados de cartão de crédito para simular o processamento de pagamento. Embora não exista uma cobrança real, favor NÃO INFORMAR seus dados pessoais! Utilize números aleatórios como '424242...'. Clique em OK para confirmar seu entendimento.");
+
+			});
+		});
+	</script>
 }
-
-<script>
-
-	function mostrarAviso() {
-		alert("ATENÇÃO! A tela seguinte exigirá dados de cartão de crédito para simular o processamento de pagamento. Embora não seja realmente cobrado, favor NÃO informar seus dados pessoais! Utilize um e-mail fictício e preencha os campos do cartão com números aleatórios como '424242...'");
-	}
-</script>
