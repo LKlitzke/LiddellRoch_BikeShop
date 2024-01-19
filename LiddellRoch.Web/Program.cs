@@ -13,6 +13,7 @@ using LiddellRoch.Application.Services;
 using System.Security.Cryptography.X509Certificates;
 using Azure.Identity;
 using Microsoft.AspNetCore.Localization;
+using LiddellRoch.Models;
 
 // Globalization
 var cultureInfo = new CultureInfo("pt-BR");
@@ -65,6 +66,7 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 
 // Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 builder.Services.ConfigureApplicationCookie(options => {
     options.LoginPath = $"/Identity/Account/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
