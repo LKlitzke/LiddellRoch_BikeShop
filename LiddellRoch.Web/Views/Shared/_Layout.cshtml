@@ -1,7 +1,12 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@using LiddellRoch.Application.Services.Interfaces
+@using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAcessor
-
+@inject ICategoriaService categoriaService
 <!DOCTYPE html>
+
+@{
+    var categList = categoriaService.GetAll().OrderBy(c => c.Nome).ToList();
+}
 
 <style>
     .navbar-nav {
@@ -38,7 +43,7 @@
 
     @@media screen and (min-width: 993px) {
         .head1 {
-            font-size: 2.2vw;
+            font-size: 2vw;
         }
     }
 
@@ -92,6 +97,14 @@
         width: 1.5em;
         color: var(--bs-primary);
     }
+
+    @@media screen and (min-width: 768px) and (max-width: 1000px) {
+        #searchBar {
+            display: none;
+        }
+    }
+
+
 </style>
 
 <html lang="en" data-bs-theme="light">
@@ -147,8 +160,28 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                    <ul class="navbar-nav" style="width: -webkit-fill-available;align-items: center;">
-                        <li class="nav-item" style="width: 100% !important">
+                    <ul class="navbar-nav" style="width: -webkit-fill-available;align-items: center; justify-content: end;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="">Bicicletas</span>
+                            </a>
+                            <ul class="dropdown-menu p-2">
+                                <li class="dropdown-item py-2 px-0">
+                                    <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes">
+                                        <i class="bi bi-chevron-compact-right"></i><div class="mx-1 fw-semibold">Todas as bikes</div>
+                                    </a>
+                                </li>
+                                @foreach(var categoria in categList)
+                                {
+                                    <li class="dropdown-item py-2 px-0">
+                                        <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes" asp-route-categBusca="@categoria.Id">
+                                            <i class="bi bi-chevron-compact-right"></i><div class="mx-1">@categoria.Nome</div>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                        <li id="searchBar" class="nav-item" style="width: 100% !important">
                             <form class="d-flex collapse-adjust" method="get" asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes" style="padding: 0.5rem;">
                                 <div class="input-group">
                                     <input name="nomeBusca" class="form-control" type="search" placeholder="Olá! O que você procura hoje?" aria-label="Buscar-modelo">
@@ -161,7 +194,7 @@
                             @await Component.InvokeAsync("ShoppingCart")
                         </li>
 
-                            @if (User.IsInRole(SD.Role_Administrador))
+                        @if (User.IsInRole(SD.Role_Administrador))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -237,15 +270,15 @@
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes">Lista de Bicicletas</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="SobreNos"> Sobre este projeto</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="Privacidade">Política de Privcidade</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="SobreNos"> Sobre este Projeto</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="Privacidade">Política de Privacidade</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4 class="text-start">Nossos serviços</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Venda de bicicletas</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Venda de Bicicletas</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Manutenção em Computadores</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Desenvolvimento Web</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Consultoria Fitness</a></li>

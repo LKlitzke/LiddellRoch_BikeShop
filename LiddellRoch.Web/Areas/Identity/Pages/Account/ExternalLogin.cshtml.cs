@@ -83,16 +83,25 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [EmailAddress(ErrorMessage = "Insira um E-mail válido")]
             public string Email { get; set; }
-            [Required]
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(10, ErrorMessage = "Insira um nome com ao menos 10 dígitos")]
             public string Nome { get; set; }
-            public string? Endereco { get; set; }
-            public string? Cidade { get; set; }
-            public string? Estado { get; set; }
-            public string? CodigoPostal { get; set; }
-            public string? Telefone { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(10, ErrorMessage = "Insira um endereço com ao menos 10 dígitos")]
+            public string Endereco { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            public string Cidade { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            public string Estado { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(8, ErrorMessage = "Insira um CEP válido")]
+            public string CodigoPostal { get; set; }
+            [Required(ErrorMessage = "Preencha este campo obrigatório.")]
+            [MinLength(11, ErrorMessage = "O campo deve possuir 11 dígitos")]
+            public string Telefone { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");

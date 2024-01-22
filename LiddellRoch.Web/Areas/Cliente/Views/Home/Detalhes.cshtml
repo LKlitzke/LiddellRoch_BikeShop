@@ -23,7 +23,7 @@
                 <div class="py-3">
                     <div class="row">
                         <div class="col-12 mx-5 pb-1 mb-4">
-                            <a asp-action="Index" class="btn btn-outline-primary bg-gradient fw-semibold btn-sm text-uppercase">
+                            <a href="#" onclick="history.back()" class="btn btn-outline-primary bg-gradient fw-semibold btn-sm text-uppercase">
                                 <i class="fa-solid fa-circle-chevron-left"></i>&nbsp; &nbsp;<span>Voltar</span>
                             </a>
                             @if(User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
@@ -76,7 +76,7 @@
                                         @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
                                        .Select((image, index) => new { Image = image, Index = index }))
                                         {
-                                            <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")" id="container" @* style="width: 80%;margin-left: 10%;" *@>
+                                            <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")" id="container">
                                                 <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="max-height:600px;object-fit: contain" alt="Bike imagem" id="img-@imageWithIndex.Index">
                                             </div>
                                         }
@@ -222,12 +222,23 @@
                         </div>
                     }
 
+                    <div class="mx-5 pt-5">
+                        <div class="pb-1">
+                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> GARANTIA</h3>
+                        </div>
+                        <div class="pl-2 my-1" style="text-align:justify">
+                            Garantia padrão de 30 dias após o recebimento do produto, conforme o Art. 26 do Código de Defesa do Consumidor.
+                            Adicionalmente, fornecemos garantia de 5 anos para o quadro, 3 meses para componentes e 6 meses para a pintura.
+                            Para devoluções, os produtos devem ser remetidos em suas embalagens originais, não abrangendo casos de mau uso.
+                        </div>
+                    </div>
+
                     @if(Model.Bicicleta.Avaliacoes.Count > 0)
                     {
                         <div class="mx-5 pt-3 my-2" id="userRatingsSummary">
                             <div class="pb-1">
                                 <h3 class="mb-3"><i class="bi bi-star-fill fs-4" style="color: var(--bs-primary)"></i> AVALIAÇÕES DOS USUÁRIOS</h3>
-                                <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;margin-left: auto;">
+                                <div class="row ratingGrid" style="display: grid; gap: 1rem;margin-left: auto;">
                                     @foreach (var item in Model.Bicicleta.Avaliacoes.OrderBy(e => e.DataAvaliacao))
                                     {
 
@@ -260,7 +271,6 @@
                             </div>
                         </div>
                     }
-                    
                 </div>
             </div>
         </div>
@@ -299,6 +309,12 @@
     }
     html {
         scroll-behavior: smooth;
+    }
+
+    @@media screen and (min-width: 993px) {
+        .ratingGrid {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 
     .carousel-inner .item img {
