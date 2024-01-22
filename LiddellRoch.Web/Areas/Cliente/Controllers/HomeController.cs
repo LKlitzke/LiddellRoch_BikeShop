@@ -31,13 +31,16 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult ListaBikes(string? nomeBusca)
+		public IActionResult ListaBikes(string? nomeBusca, int? categBusca)
 		{
 			var tamEnumList = Enum.GetValues(typeof(Tamanhos)).Cast<Tamanhos>();
 			IEnumerable<Bicicleta> bikeList = _unitOfWork.Bicicleta.GetAll(b => b.Estoque > 0, includeProperties: "Categoria,Marca,ImagensProduto,Avaliacoes");
 
             if (!string.IsNullOrEmpty(nomeBusca))
-                bikeList = bikeList.Where(b => b.Nome.ToLower().Contains(nomeBusca.ToLower())).ToList();
+                bikeList = bikeList.Where(b => b.Nome.ToLower().Contains(nomeBusca.ToLower()) || b.Marca.Nome.ToLower().Contains(nomeBusca.ToLower())).ToList();
+
+            if (categBusca != null)
+                bikeList = bikeList.Where(b => b.Categoria.Id == categBusca).ToList();
 
             ListaBikesVm listaBikesVm = new()
 			{
@@ -83,7 +86,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 				bikeList = bikeList.Where(b => b.ValorComDesconto <= decimal.Parse(precoMaximo)).ToList();
 
 			if (!string.IsNullOrEmpty(nomeBusca))
-				bikeList = bikeList.Where(b => b.Nome.ToLower().Contains(nomeBusca.ToLower())).ToList();
+				bikeList = bikeList.Where(b => b.Nome.ToLower().Contains(nomeBusca.ToLower()) || b.Marca.Nome.ToLower().Contains(nomeBusca.ToLower())).ToList();
 
 			if(!string.IsNullOrEmpty(ordenar) && int.Parse(ordenar) > 0)
 			{
@@ -161,7 +164,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 				HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.CarrinhoCompras.GetAll(u => u.ApplicationUserId == userId).Count());
 			}
 			TempData["success"] = "Carrinho atualizado com sucesso!";
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction("Index", "Cart", new { area = "Cliente" });
 		}
 
 		public IActionResult SobreNos()
