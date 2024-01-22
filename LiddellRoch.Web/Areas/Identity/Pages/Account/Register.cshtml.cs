@@ -119,7 +119,7 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
             [MinLength(10, ErrorMessage = "Insira um nome com ao menos 10 dígitos")]
             public string Nome { get; set; }
             [Required(ErrorMessage = "Preencha este campo obrigatório.")]
-            [MinLength(15, ErrorMessage = "Insira um endereço com ao menos 15 dígitos")]
+            [MinLength(10, ErrorMessage = "Insira um endereço com ao menos 10 dígitos")]
             public string Endereco { get; set; }
             [Required(ErrorMessage = "Preencha este campo obrigatório.")]
             public string Cidade { get; set; }

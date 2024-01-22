@@ -25,52 +25,53 @@
                         </div>
                         <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                            <div class="form-group first mb-3">
-                                <label asp-for="Input.Nome" class="form-label">Nome completo: <span class="required-mark">*</span></label>
+                            <div class="form-group first col-12 col-lg-6 mb-3">
+                                <label asp-for="Input.Nome" class="form-label">Nome: <span class="required-mark">*</span></label>
                                 <input asp-for="Input.Nome" class="form-control" placeholder="Digite seu nome"/>
                                 <span asp-validation-for="Input.Nome" class="text-danger"></span>
                             </div>
-                            <div class="form-group mb-3 col-md-8">
+                            <div class="form-group mb-3 col-12 col-lg-6">
                                 <label asp-for="Input.Email" class="form-label">E-mail: <span class="required-mark">*</span></label>
                                 <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true" placeholder="Digite seu melhor e-mail"/>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
-                            <div class="form-group mb-3 col-md-4">
-                                <label asp-for="Input.Telefone" class="form-label">Telefone ou Celular: <span class="required-mark">*</span></label>
-                                <input asp-for="Input.Telefone" id="phoneInput" class="form-control" placeholder="Digite seu telefone" />
-                                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3 col-md-6">
+                            <div class="form-group mb-3 col-lg-6">
                                 <label asp-for="Input.Password" class="form-label">Senha: <span class="required-mark">*</span></label>
                                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Digite uma senha"/>
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
-                            <div class="form-group mb-3 col-md-6">
+                            <div class="form-group mb-3 col-lg-6">
                                 <label asp-for="Input.ConfirmPassword" class="form-label">Confirme sua senha: <span class="required-mark">*</span></label>
                                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirme sua senha"/>
                                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
-
-                            <div class="form-group mb-3 col-md-12">
-                                <label asp-for="Input.Endereco" class="form-label">Endereço: <span class="required-mark">*</span></label>
-                                <input asp-for="Input.Endereco" class="form-control" placeholder="Digite seu endereço" />
-                                <span asp-validation-for="Input.Endereco" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3 col-md-6">
-                                <label asp-for="Input.Cidade" class="form-label">Cidade: <span class="required-mark">*</span></label>
-                                <input asp-for="Input.Cidade" class="form-control" placeholder="Digite sua cidade" />
-                                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3 col-md-3">
-                                <label asp-for="Input.Estado" class="form-label">Estado: <span class="required-mark">*</span></label>
-                                <input asp-for="Input.Estado" class="form-control" placeholder="Digite seu estado" />
-                                <span asp-validation-for="Input.Estado" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3 col-md-3">
+                            <div class="form-group mb-3 col-lg-3">
                                 <label asp-for="Input.CodigoPostal" class="form-label">CEP: <span class="required-mark">*</span></label>
-                                <input asp-for="Input.CodigoPostal" id="cepInput" class="form-control" placeholder="Digite seu CEP" />
+                                <input asp-for="Input.CodigoPostal" pattern="[0-9]{8}" id="cepInput" maxlength="8" class="form-control" placeholder="Digite seu CEP" />
                                 <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
                             </div>
+                            <div class="form-group mb-3 col-lg-6">
+                                <label asp-for="Input.Cidade" class="form-label">Cidade: <span class="required-mark">*</span></label>
+                                <input asp-for="Input.Cidade" id="cidadeInput" class="form-control" placeholder="Digite sua cidade" />
+                                <span asp-validation-for="Input.Cidade" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-lg-3">
+                                <label asp-for="Input.Estado" class="form-label">Estado: <span class="required-mark">*</span></label>
+                                <input asp-for="Input.Estado" id="estadoInput" class="form-control" placeholder="Digite seu estado" />
+                                <span asp-validation-for="Input.Estado" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 col-lg-3">
+                                <label asp-for="Input.Telefone" class="form-label">Telefone: <span class="required-mark">*</span></label>
+                                <input asp-for="Input.Telefone" id="phoneInput" class="form-control" placeholder="Digite seu telefone" />
+                                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-4 col-lg-9">
+                                <label asp-for="Input.Endereco" class="form-label">Endereço: <span class="required-mark">*</span></label>
+                                <input asp-for="Input.Endereco" id="enderecoInput" class="form-control" placeholder="Digite seu endereço" />
+                                <span asp-validation-for="Input.Endereco" class="text-danger"></span>
+                            </div>
+                            
                             @if (User.IsInRole(SD.Role_Administrador))
                             {
                                 <div class="form-group mb-3 col-md-6">
@@ -102,45 +103,45 @@
                                         @{
                                             if ((Model.ExternalLogins?.Count ?? 0) == 0)
                                             {
-                                                    <div>
-                                                        <p>
-                                                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                                                article
-                                                                about setting up this ASP.NET application to support logging in via external services
-                                                            </a>.
-                                                        </p>
-                                                    </div>
+                                                <div>
+                                                    <p>
+                                                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                            article
+                                                            about setting up this ASP.NET application to support logging in via external services
+                                                        </a>.
+                                                    </p>
+                                                </div>
                                             }
                                             else
                                             {
-                                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                                        <div>
-                                                        <p>registre-se vinculando suas redes sociais</p>
-                                                            <p class="text-center">
-                                                                @foreach (var provider in Model.ExternalLogins!)
+                                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                    <div>
+                                                    <p>registre-se vinculando suas redes sociais</p>
+                                                        <p class="text-center">
+                                                            @foreach (var provider in Model.ExternalLogins!)
                                                             {
-                                                                    @switch (provider.Name)
+                                                                @switch (provider.Name)
                                                                 {
                                                                     case "Facebook":
-                                                                            <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
+                                                                        <button id="fbBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #3b5998"><i class="bi bi-facebook"></i>&nbsp; Facebook</button>
                                                                         break;
 
                                                                     case "Microsoft":
-                                                                            <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
+                                                                        <button id="msBtn" type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="background-color: #1F1F1F"><i class="bi bi-microsoft"></i>&nbsp; Microsoft</button>
                                                                         break;
 
                                                                     case "Google":
-                                                                            <button id="ggBtn" type="submit" class="btn btn-danger bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: rgb(213, 13, 13)"><i class="bi bi-google"></i>&nbsp; Google</button>
+                                                                        <button id="ggBtn" type="submit" class="btn btn-danger bg-gradient" name="provider" value="@provider.Name" title="Faça login usando sua conta no @provider.DisplayName" style="background-color: rgb(213, 13, 13)"><i class="bi bi-google"></i>&nbsp; Google</button>
                                                                         break;
 
                                                                     default:
-                                                                            <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                                        <button type="submit" class="btn btn-primary bg-gradient" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                                                                         break;
                                                                 }
                                                             }
-                                                            </p>
-                                                        </div>
-                                                    </form>
+                                                        </p>
+                                                    </div>
+                                                </form>
                                             }
                                         }
                                     </section>
@@ -286,7 +287,7 @@
                 var selection = $('#Input_Role Option:Selected').text();
                 if (selection == 'Empresa') {
                     $('#inputEmpresa').show();
-                    
+
                     $('#Input_EmpresaId').show();
                 }
                 else {
@@ -301,13 +302,41 @@
                 removeMaskOnSubmit: true
             });
 
-            $('#cepInput').inputmask({
-                mask: ['99999-999'],
-                greedy: false,
-                removeMaskOnSubmit: true
+            // $('#cepInput').inputmask({
+            //     mask: ['99999999'],
+            //     //greedy: false,
+            //     removeMaskOnSubmit: true
+            // });
+
+            const cepInput = document.getElementById("cepInput");
+            cepInput.addEventListener('change', function (e) {
+                // Checa tamanho correto do CEP
+                if (cepInput.value.length == 8) {
+                    trackCep(cepInput.value);
+                }
             });
-            
-        })
+
+
+            function trackCep(e) {
+                $.ajax({
+                    url: 'https://brasilapi.com.br/api/cep/v2/' + e,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (result) {
+                        let cidade = document.getElementById('cidadeInput');
+                        let estado = document.getElementById('estadoInput');
+                        let endereco = document.getElementById('enderecoInput');
+
+                        cidade.value = result.city ? result.city : "";
+                        estado.value = result.state ? result.state : "";
+                        endereco.value = result.street ? result.street : "";
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
     </script>
 }
    

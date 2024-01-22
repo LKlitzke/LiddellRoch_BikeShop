@@ -4,18 +4,18 @@
 	var nomeBusca = ViewData["nomeBusca"] as string ?? null;
 }
 <div class="container">
-	<div class="card shadow border-0 my-4">
-		<div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+	<div class="border-0 my-4">
+		<div class="m-lg-0 py-3">
 			<div class="row">
-				<div class="col-12 text-center">
-					<h2 class="text-white py-2">Lista de Bicicletas</h2>
+				<div class="col-12">
+					<h2 class="py-2">Lista de Bicicletas</h2>
+					<hr />
 				</div>
 			</div>
 		</div>
 		<div class="card-body py-4">
 			<div class="row">
-				<aside class="col-md-12 col-lg-3 col-xl-2">
-					
+				<aside class="col-md-4 col-lg-3 col-xl-2">
 					<div class="accordion accordion-flush" id="accordionFlush">
 						<div class="accordion-item">
 							<h2 class="accordion-header">
@@ -27,7 +27,7 @@
 								<div class="accordion-body">
 									@foreach (var cat in Model.CategoriasList)
 									{
-										<span style="display: block"><input type="checkbox" checked="" value="@cat.Value" />&nbsp; @cat.Text</span>
+										<span style="display: block"><input type="checkbox" value="@cat.Value" />&nbsp; @cat.Text</span>
 									}
 								</div>
 							</div>
@@ -42,7 +42,7 @@
 								<div class="accordion-body">
 									@foreach (var marca in Model.MarcasList)
 									{
-										<span style="display: block"><input type="checkbox" checked="" name="brands" value="@marca.Value" />&nbsp; @marca.Text</span>
+										<span style="display: block"><input type="checkbox" name="brands" value="@marca.Value" />&nbsp; @marca.Text</span>
 									}
 								</div>
 							</div>
@@ -88,7 +88,7 @@
 						<button onclick="filtrarLista()" class="btn btn-block btn-primary w-100">Filtrar</button>
 					</div>
 				</aside>
-				<main class="col-md-12 col-lg-9 col-xl-10" id="listaBicicletas">
+				<main class="col-md-8 col-lg-9 col-xl-10 px-0" id="listaBicicletas">
 					<partial name="_BikeFilterPartial" model="Model.BicicletasList" />
 				</main>
 			</div>
@@ -142,6 +142,13 @@
 
 	 .list-menu a {
 		color: var(--bs-primary);
+	}
+
+	@@media screen and (min-width: 768px) {
+		.container {
+			padding-right: 0;
+			padding-left: 0;
+		}
 	}
 </style>
 

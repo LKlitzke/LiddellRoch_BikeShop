@@ -40,7 +40,10 @@
                                     </span>
                                 }
                             </div>
-                            <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
+                            <a asp-action="Detalhes" asp-route-bikeId="@product.Id" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;">
+                                <img alt="bike-@product.Id" src="@product.ImagensProduto.FirstOrDefault().ImagemUrl" class="bikeImg card-img-top rounded" style="height: 100%; object-fit: contain; margin:  0 auto; max-width: fit-content;" />
+
+                            </a>
                             @if (product.Estoque < 10)
                             {
                                 var estoqueText = product.Estoque == 1 ? "RESTANTE" : "RESTANTES";

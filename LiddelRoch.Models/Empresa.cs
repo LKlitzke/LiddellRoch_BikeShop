@@ -12,7 +12,7 @@ namespace LiddellRoch.Models
         [Required(ErrorMessage = "O campo é de preenchimento obrigatório.")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "O campo é de preenchimento obrigatório.")]
-        [MinLength(15, ErrorMessage = "Insira um endereço com ao menos 15 dígitos")]
+        [MinLength(10, ErrorMessage = "Insira um endereço com ao menos 10 dígitos")]
         public string? Endereco { get; set; }
         [Required(ErrorMessage = "O campo é de preenchimento obrigatório.")]
         public string? Cidade { get; set; }

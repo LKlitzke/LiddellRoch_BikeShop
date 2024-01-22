@@ -12,7 +12,7 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-12">
                     <div class="form-block mx-auto">
-                        <div class="text-center mb-5">
+                        <div class="text-center">
 
                             <h1>@ViewData["Title"]</h1>
                             <h2 id="external-login-title">Associe sua conta @Model.ProviderDisplayName em seu registro</h2>
@@ -24,40 +24,40 @@
                             </p>
                             <form asp-page-handler="Confirmation" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                                <div class="form-group first mb-3">
-                                    <label asp-for="Input.Nome" class="form-label">Nome completo</label>
-                                    <input asp-for="Input.Nome" class="form-control" />
+                                <div class="form-group first col-12 col-lg-6 mb-3">
+                                    <label asp-for="Input.Nome" class="form-label">Nome: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.Nome" class="form-control" placeholder="Digite seu nome" />
                                     <span asp-validation-for="Input.Nome" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-3 col-md-8">
-                                    <label asp-for="Input.Email" class="form-label">E-mail</label>
-                                    <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true">
+                                <div class="form-group mb-3 col-12 col-lg-6">
+                                    <label asp-for="Input.Email" class="form-label">E-mail: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="e-mail" aria-required="true" placeholder="Digite seu melhor e-mail" />
                                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-3 col-md-4">
-                                    <label asp-for="Input.Telefone" class="form-label">Telefone</label>
-                                    <input asp-for="Input.Telefone" class="form-control" />
-                                    <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                                <div class="form-group mb-3 col-md-3">
+                                    <label asp-for="Input.CodigoPostal" class="form-label">CEP: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.CodigoPostal" pattern="[0-9]{8}" id="cepInput" maxlength="8" class="form-control" placeholder="Digite seu CEP" />
+                                    <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-3 col-md-12">
-                                    <label asp-for="Input.Endereco" class="form-label">Endereço</label>
-                                    <input asp-for="Input.Endereco" class="form-control" />
-                                    <span asp-validation-for="Input.Endereco" class="text-danger"></span>
-                                </div>
-                                <div class="form-group mb-3 col-md-6">
-                                    <label asp-for="Input.Cidade" class="form-label">Cidade</label>
-                                    <input asp-for="Input.Cidade" class="form-control" />
+                                <div class="form-group mb-3 col-lg-6">
+                                    <label asp-for="Input.Cidade" class="form-label">Cidade: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.Cidade" id="cidadeInput" class="form-control" placeholder="Digite sua cidade" />
                                     <span asp-validation-for="Input.Cidade" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-3 col-md-3">
-                                    <label asp-for="Input.Estado" class="form-label">Estado</label>
-                                    <input asp-for="Input.Estado" class="form-control" />
+                                <div class="form-group mb-3 col-lg-3">
+                                    <label asp-for="Input.Estado" class="form-label">Estado: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.Estado" id="estadoInput" class="form-control" placeholder="Digite seu estado" />
                                     <span asp-validation-for="Input.Estado" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-3 col-md-3">
-                                    <label asp-for="Input.CodigoPostal" class="form-label">CEP</label>
-                                    <input asp-for="Input.CodigoPostal" class="form-control" />
-                                    <span asp-validation-for="Input.CodigoPostal" class="text-danger"></span>
+                                <div class="form-group mb-3 col-lg-3">
+                                    <label asp-for="Input.Telefone" class="form-label">Telefone: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.Telefone" id="phoneInput" class="form-control" placeholder="Digite seu telefone" />
+                                    <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-4 col-lg-9">
+                                    <label asp-for="Input.Endereco" class="form-label">Endereço: <span class="required-mark">*</span></label>
+                                    <input asp-for="Input.Endereco" id="enderecoInput" class="form-control" placeholder="Digite seu endereço" />
+                                    <span asp-validation-for="Input.Endereco" class="text-danger"></span>
                                 </div>
                                 <div class="col-12">
                                     <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-success">Registrar</button>
@@ -198,4 +198,48 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#phoneInput').inputmask({
+                mask: ['99 99999-9999'],
+                greedy: false,
+                removeMaskOnSubmit: true
+            });
+
+            // $('#cepInput').inputmask({
+            //     mask: ['99999999'],
+            //     //greedy: false,
+            //     removeMaskOnSubmit: true
+            // });
+
+            const cepInput = document.getElementById("cepInput");
+            cepInput.addEventListener('change', function (e) {
+                // Checa tamanho correto do CEP
+                if (cepInput.value.length == 8) {
+                    trackCep(cepInput.value);
+                }
+            });
+
+
+            function trackCep(e) {
+                $.ajax({
+                    url: 'https://brasilapi.com.br/api/cep/v2/' + e,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (result) {
+                        let cidade = document.getElementById('cidadeInput');
+                        let estado = document.getElementById('estadoInput');
+                        let endereco = document.getElementById('enderecoInput');
+
+                        cidade.value = result.city ? result.city : "";
+                        estado.value = result.state ? result.state : "";
+                        endereco.value = result.street ? result.street : "";
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+    </script>
 }
