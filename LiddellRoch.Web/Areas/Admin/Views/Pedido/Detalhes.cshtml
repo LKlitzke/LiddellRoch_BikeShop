@@ -146,12 +146,16 @@
                                     }
                                 </div>
                             </div>
-                            <div class="row my-1">
-                                <div class="col-3">Data de envio</div>
-                                <div class="col-9">
-                                    <input value="@Model.PedidoHeader.DataEnvio.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
+                            @if(Model.PedidoHeader.DataEnvio > DateTime.MinValue)
+                            {
+                                <div class="row my-1">
+                                    <div class="col-3">Data de envio</div>
+                                    <div class="col-9">
+                                        <input value="@Model.PedidoHeader.DataEnvio.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
+                                    </div>
                                 </div>
-                            </div>
+                            }
+                            
                             @if (User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
                             {
                                 <div class="row my-1">
@@ -179,7 +183,7 @@
                                 {
                                     <div class="col-3">Data de Pagamento</div>
                                     <div class="col-9">
-                                        <input value="@Model.PedidoHeader.DataVencimentoPagamento.ToShortDateString()" readonly type="text" class="form-control readonly-field" />
+                                        <input value="@Model.PedidoHeader.DataPagamento" readonly type="text" class="form-control readonly-field" />
                                     </div>
                                 }
                             </div>
