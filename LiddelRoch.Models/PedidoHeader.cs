@@ -34,7 +34,7 @@ namespace LiddellRoch.Models
 		public string Telefone { get; set; }
 
 		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
-		[MinLength(15, ErrorMessage = "Insira um endereço com ao menos 15 dígitos")]
+		[MinLength(10, ErrorMessage = "Insira um endereço com ao menos 10 dígitos")]
 		public string Endereco { get; set; }
 
 		[Required(ErrorMessage = "Preencha este campo obrigatório.")]
