@@ -7,6 +7,7 @@ using Stripe;
 using System.Security.Claims;
 using LiddellRoch.Models.ViewModels;
 using LiddellRoch.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace LiddellRoch.Web.Areas.Admin.Controllers
 {
@@ -15,11 +16,14 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
     public class PedidoController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
+        
         [BindProperty]
         public PedidoVm PedidoVm { get; set; }
-        public PedidoController(IUnitOfWork unitOfWork)
+        public PedidoController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -193,6 +197,27 @@ namespace LiddellRoch.Web.Areas.Admin.Controllers
 
         public IActionResult AvaliarPedido(int pedidoId)
         {
+            var pedidoHeader = _unitOfWork.PedidoHeader.GetFirstOrDefault(u => u.Id == pedidoId, includeProperties: "ApplicationUser");
+            var thisUser = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
+            var avaliacaoExists = _unitOfWork.Avaliacao.GetFirstOrDefault(u => u.PedidoHeaderId == pedidoId);
+
+            if(pedidoHeader == null)
+            {
+                return RedirectToAction("Index", "Home", new { Area = "Cliente" });
+            }
+            if (!pedidoHeader.ApplicationUserId.Equals(thisUser.Id))
+            {
+                return RedirectToAction("AccessDenied", "Account", new { Area = "Identity" });
+            }
+            if (avaliacaoExists != null)
+            {
+                return RedirectToAction("AccessDenied", "Account", new { Area = "Identity" });
+            }
+            if (pedidoHeader.StatusPedido != SD.StatusShipped)
+            {
+                return RedirectToAction("AccessDenied", "Account", new { Area = "Identity" });
+            }
+
             PedidoVm = new()
             {
                 PedidoHeader = _unitOfWork.PedidoHeader.GetFirstOrDefault(u => u.Id == pedidoId, includeProperties: "ApplicationUser"),

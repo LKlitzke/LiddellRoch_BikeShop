@@ -13,9 +13,14 @@
                         @if (product.ImagensProduto != null && product.ImagensProduto.Count() > 0)
                         {
                             <div style="place-content: space-between;">
-                                @if (product.DescontoPromocao >= 5)
+                                @if (product.DescontoPromocao > 0)
                                 {
-                                    <span class="discount-badge float-start" style="font-weight: 600; background-color: var(--bs-primary); color: #fff; padding: 5px 15px; border-radius: 5px; font-size: 16px;text-align: center;">
+                                    var cssBgColor = "--bs-primary";
+                                    if (product.DescontoPromocao >= 25)
+                                        cssBgColor = "--bs-warning";
+                                    if (product.DescontoPromocao >= 50)
+                                        cssBgColor = "--bs-danger";
+                                    <span class="discount-badge float-start" style="font-weight: 600; background-color: var(@cssBgColor); color: #fff; padding: 5px 15px; border-radius: 5px; font-size: 16px;text-align: center;">
                                         - @product.DescontoPromocao%
                                     </span>
                                 }

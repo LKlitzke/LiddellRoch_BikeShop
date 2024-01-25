@@ -135,7 +135,9 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
 			shoppingCart.ApplicationUserId = userId;
-			var item = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == shoppingCart.BicicletaId);
+			shoppingCart.CriadoEm = DateTime.Now;
+
+            var item = _unitOfWork.Bicicleta.GetFirstOrDefault(u => u.Id == shoppingCart.BicicletaId);
 			if (item.Estoque < shoppingCart.Quantidade)
 			{
 				TempData["error"] = "Unidades selecionadas acima do estoque!";

@@ -92,6 +92,7 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
 
             CarrinhoComprasVm.PedidoHeader.DataPedido = DateTime.Now;
             CarrinhoComprasVm.PedidoHeader.ApplicationUserId = userId;
+            CarrinhoComprasVm.PedidoHeader.CriadoEm = DateTime.Now;
 
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == userId);
 
@@ -141,9 +142,8 @@ namespace LiddellRoch.Web.Areas.Cliente.Controllers
                 var domain = Request.Scheme + "://" + Request.Host.Value + "/";
                 var options = new SessionCreateOptions
                 {
-                    // Provavelmente vai dar erro aqui \/
                     SuccessUrl = domain + $"cliente/cart/ConfirmacaoPedido?id={CarrinhoComprasVm.PedidoHeader.Id}",
-                    CancelUrl = domain + "cliente/cart/index",
+                    //CancelUrl = domain + "cliente/cart/index",
                     LineItems = new List<SessionLineItemOptions>(),
                     Mode = "payment",
                     CustomerEmail = applicationUser.Email

@@ -24,57 +24,39 @@
 								</h4>
 							</div>
 							<div class="row my-1">
-								<div class="col-3">
-									<label>Nome</label>
-								</div>
-								<div class="col-9">
-									<input asp-for="PedidoHeader.Nome" class="form-control" />
+								<div class="col-6">
+									<label class="mb-1" asp-for="PedidoHeader.Nome">Nome</label>
+									<input asp-for="PedidoHeader.Nome" readonly class="form-control" />
 									<span asp-validation-for="PedidoHeader.Nome" class="text-danger"></span>
 								</div>
-							</div>
-							<div class="row my-1">
-								<div class="col-3">
-									<label>Telefone</label>
-								</div>
-								<div class="col-9">
+								<div class="col-6">
+									<label class="mb-1" asp-for="PedidoHeader.Telefone">Telefone:</label>
 									<input asp-for="PedidoHeader.Telefone" id="phoneInput" class="form-control" />
 									<span asp-validation-for="PedidoHeader.Telefone" class="text-danger"></span>
 								</div>
 							</div>
-							<div class="row my-1">
-								<div class="col-3">
-									<label>Endereço</label>
+							<div class="row mt-3">
+								<div class="col-6">
+									<label class="mb-1" asp-for="PedidoHeader.CodigoPostal">Codigo Postal:</label>
+									<input asp-for="PedidoHeader.CodigoPostal" id="cepInput" class="form-control" />
+									<span asp-validation-for="PedidoHeader.CodigoPostal" class="text-danger"></span>
 								</div>
-								<div class="col-9">
-									<input asp-for="PedidoHeader.Endereco" class="form-control" />
-									<span asp-validation-for="PedidoHeader.Endereco" class="text-danger"></span>
-								</div>
-							</div>
-							<div class="row my-1">
-								<div class="col-3">
-									<label>Cidade</label>
-								</div>
-								<div class="col-9">
+								<div class="col-6">
+									<label class="mb-1" asp-for="PedidoHeader.Cidade">Cidade:</label>
 									<input asp-for="PedidoHeader.Cidade" class="form-control" />
 									<span asp-validation-for="PedidoHeader.Cidade" class="text-danger"></span>
 								</div>
 							</div>
-							<div class="row my-1">
-								<div class="col-3">
-									<label>Estado</label>
+							<div class="row mt-3">
+								<div class="col-6">
+									<label class="mb-1" asp-for="PedidoHeader.Endereco">Endereço:</label>
+									<input asp-for="PedidoHeader.Endereco" class="form-control" />
+									<span asp-validation-for="PedidoHeader.Endereco" class="text-danger"></span>
 								</div>
-								<div class="col-9">
+								<div class="col-6">
+									<label class="mb-1" asp-for="PedidoHeader.Estado">Estado:</label>
 									<input asp-for="PedidoHeader.Estado" class="form-control" />
 									<span asp-validation-for="PedidoHeader.Estado" class="text-danger"></span>
-								</div>
-							</div>
-							<div class="row my-1">
-								<div class="col-3">
-									<label>CEP</label>
-								</div>
-								<div class="col-9">
-									<input asp-for="PedidoHeader.CodigoPostal" id="cepInput" class="form-control" />
-									<span asp-validation-for="PedidoHeader.CodigoPostal" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
@@ -94,10 +76,8 @@
 									</li>
 								}
 
-
-
 								<li class="list-group-item d-flex justify-content-between bg-light">
-									<small class="text-primary">Total (R$)</small>
+									<small class="text-primary">TOTAL DO PEDIDO</small>
 									<strong class="text-primary">@Model.PedidoHeader.TotalPedido.ToString("c")</strong>
 								</li>
 							</ul>
@@ -108,10 +88,11 @@
 			<div class="card-footer">
 				<div class="row">
 					<div class="col-12 col-md-8 pt-2">
-						<p style="color:maroon; font-size:14px;">
-							Data de entrega estimada:
+						<p class="fs-6" style="color:maroon;">
+							<strong>Data de entrega estimada:</strong>
 							@DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
-
+							<br />
+							<strong>Observação:</strong> Pagamentos via boleto e PIX estão desabilitadas por se tratar de transações fictícias.
 						</p>
 					</div>
 					<div class="col-12 col-md-4">

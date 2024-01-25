@@ -98,7 +98,7 @@
         color: var(--bs-primary);
     }
 
-    @@media screen and (min-width: 768px) and (max-width: 1000px) {
+    @@media screen and (min-width: 768px) and (max-width: 1200px) {
         #searchBar {
             display: none;
         }
@@ -151,7 +151,10 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow" style="background-color: rgb(55,90,127);">
             <div class="container">
-                <img class="pr-3" src="/images/liddellroch_logo.png" alt="logo" style="width: 10vw; max-width:6rem" />
+                <a class="logo me-auto navbar-brand d-none d-md-inline fs-3" style="margin-left:1rem;display: flex !important; flex-direction: column" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="pr-3" src="/images/liddellroch_logo.png" alt="logo" style="width: 10vw; max-width:6rem" />
+                </a>
+                
                 <a class="logo me-auto navbar-brand d-none d-md-inline fs-3" style="margin-left:1rem;display: flex !important; flex-direction: column" asp-area="" asp-controller="Home" asp-action="Index">
                     <span class="head1" style="margin-left: 5px; margin-right:1.5vw; font-family: 'Shadows Into Light', cursive; text-shadow: 2px 2px #111">LIDDELLROCH</span>
                 </a>
@@ -168,14 +171,14 @@
                             <ul class="dropdown-menu p-2">
                                 <li class="dropdown-item py-2 px-0">
                                     <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes">
-                                        <i class="bi bi-chevron-compact-right"></i><div class="mx-1 fw-semibold">Todas as bikes</div>
+                                        <div class="mx-1 fw-semibold">Todas as bikes</div>
                                     </a>
                                 </li>
                                 @foreach(var categoria in categList)
                                 {
                                     <li class="dropdown-item py-2 px-0">
                                         <a class="nav-link text-dark d-flex flex-row align-items-stretch" asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes" asp-route-categBusca="@categoria.Id">
-                                            <i class="bi bi-chevron-compact-right"></i><div class="mx-1">@categoria.Nome</div>
+                                            <div class="mx-1">@categoria.Nome</div>
                                         </a>
                                     </li>
                                 }
@@ -268,7 +271,7 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4 class="text-start">Links Úteis</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="Index">Home</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="ListaBikes">Lista de Bicicletas</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="SobreNos"> Sobre este Projeto</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a asp-area="Cliente" asp-controller="Home" asp-action="Privacidade">Política de Privacidade</a></li>
