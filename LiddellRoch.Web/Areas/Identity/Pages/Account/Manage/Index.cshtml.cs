@@ -93,7 +93,8 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return RedirectToAction("Login","Account");
+                //return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
             var userPedidos = _unitOfWork.PedidoHeader.GetAll(u => u.ApplicationUserId == user.Id).ToList();
@@ -110,7 +111,8 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account.Manage
             ApplicationUser user = await _userManager.GetUserAsync(User) as ApplicationUser;
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return RedirectToAction("Login", "Account");
+                //return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
             user.PhoneNumber = Input.PhoneNumber;

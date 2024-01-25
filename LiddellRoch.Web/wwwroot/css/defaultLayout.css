@@ -2093,6 +2093,7 @@ section {
   transition: 0.3s;
   display: inline-block;
   line-height: 1;
+  text-align: left;
 }
 
 #footer .footer-top .footer-links ul a:hover {

@@ -1,8 +1,11 @@
 ﻿@using LiddellRoch.Application.DTOs
 @using LiddellRoch.Application.Services
 @using LiddellRoch.Application.Services.Interfaces
+@using LiddellRoch.DataAccess.Repository.Interfaces
+
 @model CarrinhoCompras
 @inject IAvaliacaoService AvaliacaoService
+@inject IUnitOfWork UnitOfWork
 @{
     var compList = Componentes.GetAll();
     var coresList = Model.Bicicleta.Cores.Split(",").ToList();
@@ -39,7 +42,7 @@
                     <div class="row mx-5">
                         <div class="col-md-5 col-12 text-center mb-3 px-0">
                             <div class="mb-3 d-flex justify-content-evenly align-items-center">
-                                    <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" width="20%" />
+                                    <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" style="max-height:100px; object-fit:contain; width:20%" />
                                     <a href="#userRatingsSummary">
                                         <span style="text-align:right" href="">
 
@@ -64,7 +67,7 @@
                             {
                                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="50000" style="object-fit:contain;width: 100%;display: flex; margin: 0 auto;">
 
-                                    <div class="carousel-inner" style="border:1px black solid">
+                                    <div class="carousel-inner" style="border:1px #ccc solid">
                                         <div class="carousel-indicators" style="height:0.5rem">
                                             @foreach (var imageWithIndex in Model.Bicicleta.ImagensProduto
                                            .Select((image, index) => new { Image = image, Index = index }))
@@ -77,24 +80,22 @@
                                        .Select((image, index) => new { Image = image, Index = index }))
                                         {
                                             <div class="@(imageWithIndex.Index==0?"carousel-item active":"carousel-item")" id="container">
-                                                <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="max-height:600px;object-fit: contain" alt="Bike imagem" id="img-@imageWithIndex.Index">
+                                                <img src="@imageWithIndex.Image.ImagemUrl" class="d-block w-100" style="height:400px;object-fit: contain; cursor: pointer" alt="Bike imagem" id="imgX">
                                             </div>
                                         }
                                         @if (Model.Bicicleta.ImagensProduto.Count > 1)
                                         {
-                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="background-color:rgba(214, 214, 214, 0.3); width: 10%">
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="background-color:rgba(214, 214, 214, 0.5); width: 10%">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Previous</span>
                                             </button>
-                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="background-color:rgba(214, 214, 214, 0.3); width: 10%">
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="background-color:rgba(214, 214, 214, 0.5); width: 10%">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Next</span>
                                             </button>
                                         }
-                                        
                                     </div>
                                 </div>
-
                             }
                             else
                             {
@@ -103,17 +104,16 @@
 
                         </div>
                         <div class="col-md-7 col-12 pl-2">
-                           
                             <div class="row">
                                 <div class="col-xl-8">
-                                    <h2 class="text-dark">@Model.Bicicleta.Marca.Nome @Model.Bicicleta.Nome</h2>
+                                    <h2 class="text-dark mb-0">@Model.Bicicleta.Marca.Nome @Model.Bicicleta.Nome</h2>
                                 </div>
-                                <div class="col-xl-4">
+                                <div class="col-xl-4" style="align-self: center; width: max-content;">
                                     
                                     @if (Model.Bicicleta.Estoque < 10)
                                     {
                                         var estoqueText = Model.Bicicleta.Estoque == 1 ? "RESTANTE" : "RESTANTES";
-                                        <span class="bikeBadge badge bg-danger w-100 h-100 fs-5 flex align-content-center"><i class="bi bi-fire" style="color:orange"></i> @Model.Bicicleta.Estoque @estoqueText!</span>
+                                        <span class="bikeBadge badge bg-danger w-100 h-100 fs-5 flex align-content-center"><i class="bi bi-fire me-1" style="color:orange;"></i> @Model.Bicicleta.Estoque @estoqueText!</span>
                                     }
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                     }
                                 </h6>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row mt-1">
                                 <div class="pl-1">
                                     <p class="text-dark text-opacity-75 mb-1">
                                         De:
@@ -157,10 +157,10 @@
                                         </span>
                                         <span style="font-size:small">em 12 vezes sem juros ou</span>
                                         <br>
-                                        <span class="text-success" style="font-weight:bolder; font-size:xx-large">
+                                        <span class="text-success fs-3 fw-semibold">
                                             @Model.Bicicleta.ValorComDesconto.ToString("c")
                                         </span>
-                                        (PIX ou boleto)
+                                        <strong>(@Model.Bicicleta.DescontoPromocao% OFF no PIX ou boleto)</strong>
                                     </p>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
 
                     <div class="mx-5 pt-5">
                         <div class="pb-1">
-                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> DESCRIÇÃO</h3>
+                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> DESCRIÇÃO</h3><hr />
                         </div>
                         <div class="row pl-2 my-1">
                             @Html.Raw(Model.Bicicleta.Descricao)
@@ -204,7 +204,7 @@
                     {
                         <div class="mx-5 pt-3">
                             <div class="pb-1">
-                                <h3><i class="bi bi-gear-wide fs-4" style="color: var(--bs-primary)"></i> FICHA TÉCNICA</h3>
+                                <h3><i class="bi bi-gear-wide fs-4" style="color: var(--bs-primary)"></i> FICHA TÉCNICA</h3><hr />
                             </div>
                             <div class="row pl-2 my-1">
                                 @foreach (var componente in Model.Bicicleta.Componentes)
@@ -222,9 +222,9 @@
                         </div>
                     }
 
-                    <div class="mx-5 pt-5">
+                    <div class="mx-5 pt-3">
                         <div class="pb-1">
-                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> GARANTIA</h3>
+                            <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> GARANTIA</h3><hr />
                         </div>
                         <div class="pl-2 my-1" style="text-align:justify">
                             Garantia padrão de 30 dias após o recebimento do produto, conforme o Art. 26 do Código de Defesa do Consumidor.
@@ -237,10 +237,13 @@
                     {
                         <div class="mx-5 pt-3 my-2" id="userRatingsSummary">
                             <div class="pb-1">
-                                <h3 class="mb-3"><i class="bi bi-star-fill fs-4" style="color: var(--bs-primary)"></i> AVALIAÇÕES DOS USUÁRIOS</h3>
+                                <h3 class="mb-3"><i class="bi bi-star-fill fs-4" style="color: var(--bs-primary)"></i> AVALIAÇÕES DOS USUÁRIOS</h3><hr />
                                 <div class="row ratingGrid" style="display: grid; gap: 1rem;margin-left: auto;">
                                     @foreach (var item in Model.Bicicleta.Avaliacoes.OrderBy(e => e.DataAvaliacao))
                                     {
+                                        var pedidoHeaderUser = UnitOfWork.PedidoHeader.GetFirstOrDefault(e => e.Id == item.PedidoHeaderId).ApplicationUserId;
+                                        var user = UnitOfWork.ApplicationUser.GetFirstOrDefault(i => i.Id == pedidoHeaderUser);
+                                        var userName = user.Nome == "Administrador" ? "Anônimo" : user.Nome;
 
                                         <div class="card p-0" style="">
                                             <div class="card-header">
@@ -259,8 +262,8 @@
                                             </div>
                                             <div class="card-body">
                                                 <blockquote class="blockquote mb-0">
-                                                    <p>@item.ComentarioCompra</p>
-                                                    <footer class="blockquote-footer">Anônimo</footer>
+                                                    <p style="text-align:justify">"@item.ComentarioCompra"</p>
+                                                    <footer class="blockquote-footer text-muted">@userName</footer>
                                                 </blockquote>
                                             </div>
                                         </div>
@@ -279,6 +282,28 @@
 </div>
 
 <script>
+    const carouselItems = document.querySelectorAll(".carousel-item");
+    const carouselImgs = document.querySelectorAll(".carousel-item img");
+
+    carouselItems.forEach(item => {
+        item.addEventListener("mousemove", onZoom);
+        item.addEventListener("mouseover", onZoom);
+        item.addEventListener("mouseleave", offZoom);
+    });
+
+    function onZoom(e) {
+        const x = e.clientX - this.offsetLeft - 150;
+        const y = e.clientY - this.offsetTop - 150;
+
+        this.querySelector('img').style.transformOrigin = `${x}px ${y}px`;
+        this.querySelector('img').style.transform = "scale(1.5)";
+    }
+
+    function offZoom(e) {
+        this.querySelector('img').style.transformOrigin = "center center";
+        this.querySelector('img').style.transform = "scale(1)";
+    }
+
     document.getElementById("Quantidade").addEventListener("input", function () {
         var estoque = parseInt("@Model.Bicicleta.Estoque");
         var quantidade = parseInt(this.value);
