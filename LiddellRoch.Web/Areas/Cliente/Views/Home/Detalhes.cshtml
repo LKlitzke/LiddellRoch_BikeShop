@@ -25,7 +25,7 @@
             <div class="">
                 <div class="py-3">
                     <div class="row">
-                        <div class="col-12 mx-5 pb-1 mb-4">
+                        <div class="col-12 mx-md-5 pb-1 mb-4">
                             <a href="#" onclick="history.back()" class="btn btn-outline-primary bg-gradient fw-semibold btn-sm text-uppercase">
                                 <i class="fa-solid fa-circle-chevron-left"></i>&nbsp; &nbsp;<span>Voltar</span>
                             </a>
@@ -39,7 +39,7 @@
 
                         
                     </div>
-                    <div class="row mx-5">
+                    <div class="row mx-md-5">
                         <div class="col-md-5 col-12 text-center mb-3 px-0">
                             <div class="mb-3 d-flex justify-content-evenly align-items-center">
                                     <img src="@Model.Bicicleta.Marca.IconUrl" alt="icone-marca" style="max-height:100px; object-fit:contain; width:20%" />
@@ -65,7 +65,7 @@
                             </div>
                             @if (Model.Bicicleta.ImagensProduto != null && Model.Bicicleta.ImagensProduto.Count > 0)
                             {
-                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="50000" style="object-fit:contain;width: 100%;display: flex; margin: 0 auto;">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="15000" style="object-fit:contain;width: 100%;display: flex; margin: 0 auto;">
 
                                     <div class="carousel-inner" style="border:1px #ccc solid">
                                         <div class="carousel-indicators" style="height:0.5rem">
@@ -106,7 +106,7 @@
                         <div class="col-md-7 col-12 pl-2">
                             <div class="row">
                                 <div class="col-xl-8">
-                                    <h2 class="text-dark mb-0">@Model.Bicicleta.Marca.Nome @Model.Bicicleta.Nome</h2>
+                                    <h2 class="text-dark mb-md-0">@Model.Bicicleta.Marca.Nome @Model.Bicicleta.Nome</h2>
                                 </div>
                                 <div class="col-xl-4" style="align-self: center; width: max-content;">
                                     
@@ -126,9 +126,6 @@
                             </div>
                             <div class="row">
                                 <h6 class="text-dark"><strong>Tamanhos:</strong> @Model.Bicicleta.Tamanhos.Replace(",", ", ")</h6>
-                            </div>
-                            <div class="row">
-                                <h6 class="text-dark"><strong>Peso aproximado:</strong> @Model.Bicicleta.Peso kg</h6>
                             </div>
                             <div class="row">
                                 <h6 class="text-dark pb-2 d-flex align-items-center">
@@ -191,7 +188,7 @@
 
                     </div>
 
-                    <div class="mx-5 pt-5">
+                    <div class="mx-md-5 pt-5">
                         <div class="pb-1">
                             <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> DESCRIÇÃO</h3><hr />
                         </div>
@@ -202,7 +199,7 @@
 
                     @if (Model.Bicicleta.Componentes.Count > 0)
                     {
-                        <div class="mx-5 pt-3">
+                        <div class="mx-md-5 pt-3">
                             <div class="pb-1">
                                 <h3><i class="bi bi-gear-wide fs-4" style="color: var(--bs-primary)"></i> FICHA TÉCNICA</h3><hr />
                             </div>
@@ -215,14 +212,21 @@
                                         <h6 style="margin-left: 50px;min-height: 2rem;">
                                             @componente.Valor
                                         </h6>
-                                        
+                                    </div>
+                                }
+                                @if(Model.Bicicleta.Peso != null) {
+                                    <div class="col-md-6 mb-3">
+                                        <div class="mb-1"> <img class="imgIcon" src="~/images/componentes/peso.png" /> <strong>Peso (Aproximado)</strong></div>
+                                        <h6 style="margin-left: 50px;min-height: 2rem;">
+                                            @Model.Bicicleta.Peso kg
+                                        </h6>
                                     </div>
                                 }
                             </div>
                         </div>
                     }
 
-                    <div class="mx-5 pt-3">
+                    <div class="mx-md-5 pt-3">
                         <div class="pb-1">
                             <h3><i class="bi bi-file-earmark-text-fill fs-4" style="color: var(--bs-primary)"></i> GARANTIA</h3><hr />
                         </div>
@@ -235,7 +239,7 @@
 
                     @if(Model.Bicicleta.Avaliacoes.Count > 0)
                     {
-                        <div class="mx-5 pt-3 my-2" id="userRatingsSummary">
+                        <div class="mx-md-5 pt-3 my-2" id="userRatingsSummary">
                             <div class="pb-1">
                                 <h3 class="mb-3"><i class="bi bi-star-fill fs-4" style="color: var(--bs-primary)"></i> AVALIAÇÕES DOS USUÁRIOS</h3><hr />
                                 <div class="row ratingGrid" style="display: grid; gap: 1rem;margin-left: auto;">
