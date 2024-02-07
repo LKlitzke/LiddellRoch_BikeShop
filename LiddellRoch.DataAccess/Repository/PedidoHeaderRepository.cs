@@ -40,7 +40,7 @@ namespace LiddellRoch.DataAccess.Repository
             if (!string.IsNullOrEmpty(paymentIntentId))
             {
                 orderFromDb.PaymentIntentId = paymentIntentId;
-                orderFromDb.DataPagamento = DateTime.Now;
+                orderFromDb.DataPagamento = DateTime.Now.AddHours(-3);
             }
         }
     }
