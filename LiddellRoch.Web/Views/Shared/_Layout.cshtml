@@ -197,7 +197,7 @@
                             @await Component.InvokeAsync("ShoppingCart")
                         </li>
 
-                        @if (User.IsInRole(SD.Role_Administrador))
+                        @if (User.IsInRole(SD.Role_Administrador) || User.IsInRole(SD.Role_Empregado))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

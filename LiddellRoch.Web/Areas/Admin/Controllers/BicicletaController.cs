@@ -11,7 +11,7 @@ using Stripe;
 namespace LiddellRoch.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Administrador)]
+    [Authorize(Roles = SD.Role_Administrador + "," + SD.Role_Empregado)]
     public class BicicletaController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
