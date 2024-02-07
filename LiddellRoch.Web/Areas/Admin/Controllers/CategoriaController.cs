@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LiddellRoch.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Administrador)]
+    [Authorize(Roles = SD.Role_Administrador + "," + SD.Role_Empregado)]
     public class CategoriaController : Controller
     {
         private readonly ICategoriaService _categoriaService;

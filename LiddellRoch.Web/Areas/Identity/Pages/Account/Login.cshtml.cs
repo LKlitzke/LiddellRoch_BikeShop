@@ -65,7 +65,7 @@ namespace LiddellRoch.Web.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required(ErrorMessage = "Preencha este campo obrigatório.")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Insira um e-mail válido.")]
             public string Email { get; set; }
 
             /// <summary>
