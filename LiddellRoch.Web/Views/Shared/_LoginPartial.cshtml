@@ -14,7 +14,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Visualizar perfil"><i class="fa-solid fa-user"></i> <span>@user.Nome</span></a>
+        <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Visualizar perfil"><i class="fa-solid fa-user"></i> <span style="text-wrap: nowrap;">@user.Nome</span></a>
     </li>
 
     <li class="nav-item">

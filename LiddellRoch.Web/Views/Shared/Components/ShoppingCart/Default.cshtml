@@ -1,8 +1,10 @@
 ﻿@model int
 <a class="nav-link" asp-area="Cliente" title="Visualizar carrinho" asp-controller="Cart" asp-action="Index" style="text-wrap: nowrap;">
-    <i class="bi bi-cart-fill fs-6"></i> <span id="cartSpan">Carrinho</span>
+    <i class="bi bi-cart-fill fs-6"></i>&nbsp; <span id="cartSpan">Carrinho</span>
     @if (Model > 0)
     {
-        <span> &nbsp;(@Model)</span>
+        <span class="badge bg-danger">@Model</span>
+        @*
+        <span> &nbsp;</span><span style="background-color: red">&nbsp;(@Model)&nbsp;</span> *@
     }
 </a>

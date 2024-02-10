@@ -51,8 +51,8 @@ namespace LiddellRoch.Application.Services
 
             var totalLucro = Decimal.ToDouble(totalCompras.Sum(e => e.TotalPedido));
 
-            var totalLucroMesAtual = Decimal.ToDouble(totalCompras.Where(u => u.DataPedido >= mesInicialAtual && u.DataPedido <= DateTime.Now).Sum(e => e.TotalPedido));
-            var totalLucroAnterior = Decimal.ToDouble(totalCompras.Where(u => u.DataPedido >= mesInicialAnterior && u.DataPedido <= mesInicialAtual).Sum(e => e.TotalPedido));
+            var totalLucroMesAtual = Decimal.ToDouble(totalCompras.Where(u => u.DataPedido >= DateTime.Now.AddDays(-30)).Sum(e => e.TotalPedido));
+            var totalLucroAnterior = Decimal.ToDouble(totalCompras.Where(u => u.DataPedido >= DateTime.Now.AddDays(-60) && u.DataPedido <= DateTime.Now.AddDays(-30)).Sum(e => e.TotalPedido));
 
             return GetRadialChartDataModel(totalLucro, totalLucroMesAtual, totalLucroAnterior);
         }
@@ -61,8 +61,8 @@ namespace LiddellRoch.Application.Services
         {
             var totalUsers = _unitOfWork.ApplicationUser.GetAll();
 
-            var countRegistrosMesAtual = totalUsers.Count(u => u.CriadoEm >= mesInicialAtual && u.CriadoEm <= DateTime.Now);
-            var countRegistrosMesAnterior = totalUsers.Count(u => u.CriadoEm >= mesInicialAnterior && u.CriadoEm <= mesInicialAtual);
+            var countRegistrosMesAtual = totalUsers.Count(u => u.CriadoEm >= DateTime.Now.AddDays(-30));
+            var countRegistrosMesAnterior = totalUsers.Count(u => u.CriadoEm >= DateTime.Now.AddDays(-60) && u.CriadoEm <= DateTime.Now.AddDays(-30));
 
             return GetRadialChartDataModel(totalUsers.Count(), countRegistrosMesAtual, countRegistrosMesAnterior);
         }
@@ -73,8 +73,8 @@ namespace LiddellRoch.Application.Services
                 u.StatusPedido != SD.StatusCancelled
                 || u.StatusPedido != SD.StatusPending);
 
-            var countComprasMesAtual = totalCompras.Count(u => u.DataPedido >= mesInicialAtual && u.DataPedido <= DateTime.Now);
-            var countComprasMesAnterior = totalCompras.Count(u => u.DataPedido >= mesInicialAnterior && u.DataPedido <= mesInicialAtual);
+            var countComprasMesAtual = totalCompras.Count(u => u.DataPedido >= DateTime.Now.AddDays(-30));
+            var countComprasMesAnterior = totalCompras.Count(u => u.DataPedido >= DateTime.Now.AddDays(-60) && u.DataPedido <= DateTime.Now.AddDays(-30));
 
             return GetRadialChartDataModel(totalCompras.Count(), countComprasMesAtual, countComprasMesAnterior);
         }

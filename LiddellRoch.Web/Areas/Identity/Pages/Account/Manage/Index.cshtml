@@ -20,7 +20,7 @@
                     <div class="form-block mx-auto w-100" style="display: inline-flex; align-items: center;justify-content: space-between">
                         @* justify-content-center align-content-center*@
                             <div style="display:inline-flex">
-                                <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
+                                <i class="bi bi-person-circle" style="font-size: 3rem; color: #444"></i>
                                 <div style="margin-left:10px;align-self: center;">
                                     <span>Bem-vindo, @appUser.Nome!</span>
                                     <br />
@@ -177,8 +177,8 @@
                                                 }
                                                 else if(hasAvaliacao && pedido.StatusPedido == SD.StatusShipped)
                                                 {
-                                                    <button class="w-100" disabled asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-outline-info">
-                                                    <i class="bi bi-star-half"></i>&nbsp;JÁ AVALIADO!
+                                                    <button class="btn btn-info w-100" disabled asp-area="Admin" asp-controller="Pedido" asp-action="AvaliarPedido" asp-route-pedidoId="@pedido.Id" class="btn btn-outline-info">
+                                                    <i class="bi bi-star-half"></i>&nbsp;AVALIADO!
                                                     </button>
                                                 }
                                                 else {

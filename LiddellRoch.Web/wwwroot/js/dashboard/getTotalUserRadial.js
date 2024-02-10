@@ -24,7 +24,7 @@ function loadUserRadialChart() {
             }
 
             document.querySelector("#sectionUserCount").append(sectionCurrentCount);
-            document.querySelector("#sectionUserCount").append("neste mês");
+            document.querySelector("#sectionUserCount").append("nos últimos 30 dias");
 
             loadRadialBarChart("totalUserRadialChart", data);
 
