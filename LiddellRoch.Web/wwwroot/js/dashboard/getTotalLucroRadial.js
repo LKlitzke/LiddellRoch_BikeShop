@@ -28,7 +28,7 @@ function loadRevenueRadialChart() {
                         .format(parseFloat(data.countInCurrentMonth).toFixed(2)) + '</span>';
             }
             document.querySelector("#sectionRevenueCount").append(sectionCurrentCount);
-            document.querySelector("#sectionRevenueCount").append("neste mês");
+            document.querySelector("#sectionRevenueCount").append("nos últimos 30 dias");
 
             loadRadialBarChart("totalRevenueRadialChart", data);
 

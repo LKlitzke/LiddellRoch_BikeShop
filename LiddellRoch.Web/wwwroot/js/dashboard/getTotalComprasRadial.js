@@ -27,7 +27,7 @@ function loadTotalComprasRadialChart() {
             document.querySelector("#sectionComprasCount").append(sectionCurrentCount);
             //console.log(sectionCurrentCount);
 
-            document.querySelector("#sectionComprasCount").append("neste mês");
+            document.querySelector("#sectionComprasCount").append("nos últimos 30 dias");
 
             loadRadialBarChart("totalComprasRadialChart", data);
 
