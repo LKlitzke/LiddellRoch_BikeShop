@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     internal class AvaliacaoRepository : Repository<Avaliacao>, IAvaliacaoRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public AvaliacaoRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

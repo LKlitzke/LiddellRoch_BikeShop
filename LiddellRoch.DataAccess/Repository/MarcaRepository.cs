@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     public class MarcaRepository : Repository<Marca>, IMarcaRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public MarcaRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

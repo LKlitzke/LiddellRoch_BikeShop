@@ -19,9 +19,6 @@ namespace LiddellRoch.Models
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public string Descricao { get; set; }
 
-        //[Required(ErrorMessage = "Campo de preenchimento obrigatório")]
-        //public string Especificoes { get; set; }
-
         [Required]
         [Display(Name = "Preço")]
         [DataType(DataType.Currency)]
@@ -48,7 +45,6 @@ namespace LiddellRoch.Models
         [ValidateNever]
         public string Tamanhos { get; set; }
 
-        // Adicionar componentes individuais?
         [Required(ErrorMessage = "Campo de preenchimento obrigatório")]
         public int CategoriaId { get; set; }
         [ForeignKey("CategoriaId")]

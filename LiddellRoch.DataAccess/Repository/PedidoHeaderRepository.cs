@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     internal class PedidoHeaderRepository : Repository<PedidoHeader>, IPedidoHeaderRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public PedidoHeaderRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

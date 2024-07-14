@@ -1,19 +1,15 @@
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using LiddellRoch.Utility;
-using LiddellRoch.DataAccess.Data;
-using Stripe;
-using LiddellRoch.DataAccess.Repository.Interfaces;
-using LiddellRoch.DataAccess.Repository;
-using LiddellRoch.DataAccess.DbInitializer;
-using LiddellRoch.Application.Services.Interfaces;
 using LiddellRoch.Application.Services;
-using System.Security.Cryptography.X509Certificates;
-using Azure.Identity;
-using Microsoft.AspNetCore.Localization;
-using LiddellRoch.Models;
+using LiddellRoch.Application.Services.Interfaces;
+using LiddellRoch.DataAccess.Data;
+using LiddellRoch.DataAccess.DbInitializer;
+using LiddellRoch.DataAccess.Repository;
+using LiddellRoch.DataAccess.Repository.Interfaces;
+using LiddellRoch.Utility;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
+using Stripe;
+using System.Globalization;
 
 // Globalization
 var cultureInfo = new CultureInfo("pt-BR");
@@ -67,7 +63,8 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 // Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-builder.Services.ConfigureApplicationCookie(options => {
+builder.Services.ConfigureApplicationCookie(options =>
+{
     options.LoginPath = $"/Identity/Account/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
@@ -108,7 +105,8 @@ builder.Services.AddAuthentication().AddGoogle(option =>
 builder.Services.AddDistributedMemoryCache();
 
 // Session
-builder.Services.AddSession(options => {
+builder.Services.AddSession(options =>
+{
     options.IdleTimeout = TimeSpan.FromMinutes(100);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;

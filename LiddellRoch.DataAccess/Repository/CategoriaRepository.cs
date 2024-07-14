@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public CategoriaRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

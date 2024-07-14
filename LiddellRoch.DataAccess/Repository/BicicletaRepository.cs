@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     public class BicicletaRepository : Repository<Bicicleta>, IBicicletaRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public BicicletaRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

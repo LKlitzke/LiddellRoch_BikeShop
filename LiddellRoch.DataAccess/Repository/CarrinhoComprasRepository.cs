@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     public class CarrinhoComprasRepository : Repository<CarrinhoCompras>, ICarrinhoComprasRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public CarrinhoComprasRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

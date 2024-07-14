@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     internal class ImagemProdutoRepository : Repository<ImagemProduto>, IImagemProdutoRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public ImagemProdutoRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
