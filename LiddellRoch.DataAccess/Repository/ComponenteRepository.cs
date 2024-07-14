@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     public class ComponenteRepository : Repository<Componente>, IComponenteRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public ComponenteRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;

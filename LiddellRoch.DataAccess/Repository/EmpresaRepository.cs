@@ -6,7 +6,7 @@ namespace LiddellRoch.DataAccess.Repository
 {
     public class EmpresaRepository : Repository<Empresa>, IEmpresaRepository
     {
-        private ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public EmpresaRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
